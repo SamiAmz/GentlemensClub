@@ -10,10 +10,12 @@
     "@mdi/font": "7.0.96",
     "roboto-fontface": "*",
     "vue": "^3.3.0",
+    "vue-router": "^4.2.5",
     "vuetify": "^3.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",
+    "@vue/cli-plugin-router": "~5.0.0",
     "cross-env": "^7.0.3",
     "sass": "^1.69.0",
     "unplugin-fonts": "^1.1.0",
