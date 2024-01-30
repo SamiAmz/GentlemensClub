@@ -1,11 +1,16 @@
+<script setup>
+//
+import { RouterLink, RouterView } from 'vue-router';
+</script>
+
+
 <template>
-  <v-app>
-    <v-main>
-      <HelloWorld />
-    </v-main>
-  </v-app>
+  <div>
+    <v-app>
+      <v-main>
+        <router-view />
+      </v-main>
+    </v-app>
+  </div>
 </template>
 
-<script setup>
-  //
-</script>
