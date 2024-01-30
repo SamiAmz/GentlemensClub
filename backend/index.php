@@ -7,9 +7,8 @@ session_start();
 
 // Define routes
 $router->add('GET', '/', function() {
-    echo "homePage";
+    echo "root";
 });
-
 
 
 $router->add('POST', '/login', function() {
@@ -20,9 +19,10 @@ $router->add('POST', '/login', function() {
 // Dispatch the request
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$subdirectory = '/GentlemensClub';
+$requestUri = $_SERVER['REQUEST_URI'];
+$subdirectory = '/GentlemensClub/backend';
 $requestUri = str_replace($subdirectory, '', $requestUri);
+
 
 
 $router->dispatch($requestMethod, $requestUri);
