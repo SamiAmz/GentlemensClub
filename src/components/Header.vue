@@ -7,20 +7,22 @@
             <v-row align="center" justify="center">
                 <p id="title">Gym de combat</p>
                 <router-link to="/">
-                    <v-btn outlined :ripple="false" text>Accueil</v-btn>
+                    <v-btn color="black" outlined :ripple="false" text>Accueil</v-btn>
                 </router-link>
                 <router-link to="/">
-                    <v-btn outlined :ripple="false" text>Cours</v-btn>
+                    <v-btn color="black" outlined :ripple="false" text>Cours</v-btn>
                 </router-link>
                 <router-link to="/">
-                    <v-btn outlined :ripple="false" text>À propos</v-btn>
+                    <v-btn color="black" outlined :ripple="false" text>À propos</v-btn>
                 </router-link>
-                <p id="login">login</p>
+                <router-link id="login" style="text-decoration: none; color: inherit;" to="/">
+                    <v-card-text  id="loginText">login</v-card-text>
+                </router-link>
                 <router-link to="/">
                     <v-icon large color="black">
                         mdi-login-variant
-                    </v-icon>
-                </router-link>
+                    </v-icon></router-link>
+
             </v-row>
         </v-app-bar>
     </v-layout>
@@ -52,14 +54,18 @@ export default {
 }
 
 #login {
-    color: black;
-    font-size: 20px;
     margin-left: 5dvw;
 
 }
+
+#loginText {
+    color: black;
+    font-size: 20px;
+}
+
 #title {
     color: black;
     font-size: 20px;
-margin-right: 5dvw;
+    margin-right: 5dvw;
 }
 </style>
