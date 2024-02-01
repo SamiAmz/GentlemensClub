@@ -5,7 +5,7 @@
             :elevation="20">
 
             <v-row align="center" justify="center">
-                <p id="texte">Gym de combat</p>
+                <p id="title">Gym de combat</p>
                 <router-link to="/">
                     <v-btn outlined :ripple="false" text>Accueil</v-btn>
                 </router-link>
@@ -15,8 +15,8 @@
                 <router-link to="/">
                     <v-btn outlined :ripple="false" text>À propos</v-btn>
                 </router-link>
-                <p id="texte">login</p>
-                <router-link to="/" text>
+                <p id="login">login</p>
+                <router-link to="/">
                     <v-icon large color="black">
                         mdi-login-variant
                     </v-icon>
@@ -27,8 +27,10 @@
 </template>
 
 <script>
+import '@mdi/font/css/materialdesignicons.css'
 
 export default {
+
     name: 'AppHeader',
 }
 </script>
@@ -49,9 +51,15 @@ export default {
     background-color: rgb(28, 28, 28);
 }
 
-#texte {
+#login {
     color: black;
     font-size: 20px;
-    margin: 80px;
+    margin-left: 5dvw;
+
+}
+#title {
+    color: black;
+    font-size: 20px;
+margin-right: 5dvw;
 }
 </style>
