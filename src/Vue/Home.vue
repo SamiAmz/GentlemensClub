@@ -91,8 +91,8 @@
 
 <script>
 import item1 from "@/assets/box3.png";
-import item2 from "@/assets/box2.jpg";
-import item3 from "@/assets/box.jpg";
+import item2 from "@/assets/box3.png";
+import item3 from "@/assets/box3.png";
 export default {
   name: "Home",
   data() {
