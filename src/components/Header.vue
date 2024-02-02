@@ -1,26 +1,26 @@
 <template>
     <v-layout>
 
-        <v-app-bar absolute darkhide-on-scroll prominent scroll-target="#scrolling-techniques-4" color="grey"
+        <v-app-bar a color="black"
             :elevation="20">
 
             <v-row align="center" justify="center">
                 <v-img max-width="55" src="@/assets/logo_1.png"></v-img>
                 <p id="title">Club de Champions</p>
                 <router-link to="/">
-                    <v-btn color="black" outlined :ripple="false" text>Accueil</v-btn>
+                    <v-btn color="white" outlined :ripple="false" text>Accueil</v-btn>
                 </router-link>
                 <router-link to="/">
-                    <v-btn color="black" outlined :ripple="false" text>Cours</v-btn>
+                    <v-btn color="white" outlined :ripple="false" text>Cours</v-btn>
                 </router-link>
                 <router-link to="/">
-                    <v-btn color="black" outlined :ripple="false" text>À propos</v-btn>
+                    <v-btn color="white" outlined :ripple="false" text>À propos</v-btn>
                 </router-link>
                 <router-link id="login" style="text-decoration: none; color: inherit;" to="/">
                     <p id="loginTexte">login</p>
                 </router-link>
                 <router-link to="/">
-                    <v-icon large color="black">
+                    <v-icon large color="white">
                         mdi-login-variant
                     </v-icon>
                 </router-link>
@@ -49,21 +49,17 @@ export default {
     font-size: 15px;
 }
 
-.v-app-bar {
-    background-color: rgb(28, 28, 28);
-}
-
 #login {
     margin-left: 5dvw;
 }
 
 #loginTexte {
-    color: black;
+    color: white;
     font-size: 20px;
 }
 
 #title {
-    color: black;
+    color: white;
     font-size: 20px;
     margin-right: 5dvw;
 }
