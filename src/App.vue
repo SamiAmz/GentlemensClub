@@ -1,11 +1,7 @@
-<script setup>
-//
-import { RouterLink, RouterView } from "vue-router";
-import AppHeader from "@/components/Header.vue";
-import AppFooter from "@/components/Footer.vue";
-</script>
+
 
 <template>
+  <div class="page">
   <div>
     <header>
       <AppHeader />
@@ -23,4 +19,12 @@ import AppFooter from "@/components/Footer.vue";
       <AppFooter />
     </footer>
   </div>
+  </div>
 </template>
+
+<script setup>
+//
+import { RouterLink, RouterView } from "vue-router";
+import AppHeader from "@/components/Header.vue";
+import AppFooter from "@/components/Footer.vue";
+</script>
