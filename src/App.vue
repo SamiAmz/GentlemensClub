@@ -2,7 +2,7 @@
 //
 import { RouterLink, RouterView } from "vue-router";
 import AppHeader from "@/components/Header.vue";
-import FooterApp from "@/components/Footer.vue";
+import AppFooter from "@/components/Footer.vue";
 </script>
 
 <template>
@@ -20,7 +20,7 @@ import FooterApp from "@/components/Footer.vue";
   </div>
   <div>
     <footer>
-      <FooterApp />
+      <AppFooter />
     </footer>
   </div>
 </template>

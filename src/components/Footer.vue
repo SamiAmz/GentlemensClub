@@ -1,18 +1,22 @@
 <template>
-  <v-footer padless>
-    class = "text-center pa-3" 2012-2024 Club de Champions. No Copyright
+  <v-footer class="custom-footer">
+    2012-2024 Club de Champions. All its ours DONT COPY
   </v-footer>
 </template>
 
 <script>
 export default {
-  name: "FooterApp",
+  name: "AppFooter",
 };
 </script>
 
 <style>
-.v-footer {
+.custom-footer {
   width: 100%;
-  font-size: 0.875rem;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: white;
+  background-color: #000;
 }
 </style>
