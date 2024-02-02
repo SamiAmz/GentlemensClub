@@ -58,42 +58,56 @@
             </v-card>
           </v-col>
           <v-col>
+            <v-row>
+              <v-col>
+                <v-card class="mx-auto my-8" max-width="600" elevation="16">
+                  <v-card-title>🔒 art martiau 🥋</v-card-title>
+                  <v-card-subtitle>subtitle :</v-card-subtitle>
+                  <v-card-text>
+                    text
+                    <br>
+                    text
+                    <br>
+                    text
+                    <br>
+                    text
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col>
+                <v-card class="mx-auto my-8" max-width="600" elevation="16">
+                  <v-card-title>🔒 art martiau 🥋</v-card-title>
+                  <v-card-subtitle>subtitle :</v-card-subtitle>
+                  <v-card-text>
+                    text
+                    <br>
+                    text
+                    <br>
+                    text
+                    <br>
+                    text
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
             <v-card class="mx-auto my-8" max-width="600" elevation="16">
-              <v-card-title>Ce que nous offrons :</v-card-title>
-              <v-card-subtitle>Cours de Combat de Classe Mondiale :</v-card-subtitle>
+              <v-card-title>🔒 art martiau 🥋</v-card-title>
+              <v-card-subtitle>subtitle :</v-card-subtitle>
               <v-card-text>
-                De la boxe à la lutte, en passant par les arts martiaux mixtes
-                (MMA), nos instructeurs expérimentés vous guideront à travers
-                des cours dynamiques adaptés à tous les niveaux.
-                <br />
-                <v-card-subtitle>Entraînement Personnalisé :</v-card-subtitle>
-                Atteignez vos objectifs spécifiques avec nos
-                <br />
-                programmes sur mesure. Que vous souhaitiez perdre du poids,
-                améliorer votre condition physique ou perfectionner vos
-                compétences de combat, notre équipe dévouée est là pour vous.
-                <br />
-                <v-card-subtitle>Ambiance Motivante :</v-card-subtitle>
-                Rejoignez une communauté passionnée et motivée.
-                <br />
-                L'énergie positive qui règne au sein du gym vous encouragera à
-                repousser vos limites et à atteindre des sommets que vous
-                n'auriez jamais imaginés.
-                <br />
-                <v-card-subtitle>Équipement de Pointe :</v-card-subtitle> Nos
-                installations modernes sont équipées des dernières technologies
-                et des meilleurs équipements pour garantir un environnement
-                propice à la réussite.
-                <br />
-                <v-card-subtitle>Programmes de Bien-Être :</v-card-subtitle>
-                Parce que la santé mentale est tout aussi
-                <br />
-                importante, nous offrons des cours de méditation, de yoga et
-                d'autres activités pour favoriser l'équilibre entre le corps et
-                l'esprit.
+                text
+                <br>
+                text
+                <br>
+                text
+                <br>
+                text
               </v-card-text>
             </v-card>
+
+
+
           </v-col>
+
         </v-row>
       </v-container>
     </v-container>
