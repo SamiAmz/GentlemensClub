@@ -1,7 +1,10 @@
 <template>
   <div id="footer">
-    <p>Copyright &copy; 2012-2024 Club de Champions. All its ours DONT COPY <br>
-      TOUS DROITS RÉSERVÉS</p>
+    <v-row align="center" justify="center">
+      <v-img max-width="60" max-height="100" src="@/assets/logo.png"></v-img>
+      <p>Copyright &copy; 2012-2024 Club de Champions. All its ours DONT COPY <br>
+        TOUS DROITS RÉSERVÉS</p>
+    </v-row>
   </div>
 </template>
 
@@ -22,6 +25,7 @@ export default {
 }
 
 #footer p {
+  margin-top: 1em;
   line-height: 1.7em;
   color: white;
 }
