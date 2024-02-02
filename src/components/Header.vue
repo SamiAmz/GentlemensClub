@@ -1,9 +1,11 @@
 <template>
     <v-layout>
-        <v-app-bar id="app-bar-title" :elevation="20">
+
+        <v-app-bar id="semi-transparent-app-bar" color="transparent" :elevation="20">
+
             <v-row align="center" justify="center">
                 <v-img max-width="90" max-height="100" src="@/assets/logo.png"></v-img>
-                <p id="title">Club de Chamapions</p>
+                <p id="title">Club de Champions</p>
                 <router-link to="/">
                     <v-btn color="white" outlined :ripple="false" text>Accueil</v-btn>
                 </router-link>
@@ -33,6 +35,11 @@ export default {
 </script>
 
 <style scoped>
+#semi-transparent-app-bar {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    box-shadow: none !important;
+}
+
 .v-btn {
     margin: 10px 20px 10px 0;
     padding: 10px 20px 20px 20px;
