@@ -7,15 +7,16 @@
                 <v-img max-width="90" max-height="100" src="@/assets/logo.png"></v-img>
 
                 <div>
-                    <router-link to="/">
+                    <router-link to="/" exact active-class="button-active">
                         <v-btn color="white" outlined :ripple="false" text>Accueil</v-btn>
-                    </router-link>
-                    <router-link to="/">
+                      </router-link>
+                    <router-link to="/" exact>
                         <v-btn color="white" outlined :ripple="false" text>Horaire</v-btn>
                     </router-link>
-                    <router-link to="/contact">
+                    <router-link to="/contact" exact active-class="button-active">
+                    
                         <v-btn color="white" outlined :ripple="false" text>À propos</v-btn>
-                    </router-link>
+                      </router-link>
                 </div>
 
                 <div>
@@ -30,6 +31,12 @@
 </template>
 
 <style scoped>
+
+:deep(.button-active .v-btn__content) {
+    color: rgb(255, 91, 8)
+}
+
+
 #semi-transparent-app-bar {
     background-color: rgba(0, 0, 0, 0.5) !important;
     box-shadow: none !important;

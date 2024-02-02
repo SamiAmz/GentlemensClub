@@ -1,75 +1,160 @@
 <template>
   <div id="page-container">
-    <v-container fluid class="contactPage">
-      <v-row align="center">
+      <v-row align="start">
         <v-col cols="12" md="6">
           <v-card flat class="text-card">
             <v-card-title  class="title">Qui sommes-nous ?</v-card-title>
             <v-card-text class="text">
               Gentlemen's club a ouvert ses portes en 2012 et depuis est considéré comme étant le centre d'art martiaux mixtes #1 à Montréal. Que ce soit en boxe, en MMA ou en lutte, nos entraîneurs ont été formés pour fournir un enseignement de qualité et adapté à tous les niveaux, du débutant à l'athlète de haut niveau.
             </v-card-text>
+            <v-card-title class = "title"> Notre mission</v-card-title>
+            <v-card-text class = "text">
+              Nous nous engageons à offrir un environnement sûr et respectueux <br>où chaque membre peut évoluer, progresser et atteindre ses objectifs <br>
+            personnels.Rejoignez-nous pour une expérience d'entraînement unique et <br> dynamique.
+            </v-card-text>
           </v-card>
         </v-col>
-        <v-col cols="12" md="6">
-          <v-img src="@/assets/logoBlack.png" class="logo-img"></v-img>
+        <v-col>
+          <div class="image-wrapper">
+            <v-img src="@/assets/logo.png" class="logo-img"></v-img>
+          </div>
         </v-col>
       </v-row>
 
-      <!-- Second Row for Notre mission -->
-      <v-row class="mission-section">
-        <v-col cols="12">
-          <v-card-title class="title">Notre mission</v-card-title>
-          <v-card-text class="text">Nous nous engageons à offrir un environnement sûr et respectueux <br>où chaque membre peut évoluer, progresser et atteindre ses objectifs <br>
-            personnels.Rejoignez-nous pour une expérience d'entraînement unique et <br> dynamique.
-</v-card-text>
-        </v-col>
+      <v-row class = "subTitle"> 
+        <v-card-title> Nos entraîneurs </v-card-title>
       </v-row>
-    </v-container>  
+      <v-row>
+        <v-col cols="12" md="4">
+          <v-card class="coach-card">
+            <v-card-text class = "coach-title"> 🥊</v-card-text>
+            <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
+            <v-card-title class="coach-title">Coach de box </v-card-title>
+            <v-card-text class="coach-text">Coach Description</v-card-text>
+          </v-card>
+          
+        </v-col>
 
-    <v-container>
-      <v-card-title> Nos entraîneurs</v-card-title>
-    </v-container>
+        <v-col cols="12" md="4">
+          <v-card class="coach-card">
+            <v-card-text class = "coach-title"> 🤼🏽 </v-card-text>
+            <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
+            <v-card-title class="coach-title">Coach de lutte </v-card-title>
+            <v-card-text class="coach-text">teste</v-card-text>
+          </v-card>
+          
+        </v-col>
+
+        <v-col cols="12" md="4">
+          <v-card class="coach-card">
+            <v-card-text class = "coach-title"> 🥋</v-card-text>
+            <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
+            <v-card-title class="coach-title">Coach de MMA</v-card-title>
+            <v-card-text class="coach-text">Coach Description</v-card-text>
+          </v-card>
+          
+        </v-col>
+
+
+      </v-row>
+     
+    
   </div>
 </template>
 
 <style scoped>
-.title {
-  font-size: 50px;
-  margin-bottom: 16px; 
+
+.coach-title {
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+.coach-card {
+  border: 3px solid rgb(243,237,237); 
+  border-radius: 15px; 
+  overflow: hidden; 
+  transition: transform 0.4s ease;
+  margin: 1rem; 
+  background-color: rgb(243,237,237);
+}
+
+.coach-card:hover {
+  transform: translateY(-60px); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.coach-img {
+  height: auto; 
+  width: 100%; 
+}
+
+.coach-title {
+  color: white; 
+  text-align: center; 
+  margin-top: 1rem; 
+}
+
+.coach-text {
+  color: rgb(1, 7, 15);
+  padding: 0 1rem 1rem; 
+  text-align: left;
+}
+
+.v-card-title {
+    font-size: 50px;
+    margin-bottom: 16px; 
+  
+}
+.subTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
 }
 
 .text {
-  font-size: 20px; 
+  font-size: 22px; 
+  padding-bottom: 2px;
+  line-height: 30px;
 }
 
 #page-container {
-  background-color: black;
-  color: white;
+  background-color: rgb(1, 7, 15);
   min-height: 100vh;
 }
 
 .contactPage {
-  padding: 50px; 
+  padding: 20px; 
 }
 
 .logo-img {
   max-width: 100%;
-  height: auto;
-  padding: 20px; 
+  height: 800px;
+  margin-right: 49px;
 }
 
-.mission-section {
-  margin-top: -350px; 
-}
 
 .text-card{
-  background-color: black;
-  color: white;
-  margin-top: -220px;
+  background-color: rgb(1, 7, 15);
+  color: rgb(243,237,237);
+  padding-left: 200px;
+  padding-top: 200px;
 }
 
 .v-card-title {
+  padding-top: 60px;
   color: rgb(255, 91, 8)
+
+}
+
+.image-wrapper {
+  margin-top: 30px;
+  padding-top: 50px;
+
 }
 </style>
 
