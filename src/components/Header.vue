@@ -1,15 +1,11 @@
 <template>
     <v-layout>
 
-<<<<<<< Updated upstream
-        <v-app-bar a color="black"
-=======
         <v-app-bar  color="transparent"
->>>>>>> Stashed changes
             :elevation="20">
 
             <v-row align="center" justify="center">
-                <v-img max-width="55" src="@/assets/logo_1.png"></v-img>
+                <v-img max-width="90" max-height="100" src="@/assets/logo.png"></v-img>
                 <p id="title">Club de Champions</p>
                 <router-link to="/">
                     <v-btn color="white" outlined :ripple="false" text>Accueil</v-btn>
