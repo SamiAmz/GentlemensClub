@@ -1,7 +1,11 @@
 <template>
     <v-layout>
 
+<<<<<<< Updated upstream
         <v-app-bar a color="black"
+=======
+        <v-app-bar  color="transparent"
+>>>>>>> Stashed changes
             :elevation="20">
 
             <v-row align="center" justify="center">
