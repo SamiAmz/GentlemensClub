@@ -30,4 +30,11 @@ export default {
     };
   },
 };
+
 </script>
+
+<style scoped>
+.v-container {
+  margin-top: 50px;
+}
+</style>
