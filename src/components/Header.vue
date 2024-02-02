@@ -11,9 +11,9 @@
                         <v-btn color="white" outlined :ripple="false" text>Accueil</v-btn>
                     </router-link>
                     <router-link to="/">
-                        <v-btn color="white" outlined :ripple="false" text>Cours</v-btn>
+                        <v-btn color="white" outlined :ripple="false" text>Horaire</v-btn>
                     </router-link>
-                    <router-link to="/">
+                    <router-link to="/contact">
                         <v-btn color="white" outlined :ripple="false" text>À propos</v-btn>
                     </router-link>
                 </div>
