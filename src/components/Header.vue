@@ -5,7 +5,8 @@
             :elevation="20">
 
             <v-row align="center" justify="center">
-                <p id="title">Gym de combat</p>
+                <v-img max-width="55" src="@/assets/logo_1.png"></v-img>
+                <p id="title">Club de Champions</p>
                 <router-link to="/">
                     <v-btn color="black" outlined :ripple="false" text>Accueil</v-btn>
                 </router-link>
@@ -55,7 +56,8 @@ export default {
 #login {
     margin-left: 5dvw;
 }
-#loginTexte{
+
+#loginTexte {
     color: black;
     font-size: 20px;
 }
