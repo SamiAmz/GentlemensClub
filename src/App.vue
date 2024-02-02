@@ -1,9 +1,9 @@
 <script setup>
 //
-import { RouterLink, RouterView } from 'vue-router';
-import AppHeader from '@/components/Header.vue';
+import { RouterLink, RouterView } from "vue-router";
+import AppHeader from "@/components/Header.vue";
+import FooterApp from "@/components/Footer.vue";
 </script>
-
 
 <template>
   <div>
@@ -18,5 +18,9 @@ import AppHeader from '@/components/Header.vue';
       </v-main>
     </v-app>
   </div>
+  <div>
+    <footer>
+      <FooterApp />
+    </footer>
+  </div>
 </template>
-
