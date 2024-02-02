@@ -148,7 +148,6 @@ video {
 }
 
 .v-card-text {
-  min-height: 00px;
   margin: 0;
 }
 
