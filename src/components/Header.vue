@@ -1,24 +1,17 @@
 <template>
   <v-layout>
-    <v-app-bar
-      absolute
-      darkhide-on-scroll
-      prominent
-      scroll-target="#scrolling-techniques-4"
-      color="transparent"
-      :elevation="20"
-    >
+    <v-app-bar color="transparent" :elevation="20">
       <v-row align="center" justify="center">
-        <v-img max-width="55" src="@/assets/logo_1.png"></v-img>
+        <v-img max-width="90" max-height="100" src="@/assets/logo.png"></v-img>
         <p id="title">Club de Champions</p>
         <router-link to="/">
-          <v-btn color="black" outlined :ripple="false" text>Accueil</v-btn>
+          <v-btn color="white" outlined :ripple="false" text>Accueil</v-btn>
         </router-link>
         <router-link to="/">
-          <v-btn color="black" outlined :ripple="false" text>Cours</v-btn>
+          <v-btn color="white" outlined :ripple="false" text>Cours</v-btn>
         </router-link>
         <router-link to="/">
-          <v-btn color="black" outlined :ripple="false" text>À propos</v-btn>
+          <v-btn color="white" outlined :ripple="false" text>À propos</v-btn>
         </router-link>
         <router-link
           id="login"
@@ -28,7 +21,7 @@
           <p id="loginTexte">login</p>
         </router-link>
         <router-link to="/">
-          <v-icon large color="black"> mdi-login-variant </v-icon>
+          <v-icon large color="white"> mdi-login-variant </v-icon>
         </router-link>
       </v-row>
     </v-app-bar>
@@ -51,10 +44,6 @@ export default {
   background: none;
   text-decoration: none;
   font-size: 15px;
-}
-
-.v-app-bar {
-  background-color: rgb(28, 28, 28);
 }
 
 #login {
