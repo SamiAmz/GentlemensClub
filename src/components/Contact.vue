@@ -67,8 +67,8 @@
 .coach-title {
   display: flex;
   justify-content: center;
-  font-size: 60px;
-  margin-bottom: 15px;
+  font-size: 50px;
+  margin-bottom: 9px;
 }
 .coach-card {
   border: 3px solid rgb(243,237,237); 
@@ -77,6 +77,7 @@
   transition: transform 0.4s ease;
   margin: 1rem; 
   background-color: rgb(243,237,237);
+  height: 500px
 }
 
 .coach-card:hover {
@@ -85,7 +86,7 @@
 }
 
 .coach-img {
-  height: auto; 
+  height: 350px;
   width: 100%; 
 }
 
@@ -142,7 +143,7 @@
   background-color: rgb(1, 7, 15);
   color: rgb(243,237,237);
   padding-left: 200px;
-  padding-top: 200px;
+  padding-top: 100px;
 }
 
 .v-card-title {
@@ -153,7 +154,6 @@
 
 .image-wrapper {
   margin-top: 30px;
-  padding-top: 50px;
 
 }
 </style>

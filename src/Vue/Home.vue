@@ -84,7 +84,7 @@ video {
 }
 
 #page-container {
-  background-color: black;
+  background-color: rgb(1, 7, 15);
   color: white;
 }
 </style>
