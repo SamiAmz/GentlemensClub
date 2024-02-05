@@ -136,11 +136,6 @@ export default {
   text-align: center;
   font-size: 3.5em;
   padding-top: 50px;
-  margin-bottom: 50px;
-}
-
-.imgKarate {
-  margin-top: 50px;
 }
 
 .v-card-subtitle {
