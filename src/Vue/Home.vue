@@ -62,9 +62,9 @@ export default {
           image: wrestlingImage,
           isFlipped: false,
           description: {
-            title: 'Wrestling Title',
-            subtitle: 'Wrestling Subtitle',
-            content: 'Description for Wrestling...',
+            title: 'Wrestling 🤼',
+            subtitle: 'Un parcours vers la force et la stratégie mentale. 💪',
+            content: '<br>Techniques de Lutte 🤼‍♂️: Maîtrisez une variété de techniques de lutte, des prises de base aux mouvements avancés.<br><br>Développement Physique 💪: Renforcez votre corps, améliorez votre endurance et développez une force fonctionnelle essentielle.<br><br>Stratégies et Tactiques 🤔: Apprenez à anticiper les mouvements de votre adversaire et à prendre des décisions rapides sur le tapis.<br><br>Forgez votre esprit et votre corps 🤸‍♂️: La lutte développe non seulement la force physique, mais aussi la résilience mentale.',
           },
         },
         {
@@ -72,9 +72,9 @@ export default {
           image: boxingImage,
           isFlipped: false,
           description: {
-            title: 'Boxing Title',
-            subtitle: 'Boxing Subtitle',
-            content: 'Description for Boxing...',
+            title: 'Boxing 🥊',
+            subtitle: 'Un parcours vers la puissance et la précision. 👊',
+            content: '<br>Techniques de Frappe 🥊: Maîtrisez l\'art des coups, de la jab à l\'uppercut, et perfectionnez votre précision.<br><br>Conditionnement Physique 💪: Améliorez votre endurance, renforcez votre cœur et développez la rapidité de vos mouvements.<br><br>Stratégie sur le Ring 🤔: Apprenez à lire votre adversaire et à élaborer des stratégies pour remporter le combat.<br><br>Entraînement Intensif 🏋️‍♂️: Plongez dans des séances d\'entraînement intenses pour perfectionner vos compétences.',
           },
         },
       ],
