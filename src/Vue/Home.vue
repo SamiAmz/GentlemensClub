@@ -19,10 +19,14 @@
           <v-img :src="card.image"></v-img>
         </div>
         <div v-if="card.isFlipped" class="description">
-          <h1>{{ card.description.title }}</h1>
-          <h2>{{ card.description.subtitle }}</h2>
-          <h3>{{ card.description.subsubtitle }}</h3>
-          <p>{{ card.description.content }}</p>
+          <h1 class="descriptionTitle">{{ card.description.title }}</h1>
+          <h2 class="descriptionSubTitle">{{ card.description.subtitle }}</h2>
+          <p class="descriptionContent" v-html="card.description.content"></p>
+          <div class="cta">
+            <v-btn color="rgb(255, 91, 8)" @click="learnMore(index)">En savoir plus
+              <v-icon large color="white">mdi-arrow-right-bold</v-icon>
+            </v-btn>
+          </div>
         </div>
       </v-card>
     </v-container>
@@ -48,10 +52,9 @@ export default {
           image: karateImage,
           isFlipped: false,
           description: {
-            title: 'Karate Title',
-            subtitle: 'Karate Subtitle',
-            subsubtitle: 'Karate Subsubtitle',
-            content: 'Description for Karate...',
+            title: 'Karate🥋',
+            subtitle: 'Un voyage vers l\'équilibre mental et physique. ✨',
+            content: '<br>Techniques de Frappe 🥋: Apprentissage des différentes techniques de frappe avec les mains et les pieds.<br><br>Développement Physique 💪: Renforcement musculaire, flexibilité et amélioration de la coordination.<br><br>Entraînement sur la discipline 📘: Apprenez les mouvements de défense personnelle et découvrez l\'histoire riche du Karaté. <br><br>Explorez l\'art ancien du Karaté 🥷: Renforcez votre esprit, améliorez votre flexibilité et forgez votre caractère.',
           },
         },
         {
@@ -61,7 +64,6 @@ export default {
           description: {
             title: 'Wrestling Title',
             subtitle: 'Wrestling Subtitle',
-            subsubtitle: 'Wrestling Subsubtitle',
             content: 'Description for Wrestling...',
           },
         },
@@ -72,7 +74,6 @@ export default {
           description: {
             title: 'Boxing Title',
             subtitle: 'Boxing Subtitle',
-            subsubtitle: 'Boxing Subsubtitle',
             content: 'Description for Boxing...',
           },
         },
@@ -88,6 +89,9 @@ export default {
         this.flipCard(index, false);
       }, 600); //temps du flip
     },
+    learnMore(index) {
+      console.log("En savoir plus sur la carte", index);
+    },
   },
 };
 </script>
@@ -95,11 +99,51 @@ export default {
 
 
 <style scoped>
+.v-img {
+  margin-top: 55px;
+}
+
+.cta {
+  margin-top: 10px;
+  color: rgb(255, 91, 8);
+}
+
+.v-carousel {
+  width: 80vw;
+  margin: 0 auto;
+  padding: 0;
+  display: block;
+}
+
+.v-carousel-item {
+  margin: 0;
+  padding: 0;
+}
+
+video {
+  width: 80vw;
+  margin: 0 auto;
+  padding: 0;
+  display: block;
+}
+
 .description {
   display: none;
   text-align: center;
-  margin-left: 30px;
   transform: rotateY(0deg);
+}
+
+.descriptionTitle {
+  font-size: 40px;
+}
+
+.descriptionSubTitle {
+  font-size: 20px;
+}
+
+.descriptionContent {
+  font-size: 15px;
+  text-align: left;
 }
 
 .flipped .description {
@@ -118,18 +162,15 @@ export default {
 .v-card {
   background: rgb(255, 215, 0);
   width: 23vw;
-  height: 30vw;
+  height: 38vw;
   border: 2px solid #FFD700;
   border-radius: 35px;
   transition: transform 0.5s ease;
 }
 
-.v-card:hover {
-  transform: scale(1.1);
-}
-
 .v-card.flipped {
   transform: rotateY(180deg);
+
 }
 
 .v-card-title {
