@@ -9,18 +9,19 @@
                 <div>
                     <router-link to="/" exact active-class="button-active">
                         <v-btn color="white" outlined :ripple="false" text>Accueil</v-btn>
-                      </router-link>
+                    </router-link>
                     <router-link to="/" exact>
                         <v-btn color="white" outlined :ripple="false" text>Horaire</v-btn>
                     </router-link>
                     <router-link to="/contact" exact active-class="button-active">
-                    
+
                         <v-btn color="white" outlined :ripple="false" text>À propos</v-btn>
-                      </router-link>
+                    </router-link>
                 </div>
 
                 <div>
-                    <router-link id="login" to="/" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <router-link id="login" to="/"
+                        style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                         <p id="loginTexte">Connexion</p>
                         <v-icon large color="white"> mdi-login-variant </v-icon>
                     </router-link>
@@ -31,7 +32,6 @@
 </template>
 
 <style scoped>
-
 :deep(.button-active .v-btn__content) {
     color: rgb(255, 91, 8)
 }
@@ -40,8 +40,8 @@
 #semi-transparent-app-bar {
     background-color: rgba(0, 0, 0, 0.5) !important;
     box-shadow: none !important;
-    padding-left: 100px; 
-    padding-right: 100px;   
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 
@@ -62,11 +62,10 @@
 }
 
 #loginTexte {
-    margin-right: 8px; /* Adjust spacing between text and icon as needed */
+    margin-right: 8px;
     color: white;
     font-size: 20px;
 }
-
 </style>
 
 
