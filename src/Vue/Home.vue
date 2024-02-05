@@ -54,7 +54,7 @@ export default {
           description: {
             title: 'Karate🥋',
             subtitle: 'Un voyage vers l\'équilibre mental et physique. ✨',
-            content: '<br><b>Techniques de Frappe</b> 🥋: Apprentissage des différentes techniques de frappe avec les mains et les pieds.<br><br><b>Développement Physique</b> 💪: Renforcement musculaire, flexibilité et amélioration de la coordination.<br><br><b>Entraînement sur la discipline </b>📘: Apprenez les mouvements de défense personnelle et découvrez l\'histoire riche du Karaté. <br><br><b>Explorez l\'art ancien du Karaté</b> 🥷: Renforcez votre esprit, améliorez votre flexibilité et forgez votre caractère.',
+            content: '<br><b>Techniques de Frappe</b> 🥋: Apprentissage des différentes techniques de frappe avec les mains et les pieds.<br><br><b>Développement Physique</b> 💪: Renforcement musculaire, flexibilité et amélioration de la coordination.<br><br><b>Entraînement sur la discipline </b>📘: Apprenez les mouvements de défense personnelle et découvrez l\'histoire riche du Karaté.',
           },
         },
         {
@@ -64,7 +64,7 @@ export default {
           description: {
             title: 'Wrestling 🤼',
             subtitle: 'Un parcours vers la force et la stratégie mentale. 💪',
-            content: '<br><b>Techniques de Lutte</b> 🤼‍♂️: Maîtrisez une variété de techniques de lutte, des prises de base aux mouvements avancés.<br><br><b>Développement Physique</b> 💪: Renforcez votre corps, améliorez votre endurance et développez une force fonctionnelle essentielle.<br><br><b>Stratégies et Tactiques</b> 🤔: Apprenez à anticiper les mouvements de votre adversaire et à prendre des décisions rapides sur le tapis.<br><br><b>Forgez votre esprit et votre corps</b> 🤸‍♂️: La lutte développe non seulement la force physique, mais aussi la résilience mentale.',
+            content: '<br><b>Techniques de Lutte</b> 🤼‍♂️: Maîtrisez une variété de techniques de lutte, des prises de base aux mouvements avancés.<br><br><b>Développement Physique</b> 💪: Renforcez votre corps, améliorez votre endurance et développez une force fonctionnelle essentielle.<br><br><b>Stratégies et Tactiques</b> 🤔: Apprenez à anticiper les mouvements de votre adversaire.',
           },
         },
         {
@@ -74,7 +74,7 @@ export default {
           description: {
             title: 'Boxing 🥊',
             subtitle: 'Un parcours vers la puissance et la précision. 👊',
-            content: '<br><b>Techniques de Frappe</b> 🥊: Maîtrisez l\'art des coups, de la jab à l\'uppercut, et perfectionnez votre précision.<br><br><b>Conditionnement Physique</b> 💪: Améliorez votre endurance, renforcez votre cœur et développez la rapidité de vos mouvements.<br><br><b>Stratégie sur le Ring</b> 🤔: Apprenez à lire votre adversaire et à élaborer des stratégies pour remporter le combat.<br><br><b>Entraînement Intensif</b> 🏋️‍♂️: Plongez dans des séances d\'entraînement intenses pour perfectionner vos compétences.',
+            content: '<br><b>Techniques de Frappe</b> 🥊: Maîtrisez l\'art des coups, de la jab à l\'uppercut, et perfectionnez votre précision.<br><br><b>Conditionnement Physique</b> 💪: Améliorez votre endurance, renforcez votre cœur et développez la rapidité de vos mouvements.<br><br><b>Stratégie sur le Ring</b> 🤔: Apprenez à lire votre adversaire et à élaborer des stratégies pour remporter le combat.',
           },
         },
       ],
@@ -99,6 +99,19 @@ export default {
 
 
 <style scoped>
+.v-card {
+  background: rgb(255, 80, 1);
+  width: 23vw;
+  height: 38vw;
+  border: 2px solid #ffbb00;
+  border-radius: 35px;
+  transition: transform 0.5s ease;
+}
+
+.cardBlur {
+  background-color: rgb(0, 0, 0, 0.8);
+}
+
 .v-img {
   margin-top: 55px;
 }
@@ -138,11 +151,11 @@ video {
 }
 
 .descriptionSubTitle {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .descriptionContent {
-  font-size: 15px;
+  font-size: 17px;
   text-align: left;
 }
 
@@ -159,14 +172,6 @@ video {
   transform: rotateY(0deg);
 }
 
-.v-card {
-  background: rgb(255, 215, 0);
-  width: 23vw;
-  height: 38vw;
-  border: 2px solid #FFD700;
-  border-radius: 35px;
-  transition: transform 0.5s ease;
-}
 
 .v-card.flipped {
   transform: rotateY(180deg);

@@ -1,7 +1,7 @@
 <template>
     <v-layout>
 
-        <v-app-bar id="semi-transparent-app-bar" color="transparent" :elevation="20">
+        <v-app-bar id="semi-transparent-app-bar" :elevation="20">
 
             <v-row align="center" justify="space-between">
                 <v-img max-width="90" max-height="100" src="@/assets/logo.png"></v-img>
