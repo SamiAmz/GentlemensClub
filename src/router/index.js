@@ -1,11 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../vue/Home.vue";
-<<<<<<< Updated upstream
 import Contact from "../components/Contact.vue";
 import Horaire from "../components/Horaire.vue";
-=======
 import Login from "../vue/Login.vue";
->>>>>>> Stashed changes
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,7 +12,6 @@ const router = createRouter({
       name: "home",
       component: Home,
     },
-<<<<<<< Updated upstream
 
     {
       path: "/horaire",
@@ -27,12 +23,11 @@ const router = createRouter({
       path: "/contact",
       name: "contact",
       component: Contact
-=======
+    },
     {
       path: "/login",
       name: "login",
       component: Login,
->>>>>>> Stashed changes
     }
   ],
 });
