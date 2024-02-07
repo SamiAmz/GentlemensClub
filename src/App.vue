@@ -28,3 +28,4 @@ import { RouterLink, RouterView } from "vue-router";
 import AppHeader from "@/components/Header.vue";
 import AppFooter from "@/components/Footer.vue";
 </script>
+
