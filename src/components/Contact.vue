@@ -1,5 +1,4 @@
 <template>
-  <div id="page-container">
     <v-row align="start">
       <v-col cols="12" md="6">
         <v-card flat class="text-card">
@@ -33,7 +32,7 @@
           <v-card-text class="coach-title"> 🥊</v-card-text>
           <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
           <v-card-title class="coach-title">Coach de box </v-card-title>
-          <v-card-text class="coach-text">Coach Description</v-card-text>
+
         </v-card>
 
       </v-col>
@@ -43,7 +42,7 @@
           <v-card-text class="coach-title"> 🤼🏽 </v-card-text>
           <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
           <v-card-title class="coach-title">Coach de lutte </v-card-title>
-          <v-card-text class="coach-text">teste</v-card-text>
+
         </v-card>
 
       </v-col>
@@ -52,8 +51,8 @@
         <v-card class="coach-card">
           <v-card-text class="coach-title"> 🥋</v-card-text>
           <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
-          <v-card-title class="coach-title">Coach de MMA</v-card-title>
-          <v-card-text class="coach-text">Coach Description</v-card-text>
+          <v-card-title class="coach-title">Coach de Karate</v-card-title>
+
         </v-card>
 
       </v-col>
@@ -62,15 +61,14 @@
     </v-row>
 
 
-  </div>
 </template>
 
 <style scoped>
 .coach-title {
   display: flex;
   justify-content: center;
-  font-size: 50px;
-  margin-bottom: 9px;
+  font-size: 5px;
+  margin-bottom: 0px;
 }
 
 .coach-card {
@@ -80,7 +78,8 @@
   transition: transform 0.4s ease;
   margin: 1rem;
   background-color: rgb(243, 237, 237);
-  height: 500px
+  height: 1000px; 
+  width: 80%;
 }
 
 .coach-card:hover {
@@ -89,7 +88,7 @@
 }
 
 .coach-img {
-  height: 350px;
+  height: 100%;
   width: 100%;
 }
 
