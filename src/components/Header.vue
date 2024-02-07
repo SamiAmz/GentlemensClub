@@ -20,12 +20,8 @@
                 </div>
 
                 <div>
-<<<<<<< Updated upstream
-                    <router-link id="login" to="/"
+                    <router-link id="login" to="/login"
                         style="text-decoration: none; color: inherit; display: flex; align-items: center;">
-=======
-                    <router-link id="login" to="/login" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
->>>>>>> Stashed changes
                         <p id="loginTexte">Connexion</p>
                         <v-icon large color="white"> mdi-login-variant </v-icon>
                     </router-link>
