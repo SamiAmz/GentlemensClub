@@ -102,10 +102,14 @@ export default {
 .v-card {
   background: rgb(255, 80, 1);
   width: 23vw;
-  height: 38vw;
-  border: 2px solid #ffbb00;
+  height: 36vw;
+  border: 2px solid #000000;
   border-radius: 35px;
   transition: transform 0.5s ease;
+}
+
+.v-card:hover{
+  cursor: pointer;
 }
 
 .cardBlur {
@@ -134,7 +138,7 @@ export default {
 }
 
 video {
-  width: 80vw;
+  width: 100vw;
   margin: 0 auto;
   padding: 0;
   display: block;

@@ -20,7 +20,7 @@
                 </div>
 
                 <div>
-                    <router-link id="login" to="/"
+                    <router-link id="login" to="/login"
                         style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                         <p id="loginTexte">Connexion</p>
                         <v-icon large color="white"> mdi-login-variant </v-icon>
@@ -37,13 +37,20 @@
 }
 
 
-#semi-transparent-app-bar {
-    background-color: rgba(0, 0, 0, 0.5) !important;
+#semi-transparent-app-bar.scrolled {
+    background-color: rgba(0, 0, 0, 0.5);
     box-shadow: none !important;
     padding-left: 100px;
     padding-right: 100px;
 }
 
+
+#semi-transparent-app-bar {
+    background-color: black;
+    box-shadow: none !important;
+    padding-left: 100px;
+    padding-right: 100px;
+}
 
 .v-btn {
     margin: 10px 20px;
@@ -70,12 +77,25 @@
 </style>
 
 
-
-
 <script>
 import "@mdi/font/css/materialdesignicons.css";
 
 export default {
     name: "AppHeader",
 };
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    window.addEventListener('scroll', function() {
+        var header = document.getElementById('semi-transparent-app-bar');
+        if (window.scrollY > 0) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }    
+    });
+});
 </script>
