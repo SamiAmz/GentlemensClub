@@ -24,6 +24,12 @@ const router = createRouter({
       name: "contact",
       component: Contact
     },
+
+    {
+      path: "/horaire",
+      name: "horaire",
+      component: Horaire
+    },
     {
       path: "/login",
       name: "login",

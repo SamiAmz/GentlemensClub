@@ -337,8 +337,5 @@ video {
   color: rgb(255, 255, 255);
 }
 
-#page-container {
-  background-color: rgb(1, 7, 15);
-  color: white;
-}
+
 </style>

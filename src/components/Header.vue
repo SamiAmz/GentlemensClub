@@ -10,7 +10,7 @@
                     <router-link to="/" exact active-class="button-active">
                         <v-btn color="white" outlined :ripple="false" text>Accueil</v-btn>
                     </router-link>
-                    <router-link to="/" exact>
+                    <router-link to="/horaire" exact active-class="button-active">
                         <v-btn color="white" outlined :ripple="false" text>Horaire</v-btn>
                     </router-link>
                     <router-link to="/contact" exact active-class="button-active">
@@ -73,6 +73,7 @@
     color: white;
     font-size: 20px;
 }
+
 </style>
 
 
