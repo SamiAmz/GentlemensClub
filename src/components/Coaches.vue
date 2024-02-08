@@ -48,7 +48,7 @@ export default {
   transition: transform 0.3s ease; /* Smooth transition for hover effect */
   margin: 10px; /* Increase margin to create more space between cards */
   box-shadow: none;
-  width: 90%; 
+  width: 80%; 
 }
 
 .image-container {

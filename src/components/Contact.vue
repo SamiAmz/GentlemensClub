@@ -1,6 +1,6 @@
 <template>
   <v-row align="start">
-    <v-col cols="4" md="4" class="description">
+    <v-col cols="4" md="3" class="description">
       <v-card-title class = "title" > Nos entraineurs</v-card-title>
       <v-card-text> Que ce soit pour s'amuser ou se dépasser ils sont là pour vous aider et répondre à vos questions.</v-card-text>
     
@@ -32,7 +32,7 @@ export default {
 
 .title {
   color: rgb(255, 91, 8);
-  font-size: 50px;
+  font-size: 30px;
   text-align: center;
   
 }
@@ -42,7 +42,7 @@ export default {
 }
 
 .v-card-text {
-  font-size: 22px;
+  font-size: 19px;
   display: flex; 
   justify-content: center; 
   flex-direction: column; 
