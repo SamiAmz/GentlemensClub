@@ -1,17 +1,24 @@
 <template>
-    <v-row dense>
-      <v-col cols="12" sm="4" md="4" v-for="(coach, index) in coaches" :key="`col-${index}`">
-        <router-link :to="{ name: 'Coach', params: { coachId: coach.id }}">
-          <v-card class="coach-card" flat>
-            <div class="image-container">
-              <img :src="coach.image" class="coach-img" :alt="coach.name">
-       
-            </div>
-          </v-card>
-        </router-link>
-      </v-col>
-    </v-row>
+  <v-row>
+    <v-col
+      cols="12"
+      sm="4"
+      md="4"
+      v-for="(coach, index) in coaches"
+      :key="`col-${index}`"
+      class="coach-column"
+    >
+      <router-link :to="{ name: 'Coach', params: { coachId: coach.id }}">
+        <v-card class="coach-card" flat>
+          <div class="image-container">
+            <img :src="coach.image" class="coach-img" :alt="coach.name">
+          </div>
+        </v-card>
+      </router-link>
+    </v-col>
+  </v-row>
 </template>
+
 
 
 
@@ -42,13 +49,11 @@ export default {
 </script>
 
 <style scoped>
-
-
 .coach-card {
-  transition: transform 0.3s ease; /* Smooth transition for hover effect */
-  margin: 10px; /* Increase margin to create more space between cards */
+  transition: transform 0.3s ease;
   box-shadow: none;
-  width: 80%; 
+  width: 100%; /* Fill the column width */
+  
 }
 
 .image-container {
@@ -83,9 +88,5 @@ export default {
   background: rgba(0, 0, 0, 0); /* Lighten the image back on hover */
 }
 
-/* Adjust the padding for the columns to increase space between them */
-.v-col {
-  padding-left: 16px;
-  padding-right: 16px;
-}
+
 </style>
