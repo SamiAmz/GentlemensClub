@@ -26,36 +26,7 @@
     <v-row class="subTitle">
       <v-card-title> Nos entraîneurs </v-card-title>
     </v-row>
-    <v-row>
-      <v-col cols="12" md="4">
-        <v-card class="coach-card">
-          <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
-          <v-card-title class="coach-title">Coach de box </v-card-title>
-
-        </v-card>
-
-      </v-col>
-
-      <v-col cols="12" md="4">
-        <v-card class="coach-card">
-          <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
-          <v-card-title class="coach-title">Coach de lutte </v-card-title>
-
-        </v-card>
-
-      </v-col>
-
-      <v-col cols="12" md="4">
-        <v-card class="coach-card">
-          <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
-          <v-card-title class="coach-title">Coach de Karate</v-card-title>
-
-        </v-card>
-
-      </v-col>
-
-
-    </v-row>
+    <coaches></coaches>
 
 
 </template>
@@ -69,14 +40,7 @@
 }
 
 .coach-card {
-  border: 1px solid rgb(243, 237, 237);
-  border-radius: 10px;
-  overflow: hidden;
   transition: transform 0.4s ease;
-  margin: 3rem;
-  background-color: rgb(243, 237, 237);
-  height: 1000px; 
-  width: 80%;
 }
 
 .coach-card:hover {
@@ -85,9 +49,8 @@
 }
 
 .coach-img {
-  height: 100%;
-  width: 100%;
-  margin-top: 60px;
+  height: 50%;
+  width: 50;
 }
 
 .coach-title {
@@ -134,7 +97,7 @@
 }
 
 .contactPage {
-  padding: 20px;
+  padding-bottom: 400px;
 }
 
 .logo-img {
@@ -163,7 +126,10 @@
 </style>
 
 <script>
+import Coaches from './Coaches.vue';
+
 export default {
-  name: "Contact",
+    name: "Contact",
+    components: { Coaches }
 }; 
 </script>
