@@ -26,83 +26,13 @@
     <v-row class="subTitle">
       <v-card-title> Nos entraîneurs </v-card-title>
     </v-row>
-    <v-row>
-      <v-col cols="12" md="4">
-        <v-card class="coach-card">
-          <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
-          <v-card-title class="coach-title">Coach de box </v-card-title>
-
-        </v-card>
-
-      </v-col>
-
-      <v-col cols="12" md="4">
-        <v-card class="coach-card">
-          <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
-          <v-card-title class="coach-title">Coach de lutte </v-card-title>
-
-        </v-card>
-
-      </v-col>
-
-      <v-col cols="12" md="4">
-        <v-card class="coach-card">
-          <v-img src="@/assets/coach1.png" class="coach-img"></v-img>
-          <v-card-title class="coach-title">Coach de Karate</v-card-title>
-
-        </v-card>
-
-      </v-col>
-
-
-    </v-row>
-
+    <coaches></coaches>
+  
 
 </template>
 
 <style scoped>
-.coach-title {
-  display: flex;
-  justify-content: center;
-  font-size: 5px;
-  margin-bottom: 0px;
-}
 
-.coach-card {
-  border: 1px solid rgb(243, 237, 237);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.4s ease;
-  margin: 3rem;
-  background-color: rgb(243, 237, 237);
-  height: 1000px; 
-  width: 80%;
-}
-
-.coach-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
-.coach-img {
-  height: 100%;
-  width: 100%;
-  margin-top: 60px;
-}
-
-.coach-title {
-  color: black;
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 34px;
-  font-weight: bolder;
-}
-
-.coach-text {
-  color: rgb(1, 7, 15);
-  padding: 0 1rem 1rem;
-  text-align: left;
-}
 
 .v-card-title {
   font-size: 50px;
@@ -110,15 +40,12 @@
 
 }
 
+
 .subTitle {
   display: flex;
   justify-content: center;
 }
 
-.info {
-  display: flex;
-  justify-content: center;
-}
 
 .text {
   font-size: 18px;
@@ -127,43 +54,30 @@
   text-align: left;
 }
 
-#page-container {
-  background-color: rgb(1, 7, 15);
-  min-height: 100vh;
-  margin-top: -50px;
-}
-
-.contactPage {
-  padding: 20px;
-}
-
-.logo-img {
-  max-width: 100%;
-  height: 800px;
-  margin-right: 49px;
-}
-
 
 .text-card {
   background-color: rgb(1, 7, 15);
   color: rgb(243, 237, 237);
   padding-left: 200px;
-  padding-top: 100px;
+  /* Reduced padding-top to bring the content up */
+  padding-top: 50px; /* Adjust this value as needed */
 }
 
-.v-card-title {
+.title {
   padding-top: 60px;
   color: rgb(255, 91, 8)
 }
 
 .image-wrapper {
-  margin-top: 30px;
-
+  margin-left: 300px;
 }
 </style>
 
 <script>
+import Coaches from './Coaches.vue';
+
 export default {
-  name: "Contact",
+    name: "Contact",
+    components: { Coaches }
 }; 
 </script>
