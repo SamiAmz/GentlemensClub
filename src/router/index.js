@@ -4,7 +4,6 @@ import Contact from "../components/Contact.vue";
 import Horaire from "../components/Horaire.vue";
 import Login from "../vue/userView/Login.vue";
 import Signup from "../vue/userView/Signup.vue";
-import Login from "../vue/userView/Login.vue";
 import CoachDetails from "../vue/CoachDetails.vue"; // Make sure to import the new component
 
 
