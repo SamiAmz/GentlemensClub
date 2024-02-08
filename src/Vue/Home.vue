@@ -196,6 +196,7 @@ export default {
 </script>
 
 <style scoped>
+
 #pageCar-container {
   background-image: url("../assets/backgroundeasy.jpg");
   background-size: cover;
@@ -285,10 +286,11 @@ export default {
 }
 
 video {
-  width: 80vw;
+  width: 100vw;
   margin: 0 auto;
   padding: 0;
   display: block;
+  margin-top: -30px;
 }
 
 .description {
