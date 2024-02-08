@@ -27,6 +27,7 @@
                         required
                       ></v-text-field>
                       <v-text-field
+                        type="number"
                         v-model="phone"
                         :rules="phoneRules"
                         label="Ecrivez votre téléphone"
@@ -196,7 +197,6 @@ export default {
 </script>
 
 <style scoped>
-
 #pageCar-container {
   background-image: url("../assets/backgroundeasy.jpg");
   background-size: cover;
@@ -204,7 +204,7 @@ export default {
 }
 #custom-card-id {
   background-color: white;
-  width: 200%;
+  width: 100%;
   height: 100%;
 }
 
@@ -338,6 +338,4 @@ video {
 .v-card-subtitle {
   color: rgb(255, 255, 255);
 }
-
-
 </style>
