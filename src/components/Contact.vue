@@ -30,7 +30,7 @@ export default {
 
 .title {
   color: rgb(255, 91, 8);
-  font-size: 30px;
+  font-size: 45px;
   text-align: center;
   
 }
@@ -40,7 +40,8 @@ export default {
 }
 
 .v-card-text {
-  font-size: 12px;
+  font-size: 19px;
+  text-align: center;
 
 }
 
