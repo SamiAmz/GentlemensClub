@@ -1,29 +1,49 @@
 <template>
   <div class="container"> 
     <v-row dense>
-      <v-col cols="12" sm="4" md="4" v-for="n in 6" :key="`col-${n}`">
-        <v-card class="coach-card" flat>
-          <div class="image-container">
-            <img :src="getImage(n)" class="coach-img" :alt="`Coach ${n}`">
-          </div>
-        </v-card>
+      <v-col cols="12" sm="4" md="4" v-for="(coach, index) in coaches" :key="`col-${index}`">
+        <router-link :to="{ name: 'Coach', params: { coachId: coach.id }}">
+          <v-card class="coach-card" flat>
+            <div class="image-container">
+              <img :src="coach.image" class="coach-img" :alt="coach.name">
+       
+            </div>
+          </v-card>
+        </router-link>
       </v-col>
     </v-row>
   </div>
 </template>
 
+
+
 <script>
 export default {
   name: "Coaches",
+  data() {
+    return {
+      coaches: [
+        { id: 1, name: 'Lentz-Edouard Lundy', title: 'Entraîneur de boxe', bio: '...', image: '/coach-cards/card1.png' },
+        { id: 2, name: 'Lentz-Edouard Lundy', title: 'Entraîneur de boxe', bio: '...', image: '/coach-cards/card2.png' },
+        { id: 3, name: 'Lentz-Edouard Lundy', title: 'Entraîneur de boxe', bio: '...', image: '/coach-cards/card3.png' },
+        { id: 4, name: 'Lentz-Edouard Lundy', title: 'Entraîneur de boxe', bio: '...', image: '/coach-cards/card4.png' },
+        { id: 5, name: 'Lentz-Edouard Lundy', title: 'Entraîneur de boxe', bio: '...', image: '/coach-cards/card5.png' },
+        { id: 6, name: 'Lentz-Edouard Lundy', title: 'Entraîneur de boxe', bio: '...', image: '/coach-cards/card6.png' },
+
+        // ... more coaches
+      ],
+    };
+  },
   methods: {
     getImage(n) {
       return `/coach-cards/card${n}.png`;
     },
   },
 };
+
 </script>
 
-<style>
+<style scoped>
 .container {
   max-width: 1200px; 
   margin: auto; 
