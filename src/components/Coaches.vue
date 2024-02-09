@@ -43,11 +43,13 @@ export default {
 </script>
 
 <style scoped>
+
+
 .coach-card {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  margin: 10px; /* Increase margin to create more space between cards */
   box-shadow: none;
-  width: 100%; /* Fill the column width */
-  
+  width: 90%; 
 }
 
 .image-container {
@@ -82,5 +84,9 @@ export default {
   background: rgba(0, 0, 0, 0); /* Lighten the image back on hover */
 }
 
-
+/* Adjust the padding for the columns to increase space between them */
+.v-col {
+  padding-left: 16px;
+  padding-right: 16px;
+}
 </style>

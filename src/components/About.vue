@@ -1,6 +1,6 @@
 <template>
     <v-row>
-      <v-col cols="12" md="8" class ="textcolumn">
+      <v-col cols="12" md="7" class ="textcolumn">
         <v-card flat class="text-card">
           <v-card-title class="title">Qui sommes-nous ?</v-card-title>
           <v-card-text class="text">
