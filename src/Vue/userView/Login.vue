@@ -49,7 +49,7 @@ export default {
           // Login successful
           alert('Login successful!');
           // Redirect to a different page or update UI
-          // this.$router.push('/home'); // Example redirect
+          this.$router.push('/profile'); // Example redirect
         })
 
         .catch((error) => {
