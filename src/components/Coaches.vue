@@ -1,19 +1,20 @@
 <template>
+  <v-container>
+    <!-- Title and description -->
+    <!-- Coaches cards -->
     <v-row dense>
-      <v-col cols="12" sm="4" md="4" v-for="(coach, index) in coaches" :key="`col-${index}`">
+      <v-col cols="12" sm="6" md="4" lg="4" v-for="(coach, index) in coaches" :key="`col-${index}`">
         <router-link :to="{ name: 'Coach', params: { coachId: coach.id }}">
           <v-card class="coach-card" flat>
             <div class="image-container">
               <img :src="coach.image" class="coach-img" :alt="coach.name">
-       
             </div>
           </v-card>
         </router-link>
       </v-col>
     </v-row>
+  </v-container>
 </template>
-
-
 
 <script>
 export default {

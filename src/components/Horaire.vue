@@ -1,114 +1,85 @@
 <template>
-    <div>
-      <v-sheet tile height="54" class="d-flex">
-        <v-select
-          v-model="type"
-          :items="types"
-          dense
-          variant="outlined"
-          hide-details
-          class="ma-2"
-          label="View Mode"
-        ></v-select>
-        <v-select
-          v-model="weekday"
-          :items="weekdays"
-          dense
-          variant="outlined"
-          hide-details
-          label="weekdays"
-          class="ma-2"
-        ></v-select>
-      </v-sheet>
-      <v-sheet>
+  <v-container fluid>
+    <v-row justify="center">
+      <v-col cols="12">
         <v-calendar
           ref="calendar"
-          v-model="value"
-          :weekdays="weekday"
-          :view-mode="type"
+          type="week"
+          :now="today"
+          :value="today"
+          :weekday-format="weekdayFormat"
+          :interval-format="intervalFormat"
+          :interval-height="60"
+          :interval-minutes="60"
+          :interval-count="24"
+          :intervals-per-day="24"
           :events="events"
+          :event-color="getEventColor"
+          :event-margin-bottom="3"
+          :event-more="false"
+          :event-overlap-mode="stack"
+          :day-format="dayFormat"
+          @click:event="onClickEvent"
+          @click:more="onClickMore"
+          @click:date="onClickDate"
         ></v-calendar>
-      </v-sheet>
-    </div>
-  </template>
-  
-  <script>
-    import { useDate } from 'vuetify'
-  
-    export default {
-      data: () => ({
-        type: 'month',
-        types: ['month', 'week', 'day'],
-        weekday: [0, 1, 2, 3, 4, 5, 6],
-        weekdays: [
-          { title: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
-          { title: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
-          { title: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
-          { title: 'Mon, Wed, Fri', value: [1, 3, 5] },
-        ],
-        value: [new Date()],
-        events: [],
-        colors: [
-          'blue',
-          'indigo',
-          'deep-purple',
-          'cyan',
-          'green',
-          'orange',
-          'grey darken-1',
-        ],
-        titles: [
-          'Meeting',
-          'Holiday',
-          'PTO',
-          'Travel',
-          'Event',
-          'Birthday',
-          'Conference',
-          'Party',
-        ],
-      }),
-      mounted() {
-        const adapter = useDate()
-        this.getEvents({
-          start: adapter.startOfDay(adapter.startOfMonth(new Date())),
-          end: adapter.endOfDay(adapter.endOfMonth(new Date())),
-        })
-      },
-      methods: {
-        getEvents({ start, end }) {
-          const events = []
-  
-          const min = start
-          const max = end
-          const days = (max.getTime() - min.getTime()) / 86400000
-          const eventCount = this.rnd(days, days + 20)
-  
-          for (let i = 0; i < eventCount; i++) {
-            const allDay = this.rnd(0, 3) === 0
-            const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-            const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-            const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-            const second = new Date(first.getTime() + secondTimestamp)
-  
-            events.push({
-              title: this.titles[this.rnd(0, this.titles.length - 1)],
-              start: first,
-              end: second,
-              color: this.colors[this.rnd(0, this.colors.length - 1)],
-              allDay: !allDay,
-            })
-          }
-  
-          this.events = events
-        },
-        getEventColor(event) {
-          return event.color
-        },
-        rnd(a, b) {
-          return Math.floor((b - a + 1) * Math.random()) + a
-        },
-      },
-    }
-  </script>
-  
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      today: new Date().toISOString().substr(0, 10),
+      events: [
+  {
+    name: 'Event 1',
+    start: new Date('2024-02-05T12:00:00').toISOString(),
+    end: new Date('2024-02-05T13:00:00').toISOString(),
+    color: 'blue',
+  },
+  // ... more events
+],
+    };
+  },
+  methods: {
+   
+    dayFormat(day) {
+  console.log('Formatting day:', day);
+  const formattedDay = typeof day === 'string' ? day : day.toISOString().split('T')[0];
+  console.log('Formatted day:', formattedDay);
+  return formattedDay;
+},
+    getEventColor(event) {
+      return event.color;
+    },
+    onClickEvent(event) {
+      // Handle event click
+      console.log(event);
+    },
+    onClickMore(events) {
+      // Handle click on 'more' button for overflowing events
+      console.log(events);
+    },
+    onClickDate(day) {
+      // Handle click on day cell
+      console.log(day);
+    },
+  },
+};
+</script>
+
+
+<style scoped>
+.v-calendar {
+  /* Your existing styles */
+}
+</style>
+
+<style>
+.v-calendar {
+  padding-top: 100px;
+}
+</style>
