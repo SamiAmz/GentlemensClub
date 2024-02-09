@@ -141,4 +141,8 @@ b { /* used for event dates/times */
   margin: 0 auto;
 }
 
+.demo-app-calendar {
+  background-color: rgb(29, 29, 31)
+}
+
 </style>
