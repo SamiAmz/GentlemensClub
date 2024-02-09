@@ -5,6 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
+import frLocale from '@fullcalendar/core/locales/fr';
 
 export default defineComponent({
   components: {
@@ -13,13 +14,16 @@ export default defineComponent({
   data() {
     return {
       calendarOptions: {
+        locale: frLocale,
         plugins: [
           dayGridPlugin,
           timeGridPlugin,
           interactionPlugin // needed for dateClick
         ],
         headerToolbar: {
-       
+          start: '',
+          center: 'title',
+          end: 'prev,next',
         },
         initialView: 'timeGridWeek',
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
@@ -32,12 +36,13 @@ export default defineComponent({
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
         slotMinTime: '08:00:00', // Calendar will display starting at 8 AM
-  slotMaxTime: '22:00:00', // Calendar will display up until 10 PM
+        slotMaxTime: '22:00:00', // Calendar will display up until 10 PM
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
         eventRemove:
         */
+        
       },
       currentEvents: [],
     }
@@ -142,7 +147,10 @@ b { /* used for event dates/times */
 }
 
 .demo-app-calendar {
-  background-color: rgb(29, 29, 31)
+  background-color: rgb(29, 29, 31);
+  height: 780px;
+  border-radius: 5px;
+  padding: 1%;
 }
 
 </style>
