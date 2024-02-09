@@ -74,7 +74,7 @@ export default {
     return {
 
     myStyle:{
-        backgroundColor:"#BFBFBF" 
+        backgroundColor:"#8d8d8d" 
     },
 
     profile: {
