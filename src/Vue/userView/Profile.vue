@@ -60,6 +60,8 @@
       </div>
             
       <div class="form-actions">
+        <button type="button" class="btn btn-logout" @click="logoutUser">Sign Out</button>
+
         <button type="submit" class="btn">Save Changes</button>
       </div>
     </form>
@@ -69,6 +71,8 @@
 </template>
 
 <script>
+import { auth } from "@/firebase/init"; // Adjust the import path as necessary
+import { signOut } from "firebase/auth";
 export default {
   data() {
     return {
@@ -89,11 +93,21 @@ export default {
     };
   },
   methods: {
-    updateProfile() {
-      // Implement your update logic here
-      console.log('Profile updated:', this.profile);
-    }
+  updateProfile() {
+    // Existing profile update logic
+    console.log('Profile updated:', this.profile);
+  },
+  logoutUser() {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      this.$router.push('/'); // Redirect to homepage
+    }).catch((error) => {
+      // An error happened.
+      console.error("Sign out error:", error);
+    });
   }
+}
+
 };
 </script>
 
