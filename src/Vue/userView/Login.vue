@@ -91,19 +91,19 @@ export default {
 
 #loginTitle{
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   font-size: 38px;
 }
 
 .login-container {
-  max-width: 400px;
+  max-width: 550px;
   margin: auto;
   background: #333;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: white;
-  height: 400px;
+  height: 450px;
 }
 
 .form-group {
@@ -116,7 +116,6 @@ export default {
 }
 
 .form-group input {
-  width: 100%;
   padding: 10px;
   border-radius: 4px;
   border: none;
@@ -125,9 +124,10 @@ export default {
   color: #000000;
   font-size: 16px;
   font-weight: bolder;
-  width: 90%;
-  margin-left: 20px;
+  width: 80%;
+  margin-left: 50px;
   margin-bottom: 10px;
+  height: 50px;
 }
 
 
@@ -140,14 +140,14 @@ export default {
 }
 
 .btn-login {
-  width: 100%;
+  width: 70%;
   padding: 10px;
   background: red;
   border: none;
   border-radius: 4px;
   color: white;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 40px;
   margin-bottom: 15px;
   font-size: 16px;
   font-weight: bolder;
@@ -159,7 +159,7 @@ export default {
   color: white;
   margin-top: 5px;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 50px;
 }
 
 /* This is just to simulate the placeholder style, replace with actual placeholders */

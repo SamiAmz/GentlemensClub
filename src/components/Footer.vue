@@ -2,8 +2,8 @@
   <div id="footer">
     <v-container>
       <v-row justify="center" align="center">
-        <v-img class="logo" max-width="200" src="@/assets/logo.png"></v-img>
-        <v-col cols="12" sm="6">
+        <v-img class="logo" max-width="150" src="@/assets/logo.png"></v-img>
+        <v-col cols="0" sm=" 0">
           <div class="footer-links">
             <router-link to="/">Accueil</router-link>
             <router-link to="/horaire">Horaire</router-link>
@@ -13,7 +13,7 @@
           <p>
             Copyright &copy; {{ currentYear }} Club de Champions. All rights
             reserved.<br />
-            TOUS DROITS RÉSERVÉS
+          <p class="reserve">TOUS DROITS RÉSERVÉS</p>
           </p>
         </v-col>
       </v-row>
@@ -33,6 +33,10 @@ export default {
 </script>
 
 <style scoped>
+p {
+  text-align: center;
+}
+
 #footer {
   width: 100%;
   font-family: "trebuchet ms", sans-serif;
@@ -50,6 +54,7 @@ export default {
   margin: 8px;
   color: white;
   text-decoration: none;
+  text-align: center;
 }
 
 .footer-links {

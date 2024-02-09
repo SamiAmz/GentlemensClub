@@ -1,11 +1,9 @@
 <template>
   <div id="page-container">
-    <div id="video-container">
-      <video autoplay loop muted playsinline>
-        <source src="@/assets/intro.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    <video autoplay loop muted playsinline>
+      <source src="@/assets/intro.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
 
     <div id="pageCar-container">
       <v-img class="white--text" height="100vh" width="100vw">
@@ -76,7 +74,6 @@
 
     <v-container class="d-flex flex-row justify-space-between">
       <v-card
-        id="carta"
         v-for="(card, index) in cards"
         :key="index"
         class="mx-auto my-8"
@@ -86,7 +83,7 @@
         @mouseleave="delayFlipBack(index)"
       >
         <div v-if="!card.isFlipped">
-          <v-card-title id="daBLEAT">
+          <v-card-title>
             <p class="carteTexte">{{ card.title }}</p>
           </v-card-title>
           <v-img :src="card.image"></v-img>
@@ -96,7 +93,7 @@
           <h2 class="descriptionSubTitle">{{ card.description.subtitle }}</h2>
           <p class="descriptionContent" v-html="card.description.content"></p>
           <div class="cta">
-            <v-btn color="rgb(255, 91, 8)" @click="learnMore(index)"
+            <v-btn id="moreButton" color="rgb(255, 91, 8)" @click="learnMore(index)"
               >En savoir plus
               <v-icon large color="white">mdi-arrow-right-bold</v-icon>
             </v-btn>
@@ -111,6 +108,9 @@
 import karateImage from "@/assets/karate.png";
 import wrestlingImage from "@/assets/wrestling.png";
 import boxingImage from "@/assets/boxing.png";
+
+import "@mdi/font/css/materialdesignicons.css";
+
 
 export default {
   name: "Home",
@@ -129,14 +129,9 @@ export default {
           image: karateImage,
         },
         {
-          name: "Wrestling Image",
-          description: "Description for box",
-          image: wrestlingImage,
-        },
-        {
           name: "Box Image",
           description: "Description for box",
-          image: boxingImage,
+          image: wrestlingImage,
         },
       ],
       carousel: 0,
@@ -146,10 +141,10 @@ export default {
           image: karateImage,
           isFlipped: false,
           description: {
-            title: "Karate🥋",
-            subtitle: "Un voyage vers l'équilibre mental et physique. ✨",
+            title: "Karate",
+            subtitle: "Un voyage vers l'équilibre mental et physique.",
             content:
-              "<br><b>Techniques de Frappe</b> 🥋: Apprentissage des différentes techniques de frappe avec les mains et les pieds.<br><br><b>Développement Physique</b> 💪: Renforcement musculaire, flexibilité et amélioration de la coordination.<br><br><b>Entraînement sur la discipline </b>📘: Apprenez les mouvements de défense personnelle et découvrez l'histoire riche du Karaté.",
+              "<br><b>Techniques de Frappe</b>Apprentissage des différentes techniques de frappe avec les mains et les pieds.<br><br><b>Développement Physique</b>Renforcement musculaire, flexibilité et amélioration de la coordination.<br><br><b>Entraînement sur la discipline </b>Apprenez les mouvements de défense personnelle et découvrez l'histoire riche du Karaté.",
           },
         },
         {
@@ -157,10 +152,10 @@ export default {
           image: wrestlingImage,
           isFlipped: false,
           description: {
-            title: "Wrestling 🤼",
-            subtitle: "Un parcours vers la force et la stratégie mentale. 💪",
+            title: "Wrestling",
+            subtitle: "Un parcours vers la force et la stratégie mentale.",
             content:
-              "<br><b>Techniques de Lutte</b> 🤼‍♂️: Maîtrisez une variété de techniques de lutte, des prises de base aux mouvements avancés.<br><br><b>Développement Physique</b> 💪: Renforcez votre corps, améliorez votre endurance et développez une force fonctionnelle essentielle.<br><br><b>Stratégies et Tactiques</b> 🤔: Apprenez à anticiper les mouvements de votre adversaire.",
+              "<br><b>Techniques de Lutte</b>Maîtrisez une variété de techniques de lutte, des prises de base aux mouvements avancés.<br><br><b>Développement Physique</b>Renforcez votre corps, améliorez votre endurance et développez une force fonctionnelle essentielle.<br><br><b>Stratégies et Tactiques</b>Apprenez à anticiper les mouvements de votre adversaire.",
           },
         },
         {
@@ -168,10 +163,10 @@ export default {
           image: boxingImage,
           isFlipped: false,
           description: {
-            title: "Boxing 🥊",
-            subtitle: "Un parcours vers la puissance et la précision. 👊",
+            title: "Boxing",
+            subtitle: "Un parcours vers la puissance et la précision.",
             content:
-              "<br><b>Techniques de Frappe</b> 🥊: Maîtrisez l'art des coups, de la jab à l'uppercut, et perfectionnez votre précision.<br><br><b>Conditionnement Physique</b> 💪: Améliorez votre endurance, renforcez votre cœur et développez la rapidité de vos mouvements.<br><br><b>Stratégie sur le Ring</b> 🤔: Apprenez à lire votre adversaire et à élaborer des stratégies pour remporter le combat.",
+              "<br><b>Techniques de Frappe</b>Maîtrisez l'art des coups, de la jab à l'uppercut, et perfectionnez votre précision.<br><br><b>Conditionnement Physique</b>Améliorez votre endurance, renforcez votre cœur et développez la rapidité de vos mouvements.<br><br><b>Stratégie sur le Ring</b>Apprenez à lire votre adversaire et à élaborer des stratégies pour remporter le combat.",
           },
         },
       ],
@@ -204,6 +199,7 @@ export default {
 </script>
 
 <style scoped>
+
 #pageCar-container {
   background-image: url("../assets/backgroundeasy.jpg");
   background-size: cover;
@@ -211,7 +207,7 @@ export default {
 }
 #custom-card-id {
   background-color: white;
-  width: 100%;
+  width: 200%;
   height: 100%;
 }
 
@@ -233,6 +229,10 @@ export default {
   margin-top: 10rem;
   margin-left: 5rem;
   font-size: 120px;
+}
+
+#moreButton{
+  margin-top: 45px;
 }
 
 .phone-button,
@@ -270,12 +270,11 @@ export default {
   mix-blend-mode: multiply;
 }
 
-#carta {
-  background: rgb(255, 80, 1);
+.v-card {
+  background: rgb(200, 33, 0);
   width: 23vw;
   height: 38vw;
-  border: 2px solid #ffbb00;
-  border-radius: 35px;
+  border-radius: 10px;
   transition: transform 0.5s ease;
 }
 
@@ -304,6 +303,7 @@ video {
   display: none;
   text-align: center;
   transform: rotateY(0deg);
+  margin: 10px;
 }
 
 .descriptionTitle {
@@ -327,7 +327,6 @@ video {
 .carteTexte {
   font-size: 55px;
   font-weight: bold;
-  font-family: Georgia, "Times New Roman", Times, serif;
   height: 50px;
   transform: rotateY(0deg);
 }
@@ -336,7 +335,7 @@ video {
   transform: rotateY(180deg);
 }
 
-#daBLEAT {
+.v-card-title {
   text-align: center;
   font-size: 3.5em;
   padding-top: 50px;
@@ -345,4 +344,6 @@ video {
 .v-card-subtitle {
   color: rgb(255, 255, 255);
 }
+
+
 </style>

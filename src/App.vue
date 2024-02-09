@@ -1,5 +1,5 @@
 <template>
-  <AppHeader />
+  <AppHeader :is-logged-in="isLoggedIn" />
   <v-app>
     <v-main>
       <router-view />
@@ -17,7 +17,17 @@
 </style>
 
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { onMounted, ref } from 'vue';
+import { auth } from "@/firebase/init"; // Adjust the import path as necessary
+import { onAuthStateChanged } from "firebase/auth";
 import AppHeader from "@/components/Header.vue";
 import AppFooter from "@/components/Footer.vue";
+
+const isLoggedIn = ref(false); // Reactive property to track login status
+
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    isLoggedIn.value = !!user;
+  });
+});
 </script>
