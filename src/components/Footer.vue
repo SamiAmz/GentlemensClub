@@ -1,32 +1,65 @@
 <template>
   <div id="footer">
-    <v-row align="center" justify="center">
-      <v-img max-width="60" max-height="100" src="@/assets/logo.png"></v-img>
-      <p>Copyright &copy; 2012-2024 Club de Champions. All its ours DONT COPY <br>
-        TOUS DROITS RÉSERVÉS</p>
-    </v-row>
+    <v-container>
+      <v-row justify="center" align="center">
+        <v-col cols="12" sm="4">
+          <v-img
+            max-width="60"
+            max-height="100"
+            src="@/assets/logo.png"
+          ></v-img>
+        </v-col>
+        <v-col cols="12" sm="8">
+          <div class="footer-links">
+            <router-link to="/">Accueil</router-link>
+            <router-link to="/horaire">Horaire</router-link>
+            <router-link to="/contact">A propos</router-link>
+            <router-link to="/login">Login/Register</router-link>
+          </div>
+          <p>
+            Copyright &copy; {{ currentYear }} Club de Champions. All rights
+            reserved.<br />
+            TOUS DROITS RÉSERVÉS
+          </p>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
 export default {
   name: "AppFooter",
-}; 2012 - 2024 
+  data() {
+    return {
+      currentYear: new Date().getFullYear(),
+    };
+  },
+};
 </script>
 
 <style>
 #footer {
   width: 100%;
-  font-family: 'trebuchet ms', sans-serif;
-  font-size: 14px;
-  padding: 10px 0 0 0;
+  font-family: "trebuchet ms", sans-serif;
+  font-size: 15px;
   text-align: center;
   background: #000000;
 }
 
 #footer p {
-  margin-top: 1em;
+  margin-top: 0.5em;
   line-height: 1.7em;
   color: white;
+}
+
+.footer-links a {
+  margin: 8px;
+  color: white;
+  text-decoration: none;
+}
+.footer-links a:hover {
+  text-decoration: underline;
+  color: red;
 }
 </style>

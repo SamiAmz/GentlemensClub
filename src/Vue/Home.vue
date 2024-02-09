@@ -1,9 +1,11 @@
 <template>
   <div id="page-container">
-    <video autoplay loop muted playsinline>
-      <source src="@/assets/intro.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <div id="video-container">
+      <video autoplay loop muted playsinline>
+        <source src="@/assets/intro.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
 
     <div id="pageCar-container">
       <v-img class="white--text" height="100vh" width="100vw">
@@ -74,6 +76,7 @@
 
     <v-container class="d-flex flex-row justify-space-between">
       <v-card
+        id="carta"
         v-for="(card, index) in cards"
         :key="index"
         class="mx-auto my-8"
@@ -83,7 +86,7 @@
         @mouseleave="delayFlipBack(index)"
       >
         <div v-if="!card.isFlipped">
-          <v-card-title>
+          <v-card-title id="daBLEAT">
             <p class="carteTexte">{{ card.title }}</p>
           </v-card-title>
           <v-img :src="card.image"></v-img>
@@ -126,9 +129,14 @@ export default {
           image: karateImage,
         },
         {
-          name: "Box Image",
+          name: "Wrestling Image",
           description: "Description for box",
           image: wrestlingImage,
+        },
+        {
+          name: "Box Image",
+          description: "Description for box",
+          image: boxingImage,
         },
       ],
       carousel: 0,
@@ -196,7 +204,6 @@ export default {
 </script>
 
 <style scoped>
-
 #pageCar-container {
   background-image: url("../assets/backgroundeasy.jpg");
   background-size: cover;
@@ -204,7 +211,7 @@ export default {
 }
 #custom-card-id {
   background-color: white;
-  width: 200%;
+  width: 100%;
   height: 100%;
 }
 
@@ -263,7 +270,7 @@ export default {
   mix-blend-mode: multiply;
 }
 
-.v-card {
+#carta {
   background: rgb(255, 80, 1);
   width: 23vw;
   height: 38vw;
@@ -329,7 +336,7 @@ video {
   transform: rotateY(180deg);
 }
 
-.v-card-title {
+#daBLEAT {
   text-align: center;
   font-size: 3.5em;
   padding-top: 50px;
@@ -338,6 +345,4 @@ video {
 .v-card-subtitle {
   color: rgb(255, 255, 255);
 }
-
-
 </style>
