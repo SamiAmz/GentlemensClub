@@ -121,7 +121,7 @@ export default {
 }
 
 .login-container {
-  max-width: 400px;
+  max-width: 550px;
   margin: auto;
   background: #333;
   padding: 20px;
@@ -141,11 +141,12 @@ export default {
 }
 
 #namesDiv{
-    margin-left: 5px;
+  margin-left: 30px;
+  margin-right: 10px;
 }
 
 .form-group input {
-  width: 90%;
+  width: 80%;
   padding: 10px;
   border-radius: 4px;
   border: none;
@@ -155,7 +156,7 @@ export default {
   font-size: 16px;
   font-weight: bolder;
   margin-bottom: 10px;
-  margin-left: 20px;
+  margin-left: 50px;
 }
 
 
@@ -178,7 +179,7 @@ export default {
 }
 
 .btn-login {
-  width: 100%;
+  width: 70%;
   padding: 10px;
   background: red;
   border: none;
