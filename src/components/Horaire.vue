@@ -1,114 +1,144 @@
-<template>
-    <div>
-      <v-sheet tile height="54" class="d-flex">
-        <v-select
-          v-model="type"
-          :items="types"
-          dense
-          variant="outlined"
-          hide-details
-          class="ma-2"
-          label="View Mode"
-        ></v-select>
-        <v-select
-          v-model="weekday"
-          :items="weekdays"
-          dense
-          variant="outlined"
-          hide-details
-          label="weekdays"
-          class="ma-2"
-        ></v-select>
-      </v-sheet>
-      <v-sheet>
-        <v-calendar
-          ref="calendar"
-          v-model="value"
-          :weekdays="weekday"
-          :view-mode="type"
-          :events="events"
-        ></v-calendar>
-      </v-sheet>
-    </div>
-  </template>
-  
-  <script>
-    import { useDate } from 'vuetify'
-  
-    export default {
-      data: () => ({
-        type: 'month',
-        types: ['month', 'week', 'day'],
-        weekday: [0, 1, 2, 3, 4, 5, 6],
-        weekdays: [
-          { title: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
-          { title: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
-          { title: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
-          { title: 'Mon, Wed, Fri', value: [1, 3, 5] },
+<script>
+import { defineComponent } from 'vue'
+import FullCalendar from '@fullcalendar/vue3'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import { INITIAL_EVENTS, createEventId } from './event-utils'
+
+export default defineComponent({
+  components: {
+    FullCalendar,
+  },
+  data() {
+    return {
+      calendarOptions: {
+        plugins: [
+          dayGridPlugin,
+          timeGridPlugin,
+          interactionPlugin // needed for dateClick
         ],
-        value: [new Date()],
-        events: [],
-        colors: [
-          'blue',
-          'indigo',
-          'deep-purple',
-          'cyan',
-          'green',
-          'orange',
-          'grey darken-1',
-        ],
-        titles: [
-          'Meeting',
-          'Holiday',
-          'PTO',
-          'Travel',
-          'Event',
-          'Birthday',
-          'Conference',
-          'Party',
-        ],
-      }),
-      mounted() {
-        const adapter = useDate()
-        this.getEvents({
-          start: adapter.startOfDay(adapter.startOfMonth(new Date())),
-          end: adapter.endOfDay(adapter.endOfMonth(new Date())),
-        })
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        initialView: 'dayGridMonth',
+        initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+        editable: true,
+        selectable: true,
+        selectMirror: true,
+        dayMaxEvents: true,
+        weekends: true,
+        select: this.handleDateSelect,
+        eventClick: this.handleEventClick,
+        eventsSet: this.handleEvents
+        /* you can update a remote database when these fire:
+        eventAdd:
+        eventChange:
+        eventRemove:
+        */
       },
-      methods: {
-        getEvents({ start, end }) {
-          const events = []
-  
-          const min = start
-          const max = end
-          const days = (max.getTime() - min.getTime()) / 86400000
-          const eventCount = this.rnd(days, days + 20)
-  
-          for (let i = 0; i < eventCount; i++) {
-            const allDay = this.rnd(0, 3) === 0
-            const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-            const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-            const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-            const second = new Date(first.getTime() + secondTimestamp)
-  
-            events.push({
-              title: this.titles[this.rnd(0, this.titles.length - 1)],
-              start: first,
-              end: second,
-              color: this.colors[this.rnd(0, this.colors.length - 1)],
-              allDay: !allDay,
-            })
-          }
-  
-          this.events = events
-        },
-        getEventColor(event) {
-          return event.color
-        },
-        rnd(a, b) {
-          return Math.floor((b - a + 1) * Math.random()) + a
-        },
-      },
+      currentEvents: [],
     }
-  </script>
-  
+  },
+  methods: {
+    handleWeekendsToggle() {
+      this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
+    },
+    handleDateSelect(selectInfo) {
+      let title = prompt('Please enter a new title for your event')
+      let calendarApi = selectInfo.view.calendar
+
+      calendarApi.unselect() // clear date selection
+
+      if (title) {
+        calendarApi.addEvent({
+          id: createEventId(),
+          title,
+          start: selectInfo.startStr,
+          end: selectInfo.endStr,
+          allDay: selectInfo.allDay
+        })
+      }
+    },
+    handleEventClick(clickInfo) {
+      if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+        clickInfo.event.remove()
+      }
+    },
+    handleEvents(events) {
+      this.currentEvents = events
+    },
+  }
+})
+
+</script>
+
+<template>
+  <div class='demo-app'>
+    <div class='demo-app-main'>
+      <FullCalendar
+        class='demo-app-calendar'
+        :options='calendarOptions'
+      >
+        <template v-slot:eventContent='arg'>
+          <b>{{ arg.timeText }}</b>
+          <i>{{ arg.event.title }}</i>
+        </template>
+      </FullCalendar>
+    </div>
+  </div>
+</template>
+
+<style lang='css'>
+
+h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+ul {
+  margin: 0;
+  padding: 0 0 0 1.5em;
+}
+
+li {
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+b { /* used for event dates/times */
+  margin-right: 3px;
+}
+
+.demo-app {
+  padding-top: 5%;
+  display: flex;
+  min-height: 100%;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.demo-app-sidebar {
+  width: 300px;
+  line-height: 1.5;
+  background: #eaf9ff;
+  border-right: 1px solid #d3e2e8;
+}
+
+.demo-app-sidebar-section {
+  padding: 2em;
+}
+
+.demo-app-main {
+  flex-grow: 1;
+  padding: 3em;
+}
+
+.fc { /* the calendar root */
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+</style>
