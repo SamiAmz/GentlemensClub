@@ -42,11 +42,9 @@ export default {
         this.coach = coachData;
       } else {
         console.error('Coach not found');
-        // Handle coach not found, e.g., redirect to a not-found page or display a message
       }
     },
     mockFetchCoachById(coachId) {
-      // Simulate fetching coach data by ID
       return this.$parent.coaches.find(coach => coach.id === coachId);
     },
   },
