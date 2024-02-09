@@ -4,7 +4,7 @@
   <div id="my-app">
   <div id="login-form" class="login-container">
     <h1 id="loginTitle">Login</h1>
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="loginUser">
       <div class="form-group">
         <input type="text" id="email" v-model="credentials.email" @focus="clearPlaceholder($event)" @blur="restorePlaceholder($event, 'Email or Username')" placeholder="Email or Username" required>
       </div>
@@ -24,6 +24,10 @@
 </template>
 
 <script>
+import { auth } from "@/firebase/init";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+
 export default {
   data() {
     return {
@@ -37,10 +41,24 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      // Handle form submission
-      console.log('Form submitted:', this.credentials);
+
+    loginUser() {
+
+      signInWithEmailAndPassword(auth, this.credentials.email, this.credentials.password)
+        .then((userCredential) => {
+          // Login successful
+          alert('Login successful!');
+          // Redirect to a different page or update UI
+          // this.$router.push('/home'); // Example redirect
+        })
+
+        .catch((error) => {
+          // Handle errors (e.g., wrong password, no user with such email)
+          alert(error.message); // Show error to user
+        });
     },
+
+
     forgotPassword() {
       // Handle forgot password
       console.log('Forgot password clicked');

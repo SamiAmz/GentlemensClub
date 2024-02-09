@@ -4,7 +4,7 @@
   <div id="my-app">
   <div id="login-form" class="login-container">
     <h1 id="loginTitle">Register</h1>
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="registerUser">
         <div class="form-group" id="namesDiv">
         <input type="text" id="firstName" v-model="credentials.firstName" @focus="clearPlaceholder($event)" @blur="restorePlaceholder($event, 'First Name')" placeholder="First Name" required>
         <input type="text" id="lastName" v-model="credentials.lastName" @focus="clearPlaceholder($event)" @blur="restorePlaceholder($event, 'Last Name')" placeholder="Last Name" required>
@@ -30,6 +30,10 @@
 </template>
 
 <script>
+import { auth, db } from '@/firebase/init';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+
 export default {
   data() {
     return {
@@ -37,16 +41,54 @@ export default {
             backgroundColor:"#222" 
             },
       credentials: {
+        firstName: '',
+        lastName: '',
         email: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
       }
     };
   },
   methods: {
-    submitForm() {
-      // Handle form submission
-      console.log('Form submitted:', this.credentials);
+    registerUser() {
+      if (this.credentials.password !== this.credentials.confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      // Proceed with Firebase user creation
+      createUserWithEmailAndPassword(auth, this.credentials.email, this.credentials.password)
+    .then(async (userCredential) => {
+      // User created successfully
+      alert('User created successfully.');
+
+      // Create a new user document in Firestore
+      const userDocRef = doc(db, "users", userCredential.user.uid);
+      try {
+        await setDoc(userDocRef, {
+          email: this.credentials.email,
+          first_name: this.credentials.firstName,
+          last_name: this.credentials.lastName,
+        });
+
+        // Document created successfully
+        console.log("User document created in Firestore.");
+        // Redirect user or show success message
+
+      } catch (error) {
+        // Handle errors in creating the Firestore document
+        console.error("Error creating user document:", error);
+        alert("Failed to create user profile.");
+      }
+    })
+    
+    .catch((error) => {
+      // Handle errors in user creation (e.g., email already in use)
+      console.error("Error creating user:", error);
+      alert(error.message); // Show error to user
+    });
     },
+
     existingUser() {
       this.$router.push('/login');
     },
