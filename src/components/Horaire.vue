@@ -19,11 +19,9 @@ export default defineComponent({
           interactionPlugin // needed for dateClick
         ],
         headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+       
         },
-        initialView: 'dayGridMonth',
+        initialView: 'timeGridWeek',
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
         editable: true,
         selectable: true,
@@ -32,7 +30,9 @@ export default defineComponent({
         weekends: true,
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
-        eventsSet: this.handleEvents
+        eventsSet: this.handleEvents,
+        slotMinTime: '08:00:00', // Calendar will display starting at 8 AM
+  slotMaxTime: '22:00:00', // Calendar will display up until 10 PM
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
@@ -139,6 +139,10 @@ b { /* used for event dates/times */
 .fc { /* the calendar root */
   max-width: 1100px;
   margin: 0 auto;
+}
+
+.demo-app-calendar {
+  background-color: rgb(29, 29, 31)
 }
 
 </style>
