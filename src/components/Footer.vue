@@ -2,14 +2,8 @@
   <div id="footer">
     <v-container>
       <v-row justify="center" align="center">
-        <v-col cols="12" sm="4">
-          <v-img
-            max-width="60"
-            max-height="100"
-            src="@/assets/logo.png"
-          ></v-img>
-        </v-col>
-        <v-col cols="12" sm="8">
+        <v-img class="logo" max-width="200" src="@/assets/logo.png"></v-img>
+        <v-col cols="12" sm="6">
           <div class="footer-links">
             <router-link to="/">Accueil</router-link>
             <router-link to="/horaire">Horaire</router-link>
@@ -38,12 +32,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #footer {
   width: 100%;
   font-family: "trebuchet ms", sans-serif;
   font-size: 15px;
-  text-align: center;
   background: #000000;
 }
 
@@ -58,6 +51,11 @@ export default {
   color: white;
   text-decoration: none;
 }
+
+.footer-links {
+  display: flex;
+}
+
 .footer-links a:hover {
   text-decoration: underline;
   color: red;
