@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { auth } from "@/firebase/init";
 import Home from "../vue/Home.vue";
 import Contact from "../components/Contact.vue";
 import Horaire from "../components/Horaire.vue";
 import Login from "../vue/userView/Login.vue";
 import Signup from "../vue/userView/Signup.vue";
-import CoachDetails from "../vue/CoachDetails.vue"; // Make sure to import the new component
+import CoachDetails from "../vue/CoachDetails.vue";
+import Profile from "../vue/userView/Profile.vue";
 
 
 const router = createRouter({
@@ -49,8 +51,14 @@ const router = createRouter({
       path: "/signup",
       name: "signup",
       component: Signup,
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
     }
   ],
 });
+
 
 export default router;
