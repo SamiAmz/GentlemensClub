@@ -9,7 +9,7 @@
       <v-row>
         <v-col cols="12" md="3" class="info">
             
-            <v-card-text><v-icon>mdi-phone</v-icon>: +1 (514) 389 5921</v-card-text>
+            <v-card-text><v-icon color="ORANGE">mdi-phone</v-icon>: +1 (514) 389 5921</v-card-text>
             <v-card-text><v-icon>mdi-email</v-icon>: GentlemensClub@outlook.com</v-card-text>
             <v-card-text><v-icon>mdi-map-marker</v-icon>: 9155 Rue St-Hubert, Montréal, QC H2M 1Y8</v-card-text>
         </v-col>
@@ -23,6 +23,13 @@
   
   <style scoped>
 
+  .v-card-text {
+    border-bottom: 2px solid #000; /* Example: 2px solid black border */
+    border-right: 2px solid rgb(255, 91, 8); /* Example: 2px solid black border */
+
+    padding-bottom: 15px; /* Adds some padding below the text */
+    margin-bottom: 15px; /* Adds some space below the border */
+  }
 
   .info {
     padding-top: 5%;
