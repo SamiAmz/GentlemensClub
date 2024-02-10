@@ -46,10 +46,10 @@
   }
   
   .map {
-    width: 100%; 
+    width: 100%; /* Adjusted to fill the container */
 
     height: 67%;
-    border-radius: 20px; 
+    border-radius: 20px; /* Ensure the map itself also has rounded corners if it can be seen */
   }
   </style>
 

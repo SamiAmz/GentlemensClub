@@ -52,7 +52,7 @@ export default {
 .coach-card {
   transition: transform 0.3s ease;
   box-shadow: none;
-  width: 100%; /* Fill the column width */
+  width: 97%; /* Fill the column width */
   
 }
 

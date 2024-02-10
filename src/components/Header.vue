@@ -2,10 +2,8 @@
   <v-layout>
     <v-app-bar id="semi-transparent-app-bar" :elevation="20">
       <v-row align="center" justify="space-between">
-        <!-- Logo -->
         <v-img max-width="90" max-height="100" src="@/assets/logo.png"></v-img>
 
-        <!-- Navigation Links -->
         <div>
           <router-link to="/" exact active-class="button-active">
             <v-btn class="button-hover" color="white" outlined :ripple="false" text>
@@ -24,9 +22,7 @@
           </router-link>
         </div>
 
-        <!-- Auth Links -->
         <div>
-          <!-- Profil Link (Shown when Logged In) -->
           <router-link v-if="isLoggedIn" to="/profile" id="profile" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
             <p id="profileText">Profil</p>
             <v-icon large color="white">mdi-account</v-icon>
