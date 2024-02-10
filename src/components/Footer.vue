@@ -8,7 +8,6 @@
             <router-link to="/">Accueil</router-link>
             <router-link to="/horaire">Horaire</router-link>
             <router-link to="/contact">A propos</router-link>
-            <router-link to="/login">Login/Register</router-link>
           </div>
           <p>
             Copyright &copy; {{ currentYear }} Club de Champions. All rights

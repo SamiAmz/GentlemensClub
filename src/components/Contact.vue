@@ -11,15 +11,17 @@
 
   </v-row>
   <about></about>
+  <join></join>
 </template>
 
 <script>
 import About from './About.vue';
 import Coaches from './Coaches.vue';
+import Join from './Join.vue';
 
 export default {
   name: "Contact",
-  components: { Coaches, About }
+  components: { Coaches, About, Join }
 };
 </script>
 

@@ -10,7 +10,7 @@
         </div>
         <div class="nav-item">
           <span class="icon">📅</span>
-          <span class="label">Horraire</span>
+          <span class="label">Horaire</span>
         </div>
         <div class="nav-item">
           <span class="icon">📄</span>
@@ -28,11 +28,11 @@
     <form class="profile-form" @submit.prevent="updateProfile">
       <div class="form-row">
         <div class="form-group">
-          <label for="firstName">First Name</label>
+          <label for="firstName">Prénom</label>
           <input type="text" id="firstName" v-model="profile.firstName">
         </div>
         <div class="form-group">
-          <label for="lastName">Last Name</label>
+          <label for="lastName">Nom</label>
           <input type="text" id="lastName" v-model="profile.lastName">
         </div>
       </div>
@@ -43,26 +43,26 @@
           <input type="email" id="email" v-model="profile.email">
         </div>
         <div class="form-group">
-          <label for="organization">Username</label>
+          <label for="organization">Nom d'utilisateur</label>
           <input type="text" id="organization" v-model="profile.username">
         </div>
       </div>
       
       <div class="form-row">
         <div class="form-group">
-          <label for="phone">Phone Number</label>
+          <label for="phone">Téléphone</label>
           <input type="tel" id="phone" v-model="profile.phone">
         </div>
         <div class="form-group">
-          <label for="address">Address</label>
+          <label for="address">Addresse</label>
           <input type="text" id="address" v-model="profile.address">
         </div>
       </div>
             
       <div class="form-actions">
-        <button type="button" class="btn btn-logout" @click="logoutUser">Sign Out</button>
+        <button type="button" class="btn btn-logout" @click="logoutUser">Déconnexion</button>
 
-        <button type="submit" class="btn">Save Changes</button>
+        <button type="submit" class="btn">Sauvegarder</button>
       </div>
     </form>
   </div>
@@ -113,7 +113,9 @@ export default {
 
 <style scoped>
 
-
+.btn {
+  margin-right: 15px;
+}
 
 #wrapper {
   display: flex;
