@@ -16,7 +16,7 @@ const router = createRouter({
       path: '/coach/:coachId',
       name: 'Coach',
       component: CoachDetails,
-      props: true // This will pass the `coachId` as a prop to the component
+      props: true 
     },
     
     {
@@ -56,7 +56,8 @@ const router = createRouter({
       path: "/profile",
       name: "profile",
       component: Profile,
-    }
+    },
+
   ],
 });
 

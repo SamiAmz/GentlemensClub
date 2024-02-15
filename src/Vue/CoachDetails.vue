@@ -1,23 +1,27 @@
 <template>
   <v-container>
     <v-row align="center" justify="center">
-      <v-col cols="12" md="6">
-        <!-- Coach Image -->
+      <v-col cols="12" md="6" v-if="coach">
+        <!-- Displaying Coach Image -->
         <v-img :src="coach.image" aspect-ratio="1.7"></v-img>
       </v-col>
-      <v-col cols="12" md="6">
-        <!-- Coach Name and Description -->
+      <v-col cols="12" md="6" v-if="coach">
+        <!-- Displaying Coach Name, Title, and Biography -->
         <h1>{{ coach.name }}</h1>
-        <div>
-          <h2>{{ coach.title }}</h2>
-          <p>{{ coach.bio }}</p>
-        </div>
+        <h2>{{ coach.title }}</h2>
+        <p>{{ coach.bio }}</p>
+      </v-col>
+      <v-col cols="12" v-else>
+        <p>Coach details not available. Please check back later.</p>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { db } from '@/firebase/init'; 
+import { doc, getDoc } from 'firebase/firestore';
+
 export default {
   props: {
     coachId: {
@@ -27,32 +31,31 @@ export default {
   },
   data() {
     return {
-      coach: null, // Start with no coach data
+      coach: null,
     };
   },
-  created() {
-    this.fetchCoachDetails();
+  async created() {
+    await this.fetchCoachDetails();
   },
   methods: {
-    fetchCoachDetails() {
-      // This is a mock function simulating an HTTP request
-      // In a real app, you would use this.$http.get or axios.get etc.
-      const coachData = this.mockFetchCoachById(this.coachId);
-      if (coachData) {
-        this.coach = coachData;
-      } else {
-        console.error('Coach not found');
-        // Handle coach not found, e.g., redirect to a not-found page or display a message
+    async fetchCoachDetails() {
+      try {
+        const docRef = doc(db, "coachs", "coach"); // Assuming 'coach' is the document ID
+const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          this.coach = docSnap.data();
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.error("Error fetching document:", error);
       }
-    },
-    mockFetchCoachById(coachId) {
-      // Simulate fetching coach data by ID
-      return this.$parent.coaches.find(coach => coach.id === coachId);
     },
   },
 };
 </script>
 
 <style scoped>
-/* Add your CSS here */
+/* Add any specific styles for your coach details page here */
 </style>
