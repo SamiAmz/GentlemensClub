@@ -134,9 +134,9 @@ a {
   text-decoration: none;
   color: rgb(255, 255, 255);
   box-sizing: border-box;
-  outline: 1px dashed #333;
+  outline: 1px ridge white;
   padding: 10px;
-  margin: 35px 0 0 0;
+  margin: 35px 0 0 20px;
   display: inline-block;
 }
 
