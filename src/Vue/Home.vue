@@ -155,7 +155,8 @@
                 Avez-vous déjà voulu être rapide et fort comme un ours ?
                 Avez-vous déjà eu envie d'apprendre à faire un ours ? Ensuite,
                 vous êtes invités à la lutte libre où vous apprendrez
-                l'auto-défense à l'aide de saisies et de lancers.
+                l'auto-défense à l'aide de saisies et de lancers.Dans notre
+                école de Wrestling, vous apprendrez l'art du grapling.
               </p>
               <a href="#" type="button">S'Abonner</a>
             </div>
@@ -174,7 +175,8 @@
                 La boxe est un sport purement corps à corps, vous souhaitez vous
                 protéger ainsi que vos proches dans la rue ? Alors
                 inscrivez-vous à la boxe. Comme on dit dans mon pays, la
-                couronne droite est l'enterrement gauche.
+                couronne droite est l'enterrement gauche. Dans notre école vous
+                allez apprendre la Box
               </p>
               <a href="#" type="button">S'Abonner</a>
             </div>
