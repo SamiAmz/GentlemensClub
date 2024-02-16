@@ -4,13 +4,52 @@
   color: rgb(255, 91, 8);
 }
 
+<<<<<<< Updated upstream
 .container-cards {
+=======
+.video-background {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin-top: 5em;
+  overflow: hidden;
+}
+
+#background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-out;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 1.5s ease-out;
+  font-size: 100%;
+}
+
+.container {
+>>>>>>> Stashed changes
   width: 1000px;
   position: relative;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+<<<<<<< Updated upstream
   margin-left: 15%;
+=======
+  margin-left: 12em;
+>>>>>>> Stashed changes
 }
 
 .container-cards .card {
