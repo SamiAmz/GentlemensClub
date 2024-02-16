@@ -40,12 +40,12 @@
 }
 
 .container {
-  width: 1000px;
+  width: 80%;
   position: relative;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-left: 15%;
+  margin-left: 10%;
 }
 
 .container-cards .card {
@@ -54,7 +54,7 @@
 }
 
 .container-cards .card .face {
-  width: 300px;
+  width: 350px;
   height: 200px;
   transition: 0.4s;
   border: 1px solid #f1683a;
@@ -73,10 +73,9 @@
 
 .container-cards .card:hover .face.face1 {
   transform: translateY(0);
-  box-shadow: inset 0 0 60px rgb(255, 0, 0), inset 20px 0 80px #ff0000,
-    inset -20px 0 80px #f1683a, inset 20px 0 300px rgb(255, 91, 8),
-    inset -20px 0 300px #ff0000, 0 0 50px #000000, -10px 0 80px rgb(255, 91, 8),
-    10px 0 80px #f1683a;
+  box-shadow: inset -20px 0 80px rgb(255, 91, 8),
+    inset 20px 0 300px rgb(255, 91, 8), inset -20px 0 300px #ff0000,
+    0 0 50px #000000, -10px 0 80px rgb(255, 91, 8), 10px 0 80px #ffffff;
 }
 
 .container-cards .card .face.face1 .content {
@@ -91,7 +90,7 @@
 
 .container-cards .card .face.face1 .content i {
   font-size: 3em;
-  color: white;
+  color: rgb(255, 255, 255);
   display: inline-block;
 }
 
@@ -107,7 +106,7 @@
 
 .container-cards .card .face.face2 {
   position: relative;
-  background: whitesmoke;
+  background: rgb(0, 0, 0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,20 +122,20 @@
 
 .container-cards .card .face.face2 .content p,
 a {
-  font-size: 10pt;
+  font-size: 11pt;
   margin: 0;
   padding: 0;
-  color: #333;
+  color: #ffffff;
   padding-top: 10%;
 }
 
 .container-cards .card .face.face2 .content a {
   text-decoration: none;
-  color: black;
+  color: rgb(255, 255, 255);
   box-sizing: border-box;
   outline: 1px dashed #333;
   padding: 10px;
-  margin: 15px 0 0;
+  margin: 15px 0 20px 0;
   display: inline-block;
 }
 
