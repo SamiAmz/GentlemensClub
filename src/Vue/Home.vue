@@ -120,7 +120,7 @@
         <h1 class="video-text">AU CENTRE DE LA VIE ÉNERGÉTIQUE</h1>
       </div>
     </div>
-    <h1 class="tileCards">Nos abonnemnets</h1>
+    <h1 class="titleCards">Nos abonnemnets</h1>
     <div class="container-cards">
       <div class="container">
         <div class="card">
@@ -137,7 +137,7 @@
                 delectus illum perferendis maiores quia molestias vitae fugiat
                 aspernatur alias corporis?
               </p>
-              <a href="#" type="button">Read More</a>
+              <a href="#" type="button">S'Abonner</a>
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@
                 delectus illum perferendis maiores quia molestias vitae fugiat
                 aspernatur alias corporis?
               </p>
-              <a href="#" type="button">Read More</a>
+              <a href="#" type="button">S'Abonner</a>
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@
                 delectus illum perferendis maiores quia molestias vitae fugiat
                 aspernatur alias corporis?
               </p>
-              <a href="#" type="button">Read More</a>
+              <a href="#" type="button">S'Abonner</a>
             </div>
           </div>
         </div>

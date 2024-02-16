@@ -1,9 +1,13 @@
-.tileCards {
+.titleCards {
   text-align: center;
   font-size: 5em;
   color: rgb(255, 91, 8);
+  margin-bottom: 8%;
+  margin-top: 5%;
 }
-
+.video-text {
+  font-size: 4em;
+}
 .video-background {
   position: relative;
   width: 100%;
@@ -28,7 +32,7 @@
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: red;
+  color: rgb(255, 78, 8);
   text-align: center;
   opacity: 1;
   transition: opacity 1.5s ease-out;
@@ -46,6 +50,7 @@
 
 .container-cards .card {
   position: relative;
+  margin-bottom: 10%;
 }
 
 .container-cards .card .face {
@@ -122,6 +127,7 @@ a {
   margin: 0;
   padding: 0;
   color: #333;
+  padding-top: 10%;
 }
 
 .container-cards .card .face.face2 .content a {
