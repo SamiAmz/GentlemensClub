@@ -111,12 +111,13 @@
       <!-- time running -->
       <div class="time"></div>
     </div>
-    <div class="container">
+
+    <h1 class="tileCards">Nos abonnemnets</h1>
+    <div class="container-cards">
       <div class="card">
         <div class="face face1">
           <div class="content">
-            <i class="fab fa-windows"></i>
-            <h3>Windows</h3>
+            <h3>MMA</h3>
           </div>
         </div>
         <div class="face face2">
@@ -135,8 +136,7 @@
       <div class="card">
         <div class="face face1">
           <div class="content">
-            <i class="fab fa-android"></i>
-            <h3>Android</h3>
+            <h3>WRESTLING</h3>
           </div>
         </div>
         <div class="face face2">
@@ -155,8 +155,7 @@
       <div class="card">
         <div class="face face1">
           <div class="content">
-            <i class="fab fa-apple"></i>
-            <h3>Apple</h3>
+            <h3>BOXING</h3>
           </div>
         </div>
         <div class="face face2">

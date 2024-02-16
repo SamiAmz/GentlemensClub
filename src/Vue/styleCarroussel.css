@@ -8,6 +8,7 @@ a {
   overflow: hidden;
   position: relative;
   margin-top: 50px;
+  margin-bottom: 10%;
 }
 .carousel .list .item {
   width: 100%;
