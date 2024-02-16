@@ -132,10 +132,11 @@
           <div class="face face2">
             <div class="content">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
-                repudiandae, explicabo voluptate et hic cum ratione a. Officia
-                delectus illum perferendis maiores quia molestias vitae fugiat
-                aspernatur alias corporis?
+                Êtes-vous prêt à découvrir le combattant indomptable qui est en
+                vous et à atteindre une forme physique optimale ? Rejoignez nos
+                cours d'arts martiaux mixtes où nous combinons technique, force
+                et stratégie. Dans notre école de MMA, vous apprendrez l'art du
+                combat.
               </p>
               <a href="#" type="button">S'Abonner</a>
             </div>
@@ -151,10 +152,10 @@
           <div class="face face2">
             <div class="content">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
-                repudiandae, explicabo voluptate et hic cum ratione a. Officia
-                delectus illum perferendis maiores quia molestias vitae fugiat
-                aspernatur alias corporis?
+                Avez-vous déjà voulu être rapide et fort comme un ours ?
+                Avez-vous déjà eu envie d'apprendre à faire un ours ? Ensuite,
+                vous êtes invités à la lutte libre où vous apprendrez
+                l'auto-défense à l'aide de saisies et de lancers.
               </p>
               <a href="#" type="button">S'Abonner</a>
             </div>
@@ -170,10 +171,10 @@
           <div class="face face2">
             <div class="content">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
-                repudiandae, explicabo voluptate et hic cum ratione a. Officia
-                delectus illum perferendis maiores quia molestias vitae fugiat
-                aspernatur alias corporis?
+                La boxe est un sport purement corps à corps, vous souhaitez vous
+                protéger ainsi que vos proches dans la rue ? Alors
+                inscrivez-vous à la boxe. Comme on dit dans mon pays, la
+                couronne droite est l'enterrement gauche.
               </p>
               <a href="#" type="button">S'Abonner</a>
             </div>
