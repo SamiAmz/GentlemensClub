@@ -23,7 +23,7 @@
             </div>
             <div class="buttons">
               <button>SEE MORE</button>
-              <button>SUBSCRIBE</button>
+              <button>S'ABONNER</button>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="buttons">
               <button>SEE MORE</button>
-              <button>SUBSCRIBE</button>
+              <button>S'ABONNER</button>
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@
             </div>
             <div class="buttons">
               <button>SEE MORE</button>
-              <button>SUBSCRIBE</button>
+              <button>S'ABONNER</button>
             </div>
           </div>
         </div>
