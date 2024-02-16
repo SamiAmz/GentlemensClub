@@ -28,14 +28,13 @@ export default {
   data() {
     return {
       coaches: [
-        { id: 1, name: 'Lentz-Edouard Lundy', title: 'Entraîneur de boxe', bio: '...', image: '/coach-cards/card1.png' },
-        { id: 2, name: 'Pejman « PJ » Hedayati', title: 'Entraîneur de boxe', bio: '...', image: '/coach-cards/card2.png' },
-        { id: 3, name: 'Anatolie Caraterzi', title: 'Entraîneur de lutte', bio: '...', image: '/coach-cards/card3.png' },
-        { id: 4, name: 'Sandro Ferr', title: 'Entraîneur de lutte', bio: '...', image: '/coach-cards/card4.png' },
-        { id: 5, name: 'Rob Rivest ', title: 'Entraîneur de MMA', bio: '...', image: '/coach-cards/card5.png' },
-        { id: 6, name: 'Firas Zahabi', title: 'Entraîneur de MMA', bio: '...', image: '/coach-cards/card6.png' },
+        { id: "coach1", name: 'Lentz-Edouard Lundy', title: 'Entraîneur de boxe', image: '/coach-cards/card1.png' },
+        { id: "coach2", name: 'Pejman « PJ » Hedayati', title: 'Entraîneur de boxe', image: '/coach-cards/card2.png' },
+        { id: "coach3", name: 'Anatolie Caraterzi', title: 'Entraîneur de lutte', image: '/coach-cards/card3.png' },
+        { id: "coach4", name: 'Sandro Ferr', title: 'Entraîneur de lutte', image: '/coach-cards/card4.png' },
+        { id: "coach5", name: 'Rob Rivest ', title: 'Entraîneur de MMA', image: '/coach-cards/card5.png' },
+        { id: "coach6", name: 'Firas Zahabi', title: 'Entraîneur de MMA', image: '/coach-cards/card6.png' },
 
-        // ... more coaches
       ],
     };
   },
