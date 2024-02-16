@@ -33,7 +33,7 @@ export default defineComponent({
         initialView: 'timeGridWeek',
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
         allDaySlot: false,
-        editable: true,
+        //editable: true, // Allows the user to move events
         selectable: true,
         selectMirror: true,
         dayMaxEvents: true,
@@ -54,9 +54,6 @@ export default defineComponent({
     }
   },
   methods: {
-    handleWeekendsToggle() {
-      this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
-    },
     handleDateSelect(selectInfo) {
       let title = prompt('Please enter a new title for your event')
       let calendarApi = selectInfo.view.calendar
@@ -80,9 +77,21 @@ export default defineComponent({
       //console.log(formatDate(clickInfo.event.start));
       this.dialogVisible = true;
       this.dialogTitle = clickInfo.event.title;
-      this.dialogHours = clickInfo.event.start.getHours();
-      this.dialogMinutes = clickInfo.event.start.getMinutes();
+      this.dialogStartHours = clickInfo.event.start.getHours();
+      this.dialogEndHours = clickInfo.event.end.getHours();
       this.dialogDescription = clickInfo.event.extendedProps.description;
+      // getMinutes() returns 0 if there are no minute, this code will convert to 00
+      if (clickInfo.event.start.getMinutes() == "0") {
+        this.dialogStartMinutes = "00";
+      } else {
+        this.dialogStartMinutes = clickInfo.event.start.getMinutes();
+      }
+      if (clickInfo.event.end.getMinutes() == "0") {
+        this.dialogEndMinutes = "00";
+      } else {
+        this.dialogEndMinutes = clickInfo.event.end.getMinutes();
+      }
+      
     },
     handleEvents(events) {
       this.currentEvents = events
@@ -99,7 +108,7 @@ export default defineComponent({
         <template v-slot:default="{ isActive }">
           <v-card :title="dialogTitle">
             <v-card-text>
-              Heure: {{ dialogHours }}:{{ dialogMinutes }} <br>
+              Heure: {{ dialogStartHours }}:{{ dialogStartMinutes }} - {{ dialogEndHours }}:{{ dialogEndMinutes }} <br>
               {{ dialogDescription }}
             </v-card-text>
 
@@ -178,7 +187,7 @@ b { /* used for event dates/times */
 
 .demo-app-calendar {
   background-color: rgb(29, 29, 31);
-  height: 780px;
+  height: 740px; /* Height of the calendar */
   border-radius: 5px;
   padding: 1%;
 }
