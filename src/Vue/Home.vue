@@ -112,6 +112,16 @@
       <div class="time"></div>
     </div>
 
+    <div class="video-background">
+      <video autoplay muted loop id="background-video">
+        <source src="../assets/intro.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-overlay">
+        <h1 class="video-text">AU CENTRE DE LA VIE ÉNERGÉTIQUE</h1>
+      </div>
+    </div>
+
     <h1 class="tileCards">Nos abonnemnets</h1>
     <div class="container-cards">
       <div class="card">
@@ -182,4 +192,22 @@ import "./style.css";
 export default {
   name: "Home",
 };
+
+document.addEventListener("scroll", function () {
+  var video = document.getElementById("background-video");
+  var title = document.querySelector(".video-text");
+  var videoPosition = video.getBoundingClientRect().top;
+  var videoBottomPosition = video.getBoundingClientRect().bottom;
+  var screenPosition = window.innerHeight / 2;
+  if (
+    (videoPosition < screenPosition && videoBottomPosition > 0) ||
+    (videoBottomPosition > screenPosition && videoPosition < 0)
+  ) {
+    video.style.opacity = "1";
+    title.style.opacity = "1";
+  } else {
+    video.style.opacity = "0";
+    title.style.opacity = "0";
+  }
+});
 </script>
