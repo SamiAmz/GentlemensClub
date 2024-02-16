@@ -22,8 +22,9 @@
               du MMA dès aujourd'hui.
             </div>
             <div class="buttons" id="moreBtn">
-              <button>SEE MORE</button>
-              <button>SUBSCRIBE</button>
+              <router-link to="/sports">
+                <button>SEE MORE</button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -47,8 +48,9 @@
               <br />l'excitation du wrestling.
             </div>
             <div class="buttons" id="moreBtn">
-              <button>SEE MORE</button>
-              <button>SUBSCRIBE</button>
+              <router-link to="/sports">
+                <button>SEE MORE</button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -71,8 +73,9 @@
               maintenant et découvrez tout le potentiel de la boxe.
             </div>
             <div class="buttons" id="moreBtn">
-              <button>SEE MORE</button>
-              <button>SUBSCRIBE</button>
+              <router-link to="/sports">
+                <button>SEE MORE</button>
+              </router-link>
             </div>
           </div>
         </div>
