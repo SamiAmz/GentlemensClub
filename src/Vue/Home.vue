@@ -112,10 +112,6 @@
       <div class="time"></div>
     </div>
 
-<<<<<<< Updated upstream
-    <h1 class="tileCards">Nos abonnemnets</h1>
-    <div class="container-cards">
-=======
     <div class="video-background">
       <video autoplay muted loop id="background-video">
         <source src="../assets/intro.mp4" type="video/mp4" />
@@ -127,7 +123,6 @@
     </div>
 
     <div class="container">
->>>>>>> Stashed changes
       <div class="card">
         <div class="face face1">
           <div class="content">
