@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initial setup
   let thumbnailItemsDom = thumbnailBorderDom.querySelectorAll(".item");
   thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
-  let timeRunning = 600;
+  let timeRunning = 530;
   let timeAutoNext = 7000;
   let runTimeOut;
   let runNextAuto = setTimeout(() => {

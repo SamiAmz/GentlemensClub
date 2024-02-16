@@ -1,55 +1,81 @@
 <template>
   <div :style="myStyle" id="wrapper">
-
-  <div id="my-app">
-  <div id="login-form" class="login-container">
-    <h1 id="loginTitle">Login</h1>
-    <form @submit.prevent="loginUser">
-      <div class="form-group">
-        <input type="text" id="email" v-model="credentials.email" @focus="clearPlaceholder($event)" @blur="restorePlaceholder($event, 'Email or Username')" placeholder="Email or Username" required>
+    <div id="my-app">
+      <div id="login-form" class="login-container">
+        <h1 id="loginTitle">Login</h1>
+        <form @submit.prevent="loginUser">
+          <div class="form-group">
+            <input
+              type="text"
+              id="email"
+              v-model="credentials.email"
+              @focus="clearPlaceholder($event)"
+              @blur="restorePlaceholder($event, 'Email or Username')"
+              placeholder="Email or Username"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="password"
+              v-model="credentials.password"
+              @focus="clearPlaceholder($event)"
+              @blur="restorePlaceholder($event, 'Password')"
+              placeholder="Password"
+              required
+            />
+            <button type="button" class="btn-forgot" @click="forgotPassword">
+              Forgot your password?
+            </button>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-login">Continue</button>
+            <button @click="newUser" type="button">
+              Don't have an account?
+            </button>
+          </div>
+        </form>
       </div>
-      <div class="form-group">
-        <input type="password" id="password" v-model="credentials.password" @focus="clearPlaceholder($event)" @blur="restorePlaceholder($event, 'Password')" placeholder="Password" required>
-        <button type="button" class="btn-forgot" @click="forgotPassword">Forgot your password?</button> 
-      </div>
-      <div class="form-actions">
-        <button type="submit" class="btn-login">Continue</button>
-        <button @click="newUser" type="button">Don't have an account?</button>
-      </div>
-    </form>
-  </div>
     </div>
-        </div>
-
+  </div>
 </template>
 
 <script>
 import { auth } from "@/firebase/init";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-
 export default {
   data() {
     return {
-      myStyle:{
-            backgroundColor:"#222" 
-            },
+      myStyle: {
+        backgroundColor: "#222",
+      },
       credentials: {
-        email: '',
-        password: ''
-      }
+        email: "",
+        password: "",
+      },
     };
   },
+  mounted() {
+    this.scrollToTop();
+  },
   methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
 
     loginUser() {
-
-      signInWithEmailAndPassword(auth, this.credentials.email, this.credentials.password)
+      signInWithEmailAndPassword(
+        auth,
+        this.credentials.email,
+        this.credentials.password
+      )
         .then((userCredential) => {
           // Login successful
-          alert('Login successful!');
+          alert("Login successful!");
           // Redirect to a different page or update UI
-          this.$router.push('/profile'); // Example redirect
+          this.$router.push("/profile"); // Example redirect
         })
 
         .catch((error) => {
@@ -58,30 +84,27 @@ export default {
         });
     },
 
-
     forgotPassword() {
       // Handle forgot password
-      console.log('Forgot password clicked');
+      console.log("Forgot password clicked");
     },
     newUser() {
-      this.$router.push('/signup');
+      this.$router.push("/signup");
     },
 
     clearPlaceholder(event) {
-      event.target.placeholder = ''; // Clear the placeholder text
+      event.target.placeholder = ""; // Clear the placeholder text
     },
     restorePlaceholder(event, originalPlaceholder) {
-      if (event.target.value === '') {
+      if (event.target.value === "") {
         event.target.placeholder = originalPlaceholder; // Restore the original placeholder text if the input is empty
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-
-
 #wrapper {
   display: flex;
   flex-direction: column;
@@ -89,7 +112,7 @@ export default {
   min-height: 100vh;
 }
 
-#loginTitle{
+#loginTitle {
   text-align: center;
   margin-bottom: 40px;
   font-size: 38px;
@@ -130,7 +153,6 @@ export default {
   height: 50px;
 }
 
-
 .login-container input:focus {
   outline: none;
 }
@@ -163,7 +185,8 @@ export default {
 }
 
 /* This is just to simulate the placeholder style, replace with actual placeholders */
-input[type='text']::placeholder, input[type='password']::placeholder {
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
   color: #000000;
   font-size: 16px;
   font-weight: bolder;

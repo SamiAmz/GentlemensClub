@@ -22,8 +22,10 @@
               du MMA dès aujourd'hui.
             </div>
             <div class="buttons" id="moreBtn">
-              <router-link to="/sports">
-                <button>SEE MORE</button>
+              <router-link
+                :to="{ name: 'Sports', params: { sportNom: 'mma' } }"
+              >
+                <button>S'ABONNER</button>
               </router-link>
             </div>
           </div>
@@ -44,12 +46,13 @@
               Que vous<br />
               soyez novice ou athlète chevronné, notre gym offre une expérience
               immersive<br />
-              pour tous les niveaux. Rejoignez-nous dès maintenant et découvrez
-              <br />l'excitation du wrestling.
+              pour tous les niveaux.
             </div>
             <div class="buttons" id="moreBtn">
-              <router-link to="/sports">
-                <button>SEE MORE</button>
+              <router-link
+                :to="{ name: 'Sports', params: { sportNom: 'wrestling' } }"
+              >
+                <button>S'ABONNER</button>
               </router-link>
             </div>
           </div>
@@ -73,8 +76,10 @@
               maintenant et découvrez tout le potentiel de la boxe.
             </div>
             <div class="buttons" id="moreBtn">
-              <router-link to="/sports">
-                <button>SEE MORE</button>
+              <router-link
+                :to="{ name: 'Sports', params: { sportNom: 'box' } }"
+              >
+                <button>S'ABONNER</button>
               </router-link>
             </div>
           </div>
@@ -124,62 +129,78 @@
         <h1 class="video-text">AU CENTRE DE LA VIE ÉNERGÉTIQUE</h1>
       </div>
     </div>
-
-    <h1 class="tileCards">Nos abonnemnets</h1>
+    <h1 class="titleCards">Nos abonnemnets</h1>
     <div class="container-cards">
-      <div class="card">
-        <div class="face face1">
-          <div class="content">
-            <h3>MMA</h3>
+      <div class="container">
+        <div class="card">
+          <div class="face face1">
+            <div class="content">
+              <h3>MMA</h3>
+            </div>
+          </div>
+          <div class="face face2">
+            <div class="content">
+              <p>
+                Êtes-vous prêt à découvrir le combattant indomptable qui est en
+                vous et à atteindre une forme physique optimale ? Rejoignez nos
+                cours d'arts martiaux mixtes où nous combinons technique, force
+                et stratégie. Dans notre école de MMA, vous apprendrez l'art du
+                combat.
+              </p>
+              <router-link
+                :to="{ name: 'Sports', params: { sportNom: 'mma' } }"
+              >
+                <button>S'ABONNER</button>
+              </router-link>
+            </div>
           </div>
         </div>
-        <div class="face face2">
-          <div class="content">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
-              repudiandae, explicabo voluptate et hic cum ratione a. Officia
-              delectus illum perferendis maiores quia molestias vitae fugiat
-              aspernatur alias corporis?
-            </p>
-            <a href="#" type="button">Read More</a>
-          </div>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="face face1">
-          <div class="content">
-            <h3>WRESTLING</h3>
+        <div class="card">
+          <div class="face face1">
+            <div class="content">
+              <h3>WRESTLING</h3>
+            </div>
+          </div>
+          <div class="face face2">
+            <div class="content">
+              <p>
+                Avez-vous déjà voulu être rapide et fort comme un ours ?
+                Avez-vous déjà eu envie d'apprendre à faire un ours ? Ensuite,
+                vous êtes invités à la lutte libre où vous apprendrez
+                l'auto-défense à l'aide de saisies et de lancers.Dans notre
+                école de Wrestling, vous apprendrez l'art du grapling.
+              </p>
+              <router-link
+                :to="{ name: 'Sports', params: { sportNom: 'wrestling' } }"
+              >
+                <button>S'ABONNER</button>
+              </router-link>
+            </div>
           </div>
         </div>
-        <div class="face face2">
-          <div class="content">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
-              repudiandae, explicabo voluptate et hic cum ratione a. Officia
-              delectus illum perferendis maiores quia molestias vitae fugiat
-              aspernatur alias corporis?
-            </p>
-            <a href="#" type="button">Read More</a>
-          </div>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="face face1">
-          <div class="content">
-            <h3>BOXING</h3>
+        <div class="card">
+          <div class="face face1">
+            <div class="content">
+              <h3>BOXING</h3>
+            </div>
           </div>
-        </div>
-        <div class="face face2">
-          <div class="content">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
-              repudiandae, explicabo voluptate et hic cum ratione a. Officia
-              delectus illum perferendis maiores quia molestias vitae fugiat
-              aspernatur alias corporis?
-            </p>
-            <a href="#" type="button">Read More</a>
+          <div class="face face2">
+            <div class="content">
+              <p>
+                La boxe est un sport purement corps à corps, vous souhaitez vous
+                protéger ainsi que vos proches dans la rue ? Alors
+                inscrivez-vous à la boxe. Comme on dit dans mon pays, la
+                couronne droite est l'enterrement gauche. Dans notre école vous
+                allez apprendre la Box
+              </p>
+              <router-link
+                :to="{ name: 'Sports', params: { sportNom: 'box' } }"
+              >
+                <button>S'ABONNER</button>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -194,6 +215,15 @@ import "https://kit.fontawesome.com/95a02bd20d.js";
 import "./style.css";
 export default {
   name: "Home",
+  mounted() {
+    this.scrollToTop();
+  },
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+    subscribe() {},
+  },
 };
 
 document.addEventListener("scroll", function () {

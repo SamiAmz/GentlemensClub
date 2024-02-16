@@ -1,36 +1,39 @@
 <script>
-import { defineComponent } from 'vue'
-import FullCalendar from '@fullcalendar/vue3'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId } from './event-utils'
-import frLocale from '@fullcalendar/core/locales/fr';
+import { defineComponent } from "vue";
+import FullCalendar from "@fullcalendar/vue3";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import { INITIAL_EVENTS, createEventId } from "./event-utils";
+import frLocale from "@fullcalendar/core/locales/fr";
 
 export default defineComponent({
   components: {
     FullCalendar,
   },
+  mounted() {
+    this.scrollToTop();
+  },
   data() {
     return {
       dialogVisible: false,
-      dialogTitle: '',
-      dialogDescription: '',
-      dialogHours: '',
-      dialogMinutes: '',
+      dialogTitle: "",
+      dialogDescription: "",
+      dialogHours: "",
+      dialogMinutes: "",
       calendarOptions: {
         locale: frLocale,
         plugins: [
           dayGridPlugin,
           timeGridPlugin,
-          interactionPlugin // needed for dateClick
+          interactionPlugin, // needed for dateClick
         ],
         headerToolbar: {
-          start: '',
-          center: 'title',
-          end: 'prev,next',
+          start: "",
+          center: "title",
+          end: "prev,next",
         },
-        initialView: 'timeGridWeek',
+        initialView: "timeGridWeek",
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
         allDaySlot: false,
         //editable: true, // Allows the user to move events
@@ -41,24 +44,27 @@ export default defineComponent({
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
-        slotMinTime: '08:00:00', // Calendar will display starting at 8 AM
-        slotMaxTime: '22:00:00', // Calendar will display up until 10 PM
+        slotMinTime: "08:00:00", // Calendar will display starting at 8 AM
+        slotMaxTime: "22:00:00", // Calendar will display up until 10 PM
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
         eventRemove:
         */
-        
       },
       currentEvents: [],
-    }
+    };
   },
-  methods: {
-    handleDateSelect(selectInfo) {
-      let title = prompt('Please enter a new title for your event')
-      let calendarApi = selectInfo.view.calendar
 
-      calendarApi.unselect() // clear date selection
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+    handleDateSelect(selectInfo) {
+      let title = prompt("Please enter a new title for your event");
+      let calendarApi = selectInfo.view.calendar;
+
+      calendarApi.unselect(); // clear date selection
 
       if (title) {
         calendarApi.addEvent({
@@ -66,8 +72,8 @@ export default defineComponent({
           title,
           start: selectInfo.startStr,
           end: selectInfo.endStr,
-          allDay: selectInfo.allDay
-        })
+          allDay: selectInfo.allDay,
+        });
       }
     },
     handleEventClick(clickInfo) {
@@ -91,42 +97,36 @@ export default defineComponent({
       } else {
         this.dialogEndMinutes = clickInfo.event.end.getMinutes();
       }
-      
     },
     handleEvents(events) {
-      this.currentEvents = events
+      this.currentEvents = events;
     },
-  }
-})
-
+  },
+});
 </script>
 
 <template>
-  <div class='demo-app'>
-    <div class='demo-app-main'>
+  <div class="demo-app">
+    <div class="demo-app-main">
       <v-dialog v-model="dialogVisible" width="500">
         <template v-slot:default="{ isActive }">
           <v-card :title="dialogTitle">
             <v-card-text>
-              Heure: {{ dialogStartHours }}:{{ dialogStartMinutes }} - {{ dialogEndHours }}:{{ dialogEndMinutes }} <br>
+              Heure: {{ dialogStartHours }}:{{ dialogStartMinutes }} -
+              {{ dialogEndHours }}:{{ dialogEndMinutes }} <br />
               {{ dialogDescription }}
             </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn
-                text="Fermer"
-                @click="dialogVisible = false"
-              ></v-btn>
+              <v-btn text="Fermer" @click="dialogVisible = false"></v-btn>
             </v-card-actions>
           </v-card>
         </template>
-</v-dialog>
-      <FullCalendar
-        class='demo-app-calendar'
-        :options='calendarOptions'>
-        <template v-slot:eventContent='arg'>
+      </v-dialog>
+      <FullCalendar class="demo-app-calendar" :options="calendarOptions">
+        <template v-slot:eventContent="arg">
           <b>{{ arg.timeText }}</b>
           <i>{{ arg.event.title }}</i>
         </template>
@@ -135,8 +135,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style lang='css'>
-
+<style lang="css">
 h2 {
   margin: 0;
   font-size: 16px;
@@ -152,7 +151,8 @@ li {
   padding: 0;
 }
 
-b { /* used for event dates/times */
+b {
+  /* used for event dates/times */
   margin-right: 3px;
 }
 
@@ -180,7 +180,8 @@ b { /* used for event dates/times */
   padding: 3em;
 }
 
-.fc { /* the calendar root */
+.fc {
+  /* the calendar root */
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -191,5 +192,4 @@ b { /* used for event dates/times */
   border-radius: 5px;
   padding: 1%;
 }
-
 </style>
