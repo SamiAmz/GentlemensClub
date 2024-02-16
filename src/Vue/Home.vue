@@ -196,9 +196,12 @@ document.addEventListener("scroll", function () {
   var video = document.getElementById("background-video");
   var title = document.querySelector(".video-text");
   var videoPosition = video.getBoundingClientRect().top;
+  var videoBottomPosition = video.getBoundingClientRect().bottom;
   var screenPosition = window.innerHeight / 2;
-  console.log(videoPosition, screenPosition);
-  if (videoPosition < screenPosition) {
+  if (
+    (videoPosition < screenPosition && videoBottomPosition > 0) ||
+    (videoBottomPosition > screenPosition && videoPosition < 0)
+  ) {
     video.style.opacity = "1";
     title.style.opacity = "1";
   } else {
