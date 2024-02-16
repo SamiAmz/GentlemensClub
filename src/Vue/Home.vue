@@ -111,7 +111,6 @@
       <!-- time running -->
       <div class="time"></div>
     </div>
-
     <div class="video-background">
       <video autoplay muted loop id="background-video">
         <source src="../assets/intro.mp4" type="video/mp4" />
@@ -121,61 +120,63 @@
         <h1 class="video-text">AU CENTRE DE LA VIE ÉNERGÉTIQUE</h1>
       </div>
     </div>
+    <h1 class="tileCards">Nos abonnemnets</h1>
+    <div class="container-cards">
+      <div class="container">
+        <div class="card">
+          <div class="face face1">
+            <div class="content">
+              <h3>MMA</h3>
+            </div>
+          </div>
+          <div class="face face2">
+            <div class="content">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
+                repudiandae, explicabo voluptate et hic cum ratione a. Officia
+                delectus illum perferendis maiores quia molestias vitae fugiat
+                aspernatur alias corporis?
+              </p>
+              <a href="#" type="button">Read More</a>
+            </div>
+          </div>
+        </div>
 
-    <div class="container">
-      <div class="card">
-        <div class="face face1">
-          <div class="content">
-            <h3>MMA</h3>
+        <div class="card">
+          <div class="face face1">
+            <div class="content">
+              <h3>WRESTLING</h3>
+            </div>
+          </div>
+          <div class="face face2">
+            <div class="content">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
+                repudiandae, explicabo voluptate et hic cum ratione a. Officia
+                delectus illum perferendis maiores quia molestias vitae fugiat
+                aspernatur alias corporis?
+              </p>
+              <a href="#" type="button">Read More</a>
+            </div>
           </div>
         </div>
-        <div class="face face2">
-          <div class="content">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
-              repudiandae, explicabo voluptate et hic cum ratione a. Officia
-              delectus illum perferendis maiores quia molestias vitae fugiat
-              aspernatur alias corporis?
-            </p>
-            <a href="#" type="button">Read More</a>
-          </div>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="face face1">
-          <div class="content">
-            <h3>WRESTLING</h3>
+        <div class="card">
+          <div class="face face1">
+            <div class="content">
+              <h3>BOXING</h3>
+            </div>
           </div>
-        </div>
-        <div class="face face2">
-          <div class="content">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
-              repudiandae, explicabo voluptate et hic cum ratione a. Officia
-              delectus illum perferendis maiores quia molestias vitae fugiat
-              aspernatur alias corporis?
-            </p>
-            <a href="#" type="button">Read More</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="face face1">
-          <div class="content">
-            <h3>BOXING</h3>
-          </div>
-        </div>
-        <div class="face face2">
-          <div class="content">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
-              repudiandae, explicabo voluptate et hic cum ratione a. Officia
-              delectus illum perferendis maiores quia molestias vitae fugiat
-              aspernatur alias corporis?
-            </p>
-            <a href="#" type="button">Read More</a>
+          <div class="face face2">
+            <div class="content">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
+                repudiandae, explicabo voluptate et hic cum ratione a. Officia
+                delectus illum perferendis maiores quia molestias vitae fugiat
+                aspernatur alias corporis?
+              </p>
+              <a href="#" type="button">Read More</a>
+            </div>
           </div>
         </div>
       </div>
