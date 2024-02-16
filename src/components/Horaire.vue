@@ -13,6 +13,11 @@ export default defineComponent({
   },
   data() {
     return {
+      dialogVisible: false,
+      dialogTitle: '',
+      dialogDescription: '',
+      dialogHours: '',
+      dialogMinutes: '',
       calendarOptions: {
         locale: frLocale,
         plugins: [
@@ -27,6 +32,7 @@ export default defineComponent({
         },
         initialView: 'timeGridWeek',
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+        allDaySlot: false,
         editable: true,
         selectable: true,
         selectMirror: true,
@@ -68,9 +74,15 @@ export default defineComponent({
       }
     },
     handleEventClick(clickInfo) {
-      if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-        clickInfo.event.remove()
-      }
+      //console.log(clickInfo.event.extendedProps.description);
+      //console.log(clickInfo.event.title);
+      //console.log(clickInfo.event.startStr);
+      //console.log(formatDate(clickInfo.event.start));
+      this.dialogVisible = true;
+      this.dialogTitle = clickInfo.event.title;
+      this.dialogHours = clickInfo.event.start.getHours();
+      this.dialogMinutes = clickInfo.event.start.getMinutes();
+      this.dialogDescription = clickInfo.event.extendedProps.description;
     },
     handleEvents(events) {
       this.currentEvents = events
@@ -83,10 +95,28 @@ export default defineComponent({
 <template>
   <div class='demo-app'>
     <div class='demo-app-main'>
+      <v-dialog v-model="dialogVisible" width="500">
+        <template v-slot:default="{ isActive }">
+          <v-card :title="dialogTitle">
+            <v-card-text>
+              Heure: {{ dialogHours }}:{{ dialogMinutes }} <br>
+              {{ dialogDescription }}
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                text="Fermer"
+                @click="dialogVisible = false"
+              ></v-btn>
+            </v-card-actions>
+          </v-card>
+        </template>
+</v-dialog>
       <FullCalendar
         class='demo-app-calendar'
-        :options='calendarOptions'
-      >
+        :options='calendarOptions'>
         <template v-slot:eventContent='arg'>
           <b>{{ arg.timeText }}</b>
           <i>{{ arg.event.title }}</i>
