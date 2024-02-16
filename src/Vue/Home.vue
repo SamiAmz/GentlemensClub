@@ -5,7 +5,7 @@
       <!-- list item -->
       <div class="list">
         <div class="item">
-          <img src="../assets/imageCaroussel/img1.jpg" />
+          <img src="../assets/imageCaroussel/img1.jpg" id="mmaImg" />
           <div class="content">
             <div class="author">POWER</div>
             <div class="title">COMBAT ULTIME</div>
@@ -21,7 +21,7 @@
               le potentiel<br />
               du MMA dès aujourd'hui.
             </div>
-            <div class="buttons">
+            <div class="buttons" id="moreBtn">
               <button>SEE MORE</button>
               <button>SUBSCRIBE</button>
             </div>
@@ -31,7 +31,7 @@
           <img src="../assets/imageCaroussel/img2.jpg" />
           <div class="content">
             <div class="author">STRONGER</div>
-            <div class="title">LUCHA LIBRE</div>
+            <div class="title">Lutte Libre</div>
             <div class="topic">WRESTLING</div>
             <div class="des">
               Plongez dans le monde captivant du wrestling, un sport de combat
@@ -46,7 +46,7 @@
               pour tous les niveaux. Rejoignez-nous dès maintenant et découvrez
               <br />l'excitation du wrestling.
             </div>
-            <div class="buttons">
+            <div class="buttons" id="moreBtn">
               <button>SEE MORE</button>
               <button>SUBSCRIBE</button>
             </div>
@@ -70,7 +70,7 @@
               Rejoignez-nous dès<br />
               maintenant et découvrez tout le potentiel de la boxe.
             </div>
-            <div class="buttons">
+            <div class="buttons" id="moreBtn">
               <button>SEE MORE</button>
               <button>SUBSCRIBE</button>
             </div>

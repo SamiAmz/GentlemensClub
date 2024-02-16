@@ -11,6 +11,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   margin-left: 15%;
+  margin-bottom: 80px;
 }
 
 .container-cards .card {
@@ -37,9 +38,9 @@
 
 .container-cards .card:hover .face.face1 {
   transform: translateY(0);
-  box-shadow: inset 0 0 60px rgb(255, 0, 0), inset 20px 0 80px #ff0000,
-    inset -20px 0 80px #f1683a, inset 20px 0 300px rgb(255, 91, 8),
-    inset -20px 0 300px #ff0000, 0 0 50px #000000, -10px 0 80px rgb(255, 91, 8),
+  box-shadow: inset 0 0 20px rgb(255, 0, 0), inset 20px 0 20px #ff0000,
+    inset -20px 0 20px #e44b18, inset 20px 0 300px rgb(255, 91, 8),
+    inset -20px 0 100px #ff0000, 0 0 20px #000000, -10px 0 20px rgb(255, 91, 8),
     10px 0 80px #f1683a;
 }
 
@@ -84,6 +85,7 @@
 .container-cards .card:hover .face.face2 {
   transform: translateY(0);
 }
+
 
 .container-cards .card .face.face2 .content p,
 a {

@@ -71,5 +71,6 @@ export default {
 }
 
 .v-img {
+  border-radius: 10px;
 }
 </style>
