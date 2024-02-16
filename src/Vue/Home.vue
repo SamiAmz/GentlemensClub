@@ -1,349 +1,185 @@
 <template>
   <div id="page-container">
-    <video autoplay loop muted playsinline>
-      <source src="@/assets/intro.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-
-    <div id="pageCar-container">
-      <v-img class="white--text" height="100vh" width="100vw">
-        <div class="content-container">
-          <div class="academy-title">Gentelmen's Club</div>
-          <div class="buttons-container">
-            <div class="phone-button">
-              <v-btn icon @click="dialog = true">
-                <v-icon large>mdi-phone</v-icon>
-              </v-btn>
-
-              <v-dialog v-model="dialog" persistent max-width="290">
-                <v-card id="custom-card-id">
-                  <v-card-title class="headline">Rappelle</v-card-title>
-                  <v-card-text>
-                    <v-form ref="form" v-model="valid" lazy-validation>
-                      <v-text-field
-                        v-model="name"
-                        :rules="nameRules"
-                        label="Ecrivez votre nom"
-                        required
-                      ></v-text-field>
-                      <v-text-field
-                        v-model="phone"
-                        :rules="phoneRules"
-                        label="Ecrivez votre téléphone"
-                        required
-                      ></v-text-field>
-                    </v-form>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="red" text @click="dialog = false"
-                      >Fermer</v-btn
-                    >
-                    <v-btn color="green" text @click="submitForm"
-                      >Envoyer</v-btn
-                    >
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
+    <!-- carousel -->
+    <div class="carousel">
+      <!-- list item -->
+      <div class="list">
+        <div class="item">
+          <img src="../assets/imageCaroussel/img1.jpg" />
+          <div class="content">
+            <div class="author">POWER</div>
+            <div class="title">COMBAT ULTIME</div>
+            <div class="topic">MMA</div>
+            <div class="des">
+              <!-- lorem 50 -->
+              Découvrez le MMA dans notre gym : un mélange explosif de
+              techniques de <br />combat alliant force, agilité et stratégie.
+              Nos cours, encadrés par des<br />
+              instructeurs experts, vous offrent une expérience intense
+              favorisant la confiance<br />
+              en soi et le dépassement de soi. Rejoignez-nous pour explorer tout
+              le potentiel<br />
+              du MMA dès aujourd'hui.
             </div>
-            <div class="clubs-button">
-              <v-btn color="error" dark>Voir les Abonnements</v-btn>
+            <div class="buttons">
+              <button>SEE MORE</button>
+              <button>SUBSCRIBE</button>
             </div>
           </div>
         </div>
-        <v-carousel
-          v-model="carousel"
-          cycle
-          hide-delimiters
-          class="carousel-container"
-        >
-          <v-carousel-item
-            v-for="(item, i) in items"
-            :key="i"
-            :src="item.image"
-            class="carousel-item"
-          >
-            <div class="carousel-description">
-              <h3>{{ item.name }}</h3>
-              <p>{{ item.description }}</p>
+        <div class="item">
+          <img src="../assets/imageCaroussel/img2.jpg" />
+          <div class="content">
+            <div class="author">STRONGER</div>
+            <div class="title">LUCHA LIBRE</div>
+            <div class="topic">WRESTLING</div>
+            <div class="des">
+              Plongez dans le monde captivant du wrestling, un sport de combat
+              intense où<br />
+              la technique et la puissance sont essentielles. Nos cours,
+              encadrés par <br />des professionnels expérimentés, vous
+              permettront de développer vos<br />
+              compétences tout en repoussant vos limites physiques et mentales.
+              Que vous<br />
+              soyez novice ou athlète chevronné, notre gym offre une expérience
+              immersive<br />
+              pour tous les niveaux. Rejoignez-nous dès maintenant et découvrez
+              <br />l'excitation du wrestling.
             </div>
-          </v-carousel-item>
-        </v-carousel>
-      </v-img>
+            <div class="buttons">
+              <button>SEE MORE</button>
+              <button>SUBSCRIBE</button>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="../assets/imageCaroussel/img3.jpg" />
+          <div class="content">
+            <div class="author">FASTER</div>
+            <div class="title">SPORT COMBAT</div>
+            <div class="topic">BOXING</div>
+            <div class="des">
+              Plongez dans l'univers envoûtant de la boxe, un sport de combat
+              qui allie force,<br />
+              agilité et discipline. Nos cours de boxing, dirigés par des
+              professionnels <br />aguerris, vous offrent une expérience intense
+              et stimulante. Que vous souhaitiez<br />
+              améliorer votre technique, augmenter votre endurance ou simplement
+              vous<br />
+              défouler, notre gym est l'endroit idéal pour vous entraîner.
+              Rejoignez-nous dès<br />
+              maintenant et découvrez tout le potentiel de la boxe.
+            </div>
+            <div class="buttons">
+              <button>SEE MORE</button>
+              <button>SUBSCRIBE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- list thumnail -->
+      <div class="thumbnail">
+        <div class="item">
+          <img src="../assets/imageCaroussel/img1.jpg" />
+          <div class="content">
+            <div class="description">MMA</div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="../assets/imageCaroussel/img2.jpg" />
+          <div class="content">
+            <div class="description">WRESTLING</div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="../assets/imageCaroussel/img3.jpg" />
+          <div class="content">
+            <div class="description">BOXING</div>
+          </div>
+        </div>
+      </div>
+      <!-- next prev -->
+
+      <div class="arrows">
+        <button id="prev">
+          <v-icon>mdi-arrow-left-box </v-icon>
+        </button>
+        <button id="next">
+          <v-icon>mdi-arrow-right-box</v-icon>
+        </button>
+      </div>
+      <!-- time running -->
+      <div class="time"></div>
     </div>
 
-    <v-container class="d-flex flex-row justify-space-between">
-      <v-card
-        v-for="(card, index) in cards"
-        :key="index"
-        class="mx-auto my-8"
-        elevation="16"
-        :class="{ flipped: card.isFlipped }"
-        @mouseover="flipCard(index, true)"
-        @mouseleave="delayFlipBack(index)"
-      >
-        <div v-if="!card.isFlipped">
-          <v-card-title>
-            <p class="carteTexte">{{ card.title }}</p>
-          </v-card-title>
-          <v-img :src="card.image"></v-img>
-        </div>
-        <div v-if="card.isFlipped" class="description">
-          <h1 class="descriptionTitle">{{ card.description.title }}</h1>
-          <h2 class="descriptionSubTitle">{{ card.description.subtitle }}</h2>
-          <p class="descriptionContent" v-html="card.description.content"></p>
-          <div class="cta">
-            <v-btn id="moreButton" color="rgb(255, 91, 8)" @click="learnMore(index)"
-              >En savoir plus
-              <v-icon large color="white">mdi-arrow-right-bold</v-icon>
-            </v-btn>
+    <h1 class="tileCards">Nos abonnemnets</h1>
+    <div class="container-cards">
+      <div class="card">
+        <div class="face face1">
+          <div class="content">
+            <h3>MMA</h3>
           </div>
         </div>
-      </v-card>
-    </v-container>
+        <div class="face face2">
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
+              repudiandae, explicabo voluptate et hic cum ratione a. Officia
+              delectus illum perferendis maiores quia molestias vitae fugiat
+              aspernatur alias corporis?
+            </p>
+            <a href="#" type="button">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="face face1">
+          <div class="content">
+            <h3>WRESTLING</h3>
+          </div>
+        </div>
+        <div class="face face2">
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
+              repudiandae, explicabo voluptate et hic cum ratione a. Officia
+              delectus illum perferendis maiores quia molestias vitae fugiat
+              aspernatur alias corporis?
+            </p>
+            <a href="#" type="button">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="face face1">
+          <div class="content">
+            <h3>BOXING</h3>
+          </div>
+        </div>
+        <div class="face face2">
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab
+              repudiandae, explicabo voluptate et hic cum ratione a. Officia
+              delectus illum perferendis maiores quia molestias vitae fugiat
+              aspernatur alias corporis?
+            </p>
+            <a href="#" type="button">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import karateImage from "@/assets/karate.png";
-import wrestlingImage from "@/assets/wrestling.png";
-import boxingImage from "@/assets/boxing.png";
-
-import "@mdi/font/css/materialdesignicons.css";
-
-
+import "./styleCarroussel.css";
+import "./app.js";
+import "https://kit.fontawesome.com/95a02bd20d.js";
+import "./style.css";
 export default {
   name: "Home",
-  data() {
-    return {
-      dialog: false,
-      valid: false,
-      name: "",
-      phone: "",
-      nameRules: [(v) => !!v || "Name is required"],
-      phoneRules: [(v) => !!v || "Phone is required"],
-      items: [
-        {
-          name: "Karate Image",
-          description: "Description for karate",
-          image: karateImage,
-        },
-        {
-          name: "Box Image",
-          description: "Description for box",
-          image: wrestlingImage,
-        },
-      ],
-      carousel: 0,
-      cards: [
-        {
-          title: "Karate",
-          image: karateImage,
-          isFlipped: false,
-          description: {
-            title: "Karate",
-            subtitle: "Un voyage vers l'équilibre mental et physique.",
-            content:
-              "<br><b>Techniques de Frappe</b>Apprentissage des différentes techniques de frappe avec les mains et les pieds.<br><br><b>Développement Physique</b>Renforcement musculaire, flexibilité et amélioration de la coordination.<br><br><b>Entraînement sur la discipline </b>Apprenez les mouvements de défense personnelle et découvrez l'histoire riche du Karaté.",
-          },
-        },
-        {
-          title: "Wrestling",
-          image: wrestlingImage,
-          isFlipped: false,
-          description: {
-            title: "Wrestling",
-            subtitle: "Un parcours vers la force et la stratégie mentale.",
-            content:
-              "<br><b>Techniques de Lutte</b>Maîtrisez une variété de techniques de lutte, des prises de base aux mouvements avancés.<br><br><b>Développement Physique</b>Renforcez votre corps, améliorez votre endurance et développez une force fonctionnelle essentielle.<br><br><b>Stratégies et Tactiques</b>Apprenez à anticiper les mouvements de votre adversaire.",
-          },
-        },
-        {
-          title: "Boxing",
-          image: boxingImage,
-          isFlipped: false,
-          description: {
-            title: "Boxing",
-            subtitle: "Un parcours vers la puissance et la précision.",
-            content:
-              "<br><b>Techniques de Frappe</b>Maîtrisez l'art des coups, de la jab à l'uppercut, et perfectionnez votre précision.<br><br><b>Conditionnement Physique</b>Améliorez votre endurance, renforcez votre cœur et développez la rapidité de vos mouvements.<br><br><b>Stratégie sur le Ring</b>Apprenez à lire votre adversaire et à élaborer des stratégies pour remporter le combat.",
-          },
-        },
-      ],
-    };
-  },
-  methods: {
-    flipCard(index, value) {
-      this.cards[index].isFlipped = value;
-    },
-    delayFlipBack(index) {
-      setTimeout(() => {
-        this.flipCard(index, false);
-      }, 600);
-    },
-    learnMore(index) {
-      console.log("En savoir plus sur la carte", index);
-    },
-    submitForm() {
-      if (this.$refs.form.validate()) {
-        console.log("Form submitted with:", this.name, this.phone);
-
-        this.$refs.form.reset();
-        this.$refs.form.resetValidation();
-        alert("Merci, on va vous contacter le plus tôt possible.");
-        this.dialog = false;
-      }
-    },
-  },
 };
 </script>
-
-<style scoped>
-
-#pageCar-container {
-  background-image: url("../assets/backgroundeasy.jpg");
-  background-size: cover;
-  background-position: center center;
-}
-#custom-card-id {
-  background-color: white;
-  width: 200%;
-  height: 100%;
-}
-
-.buttons-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.content-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  padding: 2rem;
-}
-
-.academy-title {
-  color: white;
-  margin-top: 10rem;
-  margin-left: 5rem;
-  font-size: 120px;
-}
-
-#moreButton{
-  margin-top: 45px;
-}
-
-.phone-button,
-.clubs-button {
-  margin-left: 10rem;
-}
-.phone-button {
-  transform: scale(1.5);
-  margin-right: 50px;
-}
-
-.clubs-button {
-  transform: scale(1.5);
-  margin-left: 50px;
-}
-
-.carousel-container {
-  position: absolute;
-  right: 0;
-  bottom: 10%;
-  width: 50%;
-  height: 100vh;
-}
-
-.carousel-description {
-  font-size: x-large;
-  position: absolute;
-  bottom: 0;
-  right: 5%;
-  color: white;
-  text-align: center;
-}
-
-.carousel-item img {
-  mix-blend-mode: multiply;
-}
-
-.v-card {
-  background: rgb(200, 33, 0);
-  width: 23vw;
-  height: 38vw;
-  border-radius: 10px;
-  transition: transform 0.5s ease;
-}
-
-.cardBlur {
-  background-color: rgb(0, 0, 0, 0.8);
-}
-
-.v-img {
-  margin-top: 55px;
-}
-
-.cta {
-  margin-top: 10px;
-  color: rgb(255, 91, 8);
-}
-
-video {
-  width: 100vw;
-  margin: 0 auto;
-  padding: 0;
-  display: block;
-  margin-top: -30px;
-}
-
-.description {
-  display: none;
-  text-align: center;
-  transform: rotateY(0deg);
-  margin: 10px;
-}
-
-.descriptionTitle {
-  font-size: 40px;
-}
-
-.descriptionSubTitle {
-  font-size: 22px;
-}
-
-.descriptionContent {
-  font-size: 17px;
-  text-align: left;
-}
-
-.flipped .description {
-  display: block;
-  transform: rotateY(180deg);
-}
-
-.carteTexte {
-  font-size: 55px;
-  font-weight: bold;
-  height: 50px;
-  transform: rotateY(0deg);
-}
-
-.v-card.flipped {
-  transform: rotateY(180deg);
-}
-
-.v-card-title {
-  text-align: center;
-  font-size: 3.5em;
-  padding-top: 50px;
-}
-
-.v-card-subtitle {
-  color: rgb(255, 255, 255);
-}
-
-
-</style>

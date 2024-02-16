@@ -4,9 +4,8 @@
     <v-main>
       <router-view />
     </v-main>
+    <AppFooter />
   </v-app>
-
-  <AppFooter />
 </template>
 
 <style>
@@ -17,7 +16,7 @@
 </style>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from "vue";
 import { auth } from "@/firebase/init"; // Adjust the import path as necessary
 import { onAuthStateChanged } from "firebase/auth";
 import AppHeader from "@/components/Header.vue";
