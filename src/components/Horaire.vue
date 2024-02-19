@@ -13,7 +13,7 @@ export default defineComponent({
   },
   data() {
     return {
-      dialogVisible: false,
+      dialogEventVisible: false,
       dialogTitle: '',
       dialogDescription: '',
       dialogHours: '',
@@ -34,11 +34,9 @@ export default defineComponent({
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
         allDaySlot: false,
         //editable: true, // Allows the user to move events
-        selectable: true,
         selectMirror: true,
         dayMaxEvents: true,
         weekends: true,
-        select: this.handleDateSelect,
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
         slotMinTime: '08:00:00', // Calendar will display starting at 8 AM
@@ -54,13 +52,8 @@ export default defineComponent({
     }
   },
   methods: {
-    handleDateSelect(selectInfo) {
-      let title = prompt('Please enter a new title for your event')
-      let calendarApi = selectInfo.view.calendar
 
-      calendarApi.unselect() // clear date selection
-
-      if (title) {
+        /*
         calendarApi.addEvent({
           id: createEventId(),
           title,
@@ -68,8 +61,8 @@ export default defineComponent({
           end: selectInfo.endStr,
           allDay: selectInfo.allDay
         })
-      }
-    },
+        */
+      
     handleEventClick(clickInfo) {
       //console.log(clickInfo.event.extendedProps.description);
       //console.log(clickInfo.event.title);
@@ -104,7 +97,11 @@ export default defineComponent({
 <template>
   <div class='demo-app'>
     <div class='demo-app-main'>
-      <v-dialog v-model="dialogVisible" width="500">
+      <div class='control-panel'>
+        <h1>Control Panel</h1>
+        <v-btn>Ajouter un cours</v-btn>
+      </div>
+      <v-dialog v-model="dialogEventVisible" width="500">
         <template v-slot:default="{ isActive }">
           <v-card :title="dialogTitle">
             <v-card-text>
@@ -117,12 +114,12 @@ export default defineComponent({
 
               <v-btn
                 text="Fermer"
-                @click="dialogVisible = false"
+                @click="dialogEventVisible = false"
               ></v-btn>
             </v-card-actions>
           </v-card>
         </template>
-</v-dialog>
+      </v-dialog>
       <FullCalendar
         class='demo-app-calendar'
         :options='calendarOptions'>
@@ -190,6 +187,14 @@ b { /* used for event dates/times */
   height: 740px; /* Height of the calendar */
   border-radius: 5px;
   padding: 1%;
+}
+
+.control-panel {
+  padding: 3%;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: white;
 }
 
 </style>
