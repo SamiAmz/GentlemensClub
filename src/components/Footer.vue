@@ -2,7 +2,7 @@
   <div id="footer">
     <v-container>
       <v-row justify="center" align="center">
-        <v-img class="logo" max-width="150" src="@/assets/logo.png"></v-img>
+        <v-img class="logo" max-width="110" src="@/assets/logo.png"></v-img>
         <v-col cols="0" sm=" 0">
           <div class="footer-links">
             <router-link to="/">Accueil</router-link>
@@ -47,6 +47,7 @@ p {
   margin-top: 0.5em;
   line-height: 1.7em;
   color: white;
+  letter-spacing: 2px;
 }
 
 .footer-links a {
@@ -58,6 +59,7 @@ p {
 
 .footer-links {
   display: flex;
+  margin-left: 135px;
 }
 
 .footer-links a:hover {

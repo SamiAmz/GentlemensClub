@@ -1,9 +1,10 @@
-.tileCards {
+.titleCards {
   text-align: center;
   font-size: 5em;
   color: rgb(255, 91, 8);
+  margin-bottom: 8%;
+  margin-top: 5%;
 }
-
 .video-text {
   font-size: 4em;
 }
@@ -38,23 +39,23 @@
   font-size: 100%;
 }
 
-.container-cards {
-  width: 1000px;
+.container {
+  width: 80%;
   position: relative;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-left: 15%;
-  margin-bottom: 80px;
+  margin-left: 10%;
 }
 
 .container-cards .card {
   position: relative;
+  margin-bottom: 10%;
 }
 
 .container-cards .card .face {
-  width: 300px;
-  height: 200px;
+  width: 350px;
+  height: 250px;
   transition: 0.4s;
   border: 1px solid #f1683a;
 }
@@ -72,10 +73,9 @@
 
 .container-cards .card:hover .face.face1 {
   transform: translateY(0);
-  box-shadow: inset 0 0 20px rgb(255, 0, 0), inset 20px 0 20px #ff0000,
-    inset -20px 0 20px #e44b18, inset 20px 0 300px rgb(255, 91, 8),
-    inset -20px 0 100px #ff0000, 0 0 20px #000000, -10px 0 20px rgb(255, 91, 8),
-    10px 0 80px #f1683a;
+  box-shadow: inset -20px 0 80px rgb(255, 91, 8),
+    inset 20px 0 300px rgb(255, 91, 8), inset -20px 0 300px #ff0000,
+    0 0 50px #000000, -10px 0 80px rgb(255, 91, 8), 10px 0 80px #ffffff;
 }
 
 .container-cards .card .face.face1 .content {
@@ -90,7 +90,7 @@
 
 .container-cards .card .face.face1 .content i {
   font-size: 3em;
-  color: white;
+  color: rgb(255, 255, 255);
   display: inline-block;
 }
 
@@ -100,13 +100,9 @@
   text-align: center;
 }
 
-.container-cards .card .face.face1 .content a {
-  transition: 0.5s;
-}
-
 .container-cards .card .face.face2 {
   position: relative;
-  background: whitesmoke;
+  background: rgb(0, 0, 0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,28 +110,29 @@
   box-sizing: border-box;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
   transform: translateY(-100px);
+  height: 260px;
 }
 
 .container-cards .card:hover .face.face2 {
   transform: translateY(0);
 }
 
-
 .container-cards .card .face.face2 .content p,
 a {
-  font-size: 10pt;
+  font-size: 11pt;
   margin: 0;
   padding: 0;
-  color: #333;
+  color: #ffffff;
+  padding-top: 10%;
 }
 
 .container-cards .card .face.face2 .content a {
   text-decoration: none;
-  color: black;
+  color: rgb(255, 255, 255);
   box-sizing: border-box;
-  outline: 1px dashed #333;
+  outline: 1px ridge white;
   padding: 10px;
-  margin: 15px 0 0;
+  margin: 35px 0 0 20px;
   display: inline-block;
 }
 

@@ -8,10 +8,10 @@
       :key="`col-${index}`"
       class="coach-column"
     >
-      <router-link :to="{ name: 'Coach', params: { coachId: coach.id }}">
+      <router-link :to="{ name: 'Coach', params: { coachId: coach.id } }">
         <v-card class="coach-card" flat>
           <div class="image-container">
-            <img :src="coach.image" class="coach-img" :alt="coach.name">
+            <img :src="coach.image" class="coach-img" :alt="coach.name" />
           </div>
         </v-card>
       </router-link>
@@ -19,22 +19,48 @@
   </v-row>
 </template>
 
-
-
-
 <script>
 export default {
   name: "Coaches",
   data() {
     return {
       coaches: [
-        { id: "coach1", name: 'Lentz-Edouard Lundy', title: 'Entraîneur de boxe', image: '/coach-cards/card1.png' },
-        { id: "coach2", name: 'Pejman « PJ » Hedayati', title: 'Entraîneur de boxe', image: '/coach-cards/card2.png' },
-        { id: "coach3", name: 'Anatolie Caraterzi', title: 'Entraîneur de lutte', image: '/coach-cards/card3.png' },
-        { id: "coach4", name: 'Sandro Ferr', title: 'Entraîneur de lutte', image: '/coach-cards/card4.png' },
-        { id: "coach5", name: 'Rob Rivest ', title: 'Entraîneur de MMA', image: '/coach-cards/card5.png' },
-        { id: "coach6", name: 'Firas Zahabi', title: 'Entraîneur de MMA', image: '/coach-cards/card6.png' },
-
+        {
+          id: "coach1",
+          name: "Lentz-Edouard Lundy",
+          title: "Entraîneur de boxe",
+          image: "/coach-cards/card1.png",
+        },
+        {
+          id: "coach2",
+          name: "Pejman « PJ » Hedayati",
+          title: "Entraîneur de boxe",
+          image: "/coach-cards/card2.png",
+        },
+        {
+          id: "coach3",
+          name: "Anatolie Caraterzi",
+          title: "Entraîneur de lutte",
+          image: "/coach-cards/card3.png",
+        },
+        {
+          id: "coach4",
+          name: "Sandro Ferr",
+          title: "Entraîneur de lutte",
+          image: "/coach-cards/card4.png",
+        },
+        {
+          id: "coach5",
+          name: "Rob Rivest ",
+          title: "Entraîneur de MMA",
+          image: "/coach-cards/card5.png",
+        },
+        {
+          id: "coach6",
+          name: "Firas Zahabi",
+          title: "Entraîneur de MMA",
+          image: "/coach-cards/card6.png",
+        },
       ],
     };
   },
@@ -44,7 +70,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style scoped>
@@ -52,7 +77,6 @@ export default {
   transition: transform 0.3s ease;
   box-shadow: none;
   width: 97%; /* Fill the column width */
-  
 }
 
 .image-container {
@@ -60,7 +84,7 @@ export default {
 }
 
 .image-container::before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   top: 0;
@@ -73,19 +97,17 @@ export default {
 }
 
 .coach-img {
-  width: 100%; 
-  height: auto; 
+  width: 100%;
+  height: auto;
   display: block;
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease;
 }
 
 .coach-card:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
 .coach-card:hover .image-container::before {
   background: rgba(0, 0, 0, 0); /* Lighten the image back on hover */
 }
-
-
 </style>
