@@ -29,11 +29,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="firstName">Prénom</label>
-          <input type="text" id="firstName" v-model="profile.firstName">
+          <input type="text" id="firstName" v-model="profile.first_name">
         </div>
         <div class="form-group">
           <label for="lastName">Nom</label>
-          <input type="text" id="lastName" v-model="profile.lastName">
+          <input type="text" id="lastName" v-model="profile.last_name">
         </div>
       </div>
       
@@ -71,45 +71,78 @@
 </template>
 
 <script>
-import { auth } from "@/firebase/init"; // Adjust the import path as necessary
-import { signOut } from "firebase/auth";
+import { auth, db } from "@/firebase/init";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { onMounted } from 'vue';
+
 export default {
   data() {
     return {
-
-    myStyle:{
-        backgroundColor:"#8d8d8d" 
-    },
-
-    profile: {
-        firstName: 'Steven',
-        lastName: 'Pancho',
-        email: 'stevenpancho@gmail.com',
-        username: 'stepancho2',
-        phone: '(514) 226-3820',
-        address: '233 rue du club',
-        // Add other fields as needed
+      myStyle: {
+        backgroundColor: "#8d8d8d",
+      },
+      profile: {
+        first_name: '',
+        last_name: '',
+        email: '',
+        username: '',
+        phone: '',
+        address: '',
       },
     };
   },
   methods: {
-  updateProfile() {
-    // Existing profile update logic
-    console.log('Profile updated:', this.profile);
-  },
-  logoutUser() {
-    signOut(auth).then(() => {
-      // Sign-out successful.
-      this.$router.push('/'); // Redirect to homepage
-    }).catch((error) => {
-      // An error happened.
-      console.error("Sign out error:", error);
-    });
-  }
+    async fetchProfile(uid) {
+      try {
+        const userDocRef = doc(db, "users", uid);
+        const docSnap = await getDoc(userDocRef);
+        if (docSnap.exists()) {
+  console.log(docSnap.data()); // Log to see the actual fetched data
+  this.profile = docSnap.data();
+} else {
+  console.log("No such document!");
 }
 
+      } catch (error) {
+        console.error("Error getting document:", error);
+      }
+    },
+    async updateProfile() {
+      if (auth.currentUser) {
+        try {
+          const userDocRef = doc(db, "users", auth.currentUser.uid);
+          await setDoc(userDocRef, this.profile, { merge: true });
+          console.log('Profile updated:', this.profile);
+        } catch (error) {
+          console.error("Error updating profile:", error);
+        }
+      } else {
+        console.error("No authenticated user found.");
+      }
+    },
+    logoutUser() {
+      signOut(auth).then(() => {
+        this.$router.push('/');
+      }).catch((error) => {
+        console.error("Sign out error:", error);
+      });
+    },
+  },
+  mounted() {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.fetchProfile(user.uid);
+      } else {
+        // Handle user not logged in or redirect to login page
+        console.log("No user is logged in.");
+        this.$router.push('/login'); // Example redirect
+      }
+    });
+  },
 };
 </script>
+
 
 <style scoped>
 
@@ -127,7 +160,7 @@ export default {
 .profile-container {
   width: 700px;
   margin: auto;
-  background: #ffffffdf;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -205,9 +238,9 @@ export default {
 
 .form-group label {
   position: absolute;
-  top: -7px;
+  top: -10px;
   left: 15px;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 0 5px;
   color: #333;
   font-size: 0.875rem;

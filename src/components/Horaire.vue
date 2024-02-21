@@ -99,10 +99,10 @@ export default defineComponent({
     <div class='demo-app-main'>
       <div class='control-panel'>
         <h1>Control Panel</h1>
-        <v-btn>Ajouter un cours</v-btn>
+        <button @click="alert(1)">Ajouter un cours</button>
       </div>
       <v-dialog v-model="dialogEventVisible" width="500">
-        <template v-slot:default="{ isActive }">
+        <template v-slot:default="{ }">
           <v-card :title="dialogTitle">
             <v-card-text>
               Heure: {{ dialogStartHours }}:{{ dialogStartMinutes }} - {{ dialogEndHours }}:{{ dialogEndMinutes }} <br>

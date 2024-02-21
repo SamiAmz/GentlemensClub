@@ -41,11 +41,14 @@ export default {
             backgroundColor:"#222" 
             },
       credentials: {
+        email: '',
         firstName: '',
         lastName: '',
-        email: '',
+        username: '',
+        phone: '',
+        address: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
       }
     };
   },
@@ -60,7 +63,7 @@ export default {
       createUserWithEmailAndPassword(auth, this.credentials.email, this.credentials.password)
     .then(async (userCredential) => {
       // User created successfully
-      alert('User created successfully.');
+      this.$router.push("/profile");
 
       // Create a new user document in Firestore
       const userDocRef = doc(db, "users", userCredential.user.uid);
@@ -69,6 +72,10 @@ export default {
           email: this.credentials.email,
           first_name: this.credentials.firstName,
           last_name: this.credentials.lastName,
+          email: this.credentials.email,
+          username: this.credentials.username,
+          phone: this.credentials.phone,
+          address: this.credentials.address,
         });
 
         // Document created successfully

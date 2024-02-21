@@ -73,9 +73,7 @@ export default {
       )
         .then((userCredential) => {
           // Login successful
-          alert("Login successful!");
-          // Redirect to a different page or update UI
-          this.$router.push("/profile"); // Example redirect
+          this.$router.push("/profile");
         })
 
         .catch((error) => {
