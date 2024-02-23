@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import emailjs from "emailjs-com";
 export default {
   data: () => ({
     dialog: false,
@@ -90,12 +91,7 @@ export default {
   }),
   methods: {
     submitQuestion() {
-      console.log(this.name, this.question, this.phone, this.email);
-      this.dialog = false;
-      this.name = "";
-      this.question = "";
-      this.phone = "";
-      this.email = "";
+      this.sendEmail();
     },
     clearForm() {
       this.name = "";
@@ -106,6 +102,26 @@ export default {
     closeDialog() {
       this.dialog = false;
       this.clearForm();
+    },
+    sendEmail() {
+      const templateParams = {
+        name: this.name,
+        question: this.question,
+        phone: this.phone,
+        email: this.email,
+      };
+      const serviceID = "service_aj2qxpa";
+      const templateID = "template_2ldkaan";
+      const userID = "yFTkKeNR4jdr1oXhr";
+
+      emailjs
+        .send(serviceID, templateID, templateParams, userID)
+        .then((response) => {
+          console.log("Email successfully sent!", response);
+          this.dialog = false;
+          this.clearForm();
+        })
+        .catch((err) => console.error("Failed to send email. Error: ", err));
     },
   },
 };
