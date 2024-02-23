@@ -3,6 +3,7 @@
   <v-app>
     <v-main>
       <router-view />
+      <Chat />
     </v-main>
     <AppFooter />
   </v-app>
@@ -21,6 +22,7 @@ import { auth } from "@/firebase/init"; // Adjust the import path as necessary
 import { onAuthStateChanged } from "firebase/auth";
 import AppHeader from "@/components/Header.vue";
 import AppFooter from "@/components/Footer.vue";
+import Chat from "./components/Chat.vue";
 
 const isLoggedIn = ref(false); // Reactive property to track login status
 
