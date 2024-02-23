@@ -1,87 +1,6 @@
 <template>
   <div class="demo-app">
     <div class="demo-app-main">
-      <div class="control-panel">
-        <h1>Control Panel</h1>
-        <v-btn @click="dialogNewEventVisible = true">Ajouter un cours</v-btn>
-      </div>
-
-      <!-- Dialog nouveau cours -->
-      <v-dialog v-model="dialogNewEventVisible" width="80%">
-        <template v-slot:default="{ isActive }">
-          <v-card title="Ajouter un nouveau cours">
-            <div class="form-class">
-              <div class="row">
-                  <p class="text">Nom du cours: </p>
-                  <v-text-field label="Nom du cours"></v-text-field>
-              </div>
-              <div class="row">
-                <p class="text">Type de cours: </p>
-                <v-select
-                  label="Type de cours"
-                  :items="['Boxe', 'MMA', 'Lutte']"
-                ></v-select>
-              </div>
-
-              <!-- Date picker -->
-              <v-menu v-model="isMenuOpen" :close-on-content-click="false">
-                <template v-slot:activator="{ props }">
-                  <div class="row">
-                  <p class="text">Date du cours: </p>
-                  <v-text-field
-                    label="Date du cours"
-                    :model-value="selectedDate"
-                    readonly
-                    v-bind="props"
-                  ></v-text-field>
-                </div>
-                </template>
-                <v-date-picker v-model="selectedDate" :format="date => new Date(date).toLocaleDateString('en-CA')">
-                </v-date-picker>
-              </v-menu>
-
-              <!-- Time picker -->
-              <div class="row">
-                <p class="text">Heure de début du cours: </p>
-                <v-select class="time-picker"
-                label="Heure"
-                :items="['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']"
-              ></v-select>
-              <v-select class="time-picker"
-                label="Minute"
-                :items="['00', '15', '30', '45']"
-              ></v-select>
-              </div>
-
-              <!-- Time picker -->
-              <div class="row">
-                <p class="text-hour">Heure de fin du cours: </p>
-                <v-select class="time-picker"
-                label="Heure"
-                :items="['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']"
-              ></v-select>
-              <v-select class="time-picker"
-                label="Minute"
-                :items="['00', '15', '30', '45']"
-              ></v-select>
-              </div>
-            </div>
-            <v-card-actions>
-              <v-btn class="button-cancel"
-                text="Annuler"
-                @click="dialogNewEventVisible = false"
-              ></v-btn>
-              <v-spacer></v-spacer>
-              <!-- Ajouter nouveau cours à la base de donnée -->
-              <v-btn
-                text="Ajouter"
-                @click="doSomething"
-              ></v-btn> 
-            </v-card-actions>
-          </v-card>
-        </template>
-      </v-dialog>
-
       <!-- Dialog afficher information d'un cours -->
       <v-dialog v-model="dialogEventVisible" width="500">
         <template v-slot:default="{ isActive }">
@@ -127,7 +46,7 @@ import frLocale from "@fullcalendar/core/locales/fr";
 
 export default defineComponent({
   components: {
-    name: "Horaire",
+    name: "HoraireUtilisateur",
     FullCalendar,
   },
   data() {
@@ -263,45 +182,6 @@ b {
   height: 740px; /* Height of the calendar */
   border-radius: 5px;
   padding: 1%;
-}
-
-.control-panel {
-  padding: 3%;
-  width: 100%;
-  border-width: 1px;
-  border-style: solid;
-  border-color: white;
-}
-
-.form-class {
-  padding: 2.5%;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.time-picker {
-  width: 10%;
-  padding-right: 2.5%;
-  flex: 1;
-}
-
-.text {
-  padding-right: 1%;
-  align-self: center;
-}
-
-.text-hour {
-  padding-right: 3.25%;
-  align-self: center;
-}
-
-.button-cancel {
-  color: red;
 }
 
 </style>

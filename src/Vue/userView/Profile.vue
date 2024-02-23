@@ -8,7 +8,7 @@
           <span class="icon">👤</span>
           <span class="label">Profile</span>
         </div>
-        <div class="nav-item" :class="{ active: activeTab === 'horraire' }" @click="setTabSection('horraire')">
+        <div class="nav-item" :class="{ active: activeTab === 'horaire' }" @click="setTabSection('horaire')">
           <span class="icon">📅</span>
           <span class="label">Horaire</span>
         </div>
@@ -99,9 +99,9 @@
 </div>
 
 
-<div v-if="activeTab === 'horraire'" class="calendar-container">
-
-
+<div v-if="activeTab === 'horaire'" class="calendar-container">
+<!-- Horaire TODO-->
+<HoraireUtilisateur></HoraireUtilisateur>
   </div>
 
         </div>
@@ -114,7 +114,6 @@
 import { auth, db } from "@/firebase/init";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { signOut, onAuthStateChanged } from "firebase/auth";
-
 
 export default {
 
