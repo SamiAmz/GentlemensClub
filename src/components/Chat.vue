@@ -21,13 +21,13 @@
       <v-card-text>
         <v-text-field
           label="Votre nom"
-          v-model="name"
+          v-model="formParams.from_name"
           outlined
           class="input-field mb-2"
         ></v-text-field>
         <v-textarea
           label="Votre question"
-          v-model="question"
+          v-model="formParams.message"
           :counter="500"
           required
           outlined
@@ -35,7 +35,7 @@
         ></v-textarea>
         <v-text-field
           label="Votre numero de téléphone"
-          v-model="phone"
+          v-model="formParams.phone_number"
           outlined
           class="input-field mb-2"
           :rules="[rules.onlyNumbers]"
@@ -43,7 +43,7 @@
         ></v-text-field>
         <v-text-field
           label="Votre Email"
-          v-model="email"
+          v-model="formParams.from_email"
           type="email"
           outlined
           class="input-field mb-2"
@@ -88,6 +88,13 @@ export default {
       onlyNumbers: (v) =>
         /^[0-9]*$/.test(v) || "Juste des chiffres qui sont permis",
     },
+
+    formParams: {
+        from_name: '',
+        from_email: '',
+        phone_number: '',
+        message: '',
+      },
   }),
   methods: {
     submitQuestion() {
@@ -104,18 +111,12 @@ export default {
       this.clearForm();
     },
     sendEmail() {
-      const templateParams = {
-        name: this.name,
-        question: this.question,
-        phone: this.phone,
-        email: this.email,
-      };
       const serviceID = "service_aj2qxpa";
       const templateID = "template_2ldkaan";
       const userID = "yFTkKeNR4jdr1oXhr";
 
       emailjs
-        .send(serviceID, templateID, templateParams, userID)
+        .send(serviceID, templateID, this.formParams, userID)
         .then((response) => {
           console.log("Email successfully sent!", response);
           this.dialog = false;
