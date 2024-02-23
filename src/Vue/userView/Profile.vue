@@ -100,9 +100,8 @@
 
 
 <div v-if="activeTab === 'horaire'" class="calendar-container">
-<!-- Horaire TODO-->
-<HoraireUtilisateur></HoraireUtilisateur>
-  </div>
+      <HoraireUtilisateur></HoraireUtilisateur>
+</div>
 
         </div>
         
@@ -430,4 +429,11 @@ export default {
 }
 
 
-  </style>
+.calendar-container{
+  width: 700px;
+  margin-left: -30px;
+  margin-top: -60px;
+}
+
+
+</style>

@@ -3,7 +3,7 @@
     <div class="demo-app-main">
       <!-- Dialog afficher information d'un cours -->
       <v-dialog v-model="dialogEventVisible" width="500">
-        <template v-slot:default="{ isActive }">
+        <template v-slot:default="{  }">
           <v-card :title="dialogTitle">
             <v-card-text>
               Heure: {{ dialogStartHours }}:{{ dialogStartMinutes }} -
@@ -179,7 +179,7 @@ b {
 
 .demo-app-calendar {
   background-color: rgb(29, 29, 31);
-  height: 740px; /* Height of the calendar */
+  height: 500px; /* Height of the calendar */
   border-radius: 5px;
   padding: 1%;
 }
