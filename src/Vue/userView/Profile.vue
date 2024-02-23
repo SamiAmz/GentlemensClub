@@ -4,20 +4,21 @@
   <div class="profile-container">
 
     <div class="profile-nav">
-        <div class="nav-item active">
+        <div class="nav-item" :class="{ active: activeTab === 'profile' }" @click="setTabSection('profile')">
           <span class="icon">👤</span>
           <span class="label">Profile</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" :class="{ active: activeTab === 'horraire' }" @click="setTabSection('horraire')">
           <span class="icon">📅</span>
           <span class="label">Horaire</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" :class="{ active: activeTab === 'abonnement' }" @click="setTabSection('abonnement')">
           <span class="icon">📄</span>
           <span class="label">Abonnement</span>
         </div>
       </div>
 
+  <div v-if="activeTab === 'profile'" class="profile-content">
     <div class="profile-header">
         <h1 id="profileTitle">Mes infos</h1>
       <div class="profile-picture">
@@ -66,7 +67,46 @@
       </div>
     </form>
   </div>
+
+  <div v-if="activeTab === 'abonnement'" class="abonnement-content">
+  <div class="abonnement-header">
+    <h1>Mon Abonnement</h1>
+  </div>
+  
+  <div class="abonnement-details">
+    <div class="detail-item">
+      <span class="detail-label">Type d'abonnement:</span>
+      <span class="detail">{{ profile.subscriptionType }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">Coût Mensuel:</span>
+      <span class="detail">{{ profile.subscriptionPrice }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">Statut:</span>
+      <span class="detail">{{ profile.subscriptionStatus }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">Date de renouvellement:</span>
+      <span class="detail">{{ profile.renewalDate }}</span>
+    </div>
+  </div>
+  
+  <div class="abonnement-actions">
+    <button type="button" class="btn btn-renew" @click="renewSubscription">Renouveler</button>
+    <button type="button" class="btn btn-cancel" @click="cancelSubscription">Annuler</button>
+  </div>
+</div>
+
+
+<div v-if="activeTab === 'horraire'" class="calendar-container">
+
+
+  </div>
+
         </div>
+        
+            </div>
 
 </template>
 
@@ -74,11 +114,16 @@
 import { auth, db } from "@/firebase/init";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { signOut, onAuthStateChanged } from "firebase/auth";
-import { onMounted } from 'vue';
+
 
 export default {
+
   data() {
     return {
+
+      activeTab: 'profile',
+
+
       myStyle: {
         backgroundColor: "#8d8d8d",
       },
@@ -89,10 +134,21 @@ export default {
         username: '',
         phone: '',
         address: '',
+        subscriptionType: '',
+        subscriptionPrice: '',
+        subscriptionStatus: '',
+        renewalDate: '',
       },
     };
   },
   methods: {
+
+
+    setTabSection(tab) {
+          this.activeTab = tab;
+        },
+
+
     async fetchProfile(uid) {
       try {
         const userDocRef = doc(db, "users", uid);
@@ -100,6 +156,11 @@ export default {
         if (docSnap.exists()) {
   console.log(docSnap.data()); // Log to see the actual fetched data
   this.profile = docSnap.data();
+  this.profile.subscriptionType = "Boxe"
+  this.profile.subscriptionStatus = "Actif"
+  this.profile.renewalDate = "2024-02-18"
+  this.profile.subscriptionPrice = '$120'
+
 } else {
   console.log("No such document!");
 }
@@ -139,7 +200,9 @@ export default {
         this.$router.push('/login'); // Example redirect
       }
     });
+
   },
+
 };
 </script>
 
@@ -295,5 +358,77 @@ export default {
   background-color: rgb(222, 76, 4);
 }
 
-/* Add responsive styles as needed */
-</style>
+
+.abonnement-content {
+  background: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+.abonnement-header h1 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.abonnement-details {
+  margin-bottom: 2rem;
+  margin-left: 10px;
+  font-size: 17px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: rgb(73, 73, 73);
+}
+
+.detail {
+  flex: 1;
+  color: rgb(255, 91, 8);
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.abonnement-actions {
+  text-align: center;
+}
+
+.abonnement-actions .btn {
+  padding: 0.8rem 2rem;
+  margin-right: 1rem;
+  background-color: #bbb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+
+.abonnement-actions .btn:hover {
+  background-color: rgb(255, 91, 8);
+}
+
+.abonnement-actions .btn-renew {
+  margin-left: 260px
+}
+
+.abonnement-actions .btn:hover {
+  background-color: rgb(255, 91, 8);
+}
+
+
+  </style>
