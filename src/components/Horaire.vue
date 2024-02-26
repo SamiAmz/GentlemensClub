@@ -8,16 +8,32 @@
 
       <!-- Dialog nouveau cours -->
       <v-dialog v-model="dialogNewEventVisible" width="80%">
-        <template v-slot:default="{ isActive }">
+        <v-form v-model="form" @submit.prevent="onSubmit" v-slot:default="{ isActive }">
           <v-card title="Ajouter un nouveau cours">
             <div class="form-class">
               <div class="row">
                   <p class="text">Nom du cours: </p>
-                  <v-text-field label="Nom du cours"></v-text-field>
+                  <v-text-field 
+                  v-model="classData.title"
+                  :rules="[rules.required]" 
+                  label="Nom du cours"
+                  clearable
+                  ></v-text-field>
+              </div>
+              <div class="row">
+                  <p class="text">Description: </p>
+                  <v-text-field 
+                  v-model="classData.description"
+                  :rules="[rules.required]" 
+                  label="Description"
+                  clearable
+                  ></v-text-field>
               </div>
               <div class="row">
                 <p class="text">Type de cours: </p>
                 <v-select
+                  v-model="classData.type"
+                  :rules="[rules.required]"
                   label="Type de cours"
                   :items="['Boxe', 'MMA', 'Lutte']"
                 ></v-select>
@@ -29,38 +45,47 @@
                   <div class="row">
                   <p class="text">Date du cours: </p>
                   <v-text-field
+                    :rules="[rules.required]"
                     label="Date du cours"
-                    :model-value="selectedDate"
+                    :model-value="formattedDate"
                     readonly
                     v-bind="props"
                   ></v-text-field>
                 </div>
                 </template>
-                <v-date-picker v-model="selectedDate" :format="date => new Date(date).toLocaleDateString('en-CA')">
+                <v-date-picker v-model="selectedDate" @click="formatDate(selectedDate)">
                 </v-date-picker>
               </v-menu>
 
-              <!-- Time picker -->
+              <!-- Time picker start -->
               <div class="row">
                 <p class="text">Heure de début du cours: </p>
                 <v-select class="time-picker"
+                v-model="classData.startHour"
+                :rules="[rules.required]"
                 label="Heure"
                 :items="['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']"
               ></v-select>
               <v-select class="time-picker"
+                v-model="classData.startMinutes"
+                :rules="[rules.required]"
                 label="Minute"
                 :items="['00', '15', '30', '45']"
               ></v-select>
               </div>
 
-              <!-- Time picker -->
+              <!-- Time picker end -->
               <div class="row">
                 <p class="text-hour">Heure de fin du cours: </p>
                 <v-select class="time-picker"
+                v-model="classData.endHour"
+                :rules="[rules.required]"
                 label="Heure"
                 :items="['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']"
               ></v-select>
               <v-select class="time-picker"
+                v-model="classData.endMinutes"
+                :rules="[rules.required]"
                 label="Minute"
                 :items="['00', '15', '30', '45']"
               ></v-select>
@@ -74,12 +99,14 @@
               <v-spacer></v-spacer>
               <!-- Ajouter nouveau cours à la base de donnée -->
               <v-btn
+                :disabled="!form"
+                :loading="loading"
                 text="Ajouter"
-                @click="doSomething"
+                @click="addNewClass()"
               ></v-btn> 
             </v-card-actions>
           </v-card>
-        </template>
+        </v-form>
       </v-dialog>
 
       <!-- Dialog afficher information d'un cours -->
@@ -93,6 +120,9 @@
             </v-card-text>
 
             <v-card-actions>
+              
+              <v-btn text="S'inscrire" @click="registerToClass()"></v-btn>
+              <v-btn text="Modifier" @click="updateClass()"></v-btn>
               <v-spacer></v-spacer>
               <v-btn text="Fermer" @click="dialogEventVisible = false"></v-btn>
             </v-card-actions>
@@ -125,6 +155,9 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { INITIAL_EVENTS } from "./event-utils";
 import frLocale from "@fullcalendar/core/locales/fr";
 
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '@/firebase/init';
+
 export default defineComponent({
   components: {
     name: "Horaire",
@@ -132,12 +165,34 @@ export default defineComponent({
   },
   data() {
     return {
+      rules: {
+        required: value => !!value || 'Champ requis', // Required field
+      },
+
+      // Firebase document class data
+      classData: {
+        title: "",
+        description: "",
+        startHour: "",
+        startMinutes: "",
+        endHour: "",
+        endMinutes: "",
+        type: "",
+      },
+
+      formattedDate: "",
+      form: false,
+      loading: false,
+
+      // Dialog
       dialogNewEventVisible: false,
       dialogEventVisible: false,
       dialogTitle: "",
       dialogDescription: "",
       dialogHours: "",
       dialogMinutes: "",
+
+      // Fullcalendar calendar parameters
       calendarOptions: {
         locale: frLocale,
         plugins: [
@@ -180,9 +235,59 @@ export default defineComponent({
           allDay: selectInfo.allDay
         })
         */
+    
+    onSubmit() {
+      // Does absolutely nothing  
+    },
 
-    handleEventClick(clickInfo) {
+    async addNewClass() {
+      this.loading = true;
+      setTimeout(() => (this.loading = false), 1000); // Simulate loading time on the button
+
+      try {
+        // Add a new document to the "class" collection with auto-generated ID
+        const docRef = await addDoc(collection(db, "class"), {
+          title: this.classData.title,
+          description: this.classData.description,
+          startHour: this.classData.startHour + ":" + this.classData.startMinutes + ":00",  
+          endHour: this.classData.endHour + ":" + this.classData.endMinutes + ":00",
+          date: this.formattedDate,
+          type: this.classData.type,
+        });
+        
+        console.log("Document written with ID: ", docRef.id);
+        setTimeout(() => (this.dialogNewEventVisible = false), 1000);
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
+    },
+
+    // Allows a member to register to a class
+    registerToClass() {
+      //TODO
       console.log("test");
+    },
+
+    // Update class information
+    updateClass() {
+      //TODO
+      console.log("test");
+    },
+
+    // Formats date to YYYY-MM-DD
+    formatDate(selectedDate) {
+      const dateObj = new Date(selectedDate);
+      const year = dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const day = String(dateObj.getDate()).padStart(2, '0');
+      
+      const formattedDate = `${year}-${month}-${day}`;
+      this.formattedDate = formattedDate;
+      console.log(formattedDate);
+    },
+
+    // Display event information
+    handleEventClick(clickInfo) {
       this.dialogEventVisible = true;
       this.dialogTitle = clickInfo.event.title;
       this.dialogStartHours = clickInfo.event.start.getHours();
@@ -298,10 +403,6 @@ b {
 .text-hour {
   padding-right: 3.25%;
   align-self: center;
-}
-
-.button-cancel {
-  color: red;
 }
 
 </style>
