@@ -86,22 +86,23 @@
       },
       async subscribe() {
   try {
-    // Replace '/.netlify/functions/create-checkout-session' with your Netlify function endpoint
-    const response = await fetch('/functions/create-checkout-session', {
+    const response = await fetch('/.netlify/functions/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      // Adjust the body as necessary to pass any required parameters to your function
       body: JSON.stringify({ priceId: 'price_1Oo7gBIrFzdedmXMi51ZvYJ1' }),
     });
 
+    console.log('Response:', response); // Log the response object
+
     const { sessionId } = await response.json();
+    console.log('Session ID:', sessionId); // Log the session ID
+
     if (!sessionId) {
       throw new Error('Session ID is missing in the response');
     }
 
-    // Ensure you initialize Stripe with your actual publishable key
     const stripe = Stripe('pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU');
     const { error } = await stripe.redirectToCheckout({ sessionId });
 
@@ -114,6 +115,7 @@
     // Handle general errors
   }
 },
+
   },
     
   };
