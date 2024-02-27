@@ -3,10 +3,10 @@ import { auth } from "@/firebase/init";
 import Home from "../Vue/Home.vue";
 import Contact from "../components/Contact.vue";
 import Horaire from "../components/Horaire.vue";
-import Login from "../vue/userView/Login.vue";
-import Signup from "../vue/userView/Signup.vue";
-import CoachDetails from "../vue/CoachDetails.vue";
-import Profile from "../vue/userView/Profile.vue";
+import Login from "../Vue/userView/Login.vue";
+import Signup from "../Vue/userView/Signup.vue";
+import CoachDetails from "../Vue/CoachDetails.vue";
+import Profile from "../Vue/userView/Profile.vue";
 import Sports from "../components/Sports.vue";
 import Mma from "../components/Sports/Mma"
 import Box from "../components/Sports/Box"
