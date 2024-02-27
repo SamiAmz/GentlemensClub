@@ -85,28 +85,35 @@
         window.scrollTo(0, 0);
       },
       async subscribe() {
-      try {
-        // Call your backend endpoint to create a checkout session
-        const response = await fetch('/create-checkout-session', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ priceId: 'price_1Oo7gBIrFzdedmXMi51ZvYJ1' }), // Send the price ID to the backend
-        });
+  try {
+    // Replace '/.netlify/functions/create-checkout-session' with your Netlify function endpoint
+    const response = await fetch('/.netlify/functions/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Adjust the body as necessary to pass any required parameters to your function
+      body: JSON.stringify({ priceId: 'price_1Oo7gBIrFzdedmXMi51ZvYJ1' }),
+    });
 
-        const { sessionId } = await response.json();
-        // Redirect to Stripe Checkout using the session ID
-        const stripe = Stripe('pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU'); // Initialize Stripe with your public key
-        const { error } = await stripe.redirectToCheckout({ sessionId });
+    const { sessionId } = await response.json();
+    if (!sessionId) {
+      throw new Error('Session ID is missing in the response');
+    }
 
-        if (error) {
-          console.error(error);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    },
+    // Ensure you initialize Stripe with your actual publishable key
+    const stripe = Stripe('pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU');
+    const { error } = await stripe.redirectToCheckout({ sessionId });
+
+    if (error) {
+      console.error('Stripe checkout error:', error.message);
+      // Handle errors in Stripe checkout
+    }
+  } catch (error) {
+    console.error('Error creating checkout session:', error);
+    // Handle general errors
+  }
+},
   },
     
   };
