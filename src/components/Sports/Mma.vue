@@ -87,7 +87,7 @@
       async subscribe() {
   try {
     // Replace '/.netlify/functions/create-checkout-session' with your Netlify function endpoint
-    const response = await fetch('/.netlify/functions/create-checkout-session', {
+    const response = await fetch('/functions/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
