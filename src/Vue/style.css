@@ -6,7 +6,9 @@
   margin-top: 5%;
 }
 .video-text {
+  padding-top: 15%;
   font-size: 4em;
+  color: lightgray;
 }
 .video-background {
   position: relative;

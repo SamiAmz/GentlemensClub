@@ -1,0 +1,2 @@
+[build]
+functions = "netlify/functions" # This line specifies where your functions are stored.
