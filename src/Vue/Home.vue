@@ -148,7 +148,7 @@
                 combat.
               </p>
               <router-link
-                :to="{ name: 'Sports', params: { sportNom: 'mma' } }"
+                :to="{ name: 'Mma' }"
               >
                 <button>S'ABONNER</button>
               </router-link>
@@ -172,7 +172,7 @@
                 école de Wrestling, vous apprendrez l'art du grapling.
               </p>
               <router-link
-                :to="{ name: 'Sports', params: { sportNom: 'wrestling' } }"
+                :to="{ name: 'Wrestling' }"
               >
                 <button>S'ABONNER</button>
               </router-link>
@@ -196,7 +196,7 @@
                 allez apprendre la Box
               </p>
               <router-link
-                :to="{ name: 'Sports', params: { sportNom: 'box' } }"
+                :to="{ name: 'Box' }"
               >
                 <button>S'ABONNER</button>
               </router-link>
