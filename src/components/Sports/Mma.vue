@@ -86,7 +86,7 @@
       },
       async subscribe() {
   try {
-    const response = await fetch('/.netlify/functions/create-checkout-session', {
+    const response = await fetch('/functions/create-checkout-sessions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
