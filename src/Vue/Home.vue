@@ -216,7 +216,7 @@ import "https://kit.fontawesome.com/95a02bd20d.js";
 import "./style.css";
 export default {
   name: "Home",
-  mounted() {
+  mounted() { 
     this.scrollToTop();
   },
   methods: {
@@ -237,10 +237,10 @@ document.addEventListener("scroll", function () {
     (videoBottomPosition > screenPosition && videoPosition < 0)
   ) {
     video.style.opacity = "1";
-    title.style.opacity = "1";
+    //title.style.opacity = "1";
   } else {
     video.style.opacity = "0";
-    title.style.opacity = "0";
+    //title.style.opacity = "0";
   }
 });
 </script>
