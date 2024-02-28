@@ -85,6 +85,8 @@
         window.scrollTo(0, 0);
       },
       async subscribe() {
+        console.log('Subscribe button clicked');
+
   try {
     const response = await fetch('/functions/create-checkout-sessions', {
       method: 'POST',
