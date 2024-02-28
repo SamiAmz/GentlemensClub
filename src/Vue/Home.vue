@@ -229,7 +229,6 @@ export default {
 
 document.addEventListener("scroll", function () {
   var video = document.getElementById("background-video");
-  var title = document.querySelector(".video-text");
   var videoPosition = video.getBoundingClientRect().top;
   var videoBottomPosition = video.getBoundingClientRect().bottom;
   var screenPosition = window.innerHeight / 2;
