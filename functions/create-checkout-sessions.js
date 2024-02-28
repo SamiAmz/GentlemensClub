@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
         quantity: 1,
       }],
       mode: 'subscription',
-      success_url: 'https://stripe--dancing-centaur-316b8d.netlify.app/profile',
+      success_url: 'https://stripe--dancing-centaur-316b8d.netlify.app',
       cancel_url: 'https://stripe--dancing-centaur-316b8d.netlify.app',
     });
 

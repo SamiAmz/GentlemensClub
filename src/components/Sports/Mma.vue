@@ -144,7 +144,6 @@ export default {
           type: "Boxe",
         });
 
-        // Redirect or indicate success to the user here
         
       } catch (error) {
         console.error("Subscription error:", error);
