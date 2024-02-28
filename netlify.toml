@@ -1,5 +1,5 @@
 [build]
-functions = "netlify/functions" # This line specifies where your functions are stored.
+functions = "functions" # This line specifies where your functions are stored.
 
 [build.environment]
   STRIPE_SECRET_KEY = "sk_test_51Oo7T7IrFzdedmXMfSriBsHvQcWz7TbiQNSE7FHwv91YbwHmtbUc2QBtjCUEgGDGSjvpRl04B4VJ4C7RKSgXKPvM00VyZ8x2IJ"
