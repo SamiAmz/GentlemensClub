@@ -1,4 +1,4 @@
-<template>
+heres my code: <template>
   <div :style="myStyle" id="wrapper">
 
   <div class="profile-container">
@@ -76,19 +76,19 @@
   <div class="abonnement-details">
     <div class="detail-item">
       <span class="detail-label">Type d'abonnement:</span>
-      <span class="detail">{{ profile.subscriptionType }}</span>
+      <span class="detail">{{ subscription.subscriptionType }}</span>
     </div>
     <div class="detail-item">
       <span class="detail-label">Coût Mensuel:</span>
-      <span class="detail">{{ profile.subscriptionPrice }}</span>
+      <span class="detail">${{ subscription.subscriptionPrice }}</span>
     </div>
     <div class="detail-item">
       <span class="detail-label">Statut:</span>
-      <span class="detail">{{ profile.subscriptionStatus }}</span>
+      <span class="detail">{{ subscription.subscriptionStatus }}</span>
     </div>
     <div class="detail-item">
       <span class="detail-label">Date de renouvellement:</span>
-      <span class="detail">{{ profile.renewalDate }}</span>
+      <span class="detail">{{ subscription.renewalDate }}</span>
     </div>
   </div>
   
@@ -111,7 +111,7 @@
 
 <script>
 import { auth, db } from "@/firebase/init";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, query, where, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 
 export default {
@@ -132,11 +132,14 @@ export default {
         username: '',
         phone: '',
         address: '',
+      },
+
+      subscription: {
         subscriptionType: '',
         subscriptionPrice: '',
         subscriptionStatus: '',
         renewalDate: '',
-      },
+      }
     };
   },
   methods: {
@@ -144,29 +147,31 @@ export default {
 
     setTabSection(tab) {
           this.activeTab = tab;
+          if (tab === 'abonnement') {
+            this.fetchSubscription();
+            }
+          if (tab === 'profile') {
+            this.fetchProfile(auth.currentUser.uid);
+            }
         },
 
 
-    async fetchProfile(uid) {
-      try {
-        const userDocRef = doc(db, "users", uid);
-        const docSnap = await getDoc(userDocRef);
-        if (docSnap.exists()) {
-  console.log(docSnap.data()); // Log to see the actual fetched data
-  this.profile = docSnap.data();
-  this.profile.subscriptionType = "Boxe"
-  this.profile.subscriptionStatus = "Actif"
-  this.profile.renewalDate = "2024-02-18"
-  this.profile.subscriptionPrice = '$120'
+   async fetchProfile(uid) {
+  try {
+    const userDocRef = doc(db, "users", uid);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      // Update the profile object with the fetched data
+      this.profile = docSnap.data();
+    } else {
+      console.log("No such document!");
+    }
+  } catch (error) {
+    console.error("Error getting document:", error);
+  }
+},
 
-} else {
-  console.log("No such document!");
-}
 
-      } catch (error) {
-        console.error("Error getting document:", error);
-      }
-    },
     async updateProfile() {
       if (auth.currentUser) {
         try {
@@ -187,7 +192,42 @@ export default {
         console.error("Sign out error:", error);
       });
     },
+
+    async fetchSubscription() {
+  if (!auth.currentUser) {
+    console.error("No authenticated user found.");
+    return;
+  }
+  const userId = auth.currentUser.uid;
+  // Create a reference to the 'abonnement' collection
+  const abonnementCollectionRef = collection(db, "abonnement");
+  // Create a query against the collection, where 'userid' field matches the userId
+  const q = query(abonnementCollectionRef, where("userid", "==", userId));
+
+  try {
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      console.log("No matching subscription document.");
+      return;
+    }
+    // Assuming one subscription per user, take the first document found
+    const subscriptionDoc = querySnapshot.docs[0].data();
+    console.log(subscriptionDoc); // Log to see the fetched subscription data
+    // Update your profile object here with subscription details
+    // Adjust these lines based on your actual subscription document structure
+    this.subscription.subscriptionType = subscriptionDoc.type; 
+    this.subscription.subscriptionPrice = subscriptionDoc.prix;
+    this.subscription.subscriptionStatus = subscriptionDoc.status;
+    this.subscription.renewalDate = subscriptionDoc.date_expiration;
+  } catch (error) {
+    console.error("Error getting subscription document:", error);
+  }
+}
+
+
   },
+
+
   mounted() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -436,4 +476,4 @@ export default {
 }
 
 
-</style>
+</style> 
