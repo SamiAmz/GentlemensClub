@@ -134,18 +134,26 @@ export default {
 
         const paymentDetails = await paymentDetailsResponse.json();
 
+        console.log("Attempting to add subscription:", {
+  userId: user.uid,
+  sessionId: sessionId,
+  date_expiration: paymentDetails.expirationDate,
+  prix: paymentDetails.amount,
+  status: paymentDetails.status,
+  type: "Boxe",
+});
         // Update Firestore with the payment details
-        await db.collection('abonnement').add({
-          userId: user.uid,
-          sessionId: sessionId,
-          date_expiration: paymentDetails.expirationDate,
-          prix: paymentDetails.amount,
-          status: paymentDetails.status,
-          type: "Boxe",
-        }).then((docRef) => {
-  console.log("Document written with ID: ", docRef.id);
-}).catch((error) => {
-  console.error("Error adding document: ", error);
+        db.collection('abonnement').add({
+  userId: user.uid,
+  sessionId: sessionId,
+  date_expiration: paymentDetails.expirationDate,
+  prix: paymentDetails.amount,
+  status: paymentDetails.status,
+  type: "Boxe",
+}).then(docRef => {
+  console.log("Subscription document successfully added with ID:", docRef.id);
+}).catch(error => {
+  console.error("Error adding subscription document to Firestore:", error);
 });
 
         
