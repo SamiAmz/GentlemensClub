@@ -98,7 +98,7 @@
 
       // If user is logged in, proceed with subscription
       try {
-        const response = await fetch('/functions/create-checkout-sessions', {
+        const response = await fetch('.netlify/functions/create-checkout-sessions', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -113,8 +113,6 @@
       }
     },
   },
-
-  
     
   };
   </script>
