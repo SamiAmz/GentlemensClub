@@ -74,10 +74,11 @@
 </template>
 
 <script>
-import { auth } from "@/firebase/init";
-import router from "@/router"; // Import your router instance
+import { auth, db } from "@/firebase/init"; // Assuming db is exported from here
+import router from "@/router";
+import { loadStripe } from '@stripe/stripe-js'; // Ensure you have this installed and imported
+
 export default {
-  import: "https://unicons.iconscout.com/release/v3.0.6/css/line.css",
   name: "Mma",
   mounted() {
     this.scrollToTop();
@@ -89,48 +90,71 @@ export default {
     async subscribe() {
       const user = auth.currentUser;
       if (!user) {
-        // If user is not logged in, redirect to login component
         router.push({ name: 'login' });
         return;
       }
-      try {
-        const response = await fetch(
-          ".netlify/functions/create-checkout-sessions",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ priceId: "price_1Oo7gBIrFzdedmXMi51ZvYJ1" }),
-          }
-        );
 
-        console.log("Response:", response); // Log the response object
+      const stripePromise = loadStripe("pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU"); // Replace with your Stripe publishable key
+
+      try {
+        const response = await fetch("/.netlify/functions/create-checkout-sessions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ priceId: "price_1Oo7gBIrFzdedmXMi51ZvYJ1" }),
+        });
 
         const { sessionId } = await response.json();
-        console.log("Session ID:", sessionId); // Log the session ID
 
         if (!sessionId) {
           throw new Error("Session ID is missing in the response");
         }
 
-        const stripe = Stripe(
-          "pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU"
-        );
+        const stripe = await stripePromise;
         const { error } = await stripe.redirectToCheckout({ sessionId });
 
         if (error) {
           console.error("Stripe checkout error:", error.message);
-          // Handle errors in Stripe checkout
+          return;
         }
+
+        // Retrieve payment details from Netlify Function
+        const paymentDetailsResponse = await fetch('/.netlify/functions/payment-details', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ sessionId }),
+        });
+
+        if (!paymentDetailsResponse.ok) {
+          throw new Error("Error retrieving payment details.");
+        }
+
+        const paymentDetails = await paymentDetailsResponse.json();
+
+        // Update Firestore with the payment details
+        await db.collection('abonnement').add({
+          userId: user.uid,
+          sessionId: sessionId,
+          date_expiration: paymentDetails.expirationDate,
+          prix: paymentDetails.amount,
+          status: paymentDetails.status,
+          type: "Boxe",
+        });
+
+        // Redirect or indicate success to the user here
+        
       } catch (error) {
-        console.error("Error creating checkout session:", error);
-        // Handle general errors
+        console.error("Subscription error:", error);
+        // Handle other errors
       }
     },
   },
 };
 </script>
+
 
 <style scoped>
 .v-spacer {

@@ -142,7 +142,7 @@
               <router-link
                 :to="{ name: 'Mma' }"
               >
-                <button>S'ABONNER</button>
+                <button>EN SAVOIR PLUS</button>
               </router-link>
             </div>
           </div>
@@ -166,7 +166,7 @@
               <router-link
                 :to="{ name: 'Wrestling' }"
               >
-                <button>S'ABONNER</button>
+                <button>EN SAVOIR PLUS</button>
               </router-link>
             </div>
           </div>
@@ -190,7 +190,7 @@
               <router-link
                 :to="{ name: 'Box' }"
               >
-                <button>S'ABONNER</button>
+                <button>EN SAVOIR PLUS</button>
               </router-link>
             </div>
           </div>
