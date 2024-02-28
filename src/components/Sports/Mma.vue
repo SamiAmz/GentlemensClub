@@ -74,7 +74,10 @@
   </template>
   
   <script>
+      import { auth } from "@/firebase/init";
+    import router from "@/router";
   export default {
+
     import: "https://unicons.iconscout.com/release/v3.0.6/css/line.css",
     name: "Mma",
     mounted() {
@@ -85,40 +88,33 @@
         window.scrollTo(0, 0);
       },
       async subscribe() {
-        console.log('Subscribe button clicked');
+      // Check if the user is logged in
+      const user = auth.currentUser;
+      if (!user) {
+        // If user is not logged in, redirect to signup component
+        router.push({ name: 'signup' });
+        return;
+      }
 
-  try {
-    const response = await fetch('.netlify/functions/create-checkout-sessions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ priceId: 'price_1Oo7gBIrFzdedmXMi51ZvYJ1' }),
-    });
+      // If user is logged in, proceed with subscription
+      try {
+        const response = await fetch('/functions/create-checkout-sessions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ priceId: 'price_1Oo7gBIrFzdedmXMi51ZvYJ1' }),
+        });
 
-    console.log('Response:', response); // Log the response object
-
-    const { sessionId } = await response.json();
-    console.log('Session ID:', sessionId); // Log the session ID
-
-    if (!sessionId) {
-      throw new Error('Session ID is missing in the response');
-    }
-
-    const stripe = Stripe('pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU');
-    const { error } = await stripe.redirectToCheckout({ sessionId });
-
-    if (error) {
-      console.error('Stripe checkout error:', error.message);
-      // Handle errors in Stripe checkout
-    }
-  } catch (error) {
-    console.error('Error creating checkout session:', error);
-    // Handle general errors
-  }
-},
-
+        // Handle response...
+      } catch (error) {
+        console.error('Error creating checkout session:', error);
+        // Handle error...
+      }
+    },
   },
+
+  
     
   };
   </script>
