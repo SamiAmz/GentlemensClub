@@ -88,7 +88,8 @@ export default {
       window.scrollTo(0, 0);
     },
     async subscribe() {
-
+      console.log("User authenticated:", auth.currentUser != null);
+console.log("User UID:", auth.currentUser ? auth.currentUser.uid : "N/A");
       console.log("subscribe button hit")
       //Check si le user est connecter avant de permettre le checkout
       const user = auth.currentUser;
@@ -146,7 +147,7 @@ export default {
         }
 
         const paymentDetails = await paymentDetailsResponse.json();
-
+        console.log("Payment Details:", paymentDetails);
         console.log("Attempting to add subscription:", {
           userId: user.uid,
           sessionId: sessionId,
