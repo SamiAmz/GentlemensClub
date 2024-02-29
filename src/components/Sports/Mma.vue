@@ -155,8 +155,9 @@ export default {
           status: paymentDetails.status,
           type: "Boxe",
         });
+        console.log("Preparing to write document to Firestore with the following data:") 
         // Update Firestore with the payment details
-        db.collection("abonnement")
+        await db.collection("abonnement")
           .add({
             userId: user.uid,
             sessionId: sessionId,
