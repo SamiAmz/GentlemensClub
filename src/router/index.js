@@ -11,6 +11,7 @@ import Sports from "../components/Sports.vue";
 import Mma from "../components/Sports/Mma"
 import Box from "../components/Sports/Box"
 import Wrestling from "../components/Sports/Wrestling"
+import Success from "../Vue/userView/Success"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,13 @@ const router = createRouter({
       name: "Mma",
       component: Mma,
       props: true,
+    },
+
+    {
+      path: "/Success",
+      name: Success,
+      component: Success,
+      props: true
     },
     {
       path: "/Box",
