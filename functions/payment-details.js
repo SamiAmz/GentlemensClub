@@ -1,19 +1,28 @@
+// Require the Stripe library with your secret key
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async function(event) {
-  const { sessionId } = JSON.parse(event.body);
-  
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
   try {
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
-    const paymentDetails = {
-      status: session.payment_status,
-      amount: session.amount_total / 100, // Stripe amounts are in the smallest currency unit, like cents for USD
-      expirationDate: calculateExpirationDate(), // Implement this according to your business logic
-    };
+    const { priceId } = JSON.parse(event.body);
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [{
+        price: priceId,
+        quantity: 1,
+      }],
+      mode: 'subscription',
+      success_url: `${process.env.URL}/success?session_id={CHECKOUT_SESSION_ID}`, 
+      cancel_url: process.env.URL, 
+    });
 
     return {
       statusCode: 200,
-      body: JSON.stringify(paymentDetails),
+      body: JSON.stringify({ sessionId: session.id }),
     };
   } catch (error) {
     return {
@@ -22,9 +31,3 @@ exports.handler = async function(event) {
     };
   }
 };
-function calculateExpirationDate() {
-    const now = new Date();
-    now.setMonth(now.getMonth() + 1);
-    return now.toISOString().split('T')[0]; 
-  }
-  

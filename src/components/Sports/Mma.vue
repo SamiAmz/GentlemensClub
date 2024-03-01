@@ -116,11 +116,9 @@ export default {
     }
 
     const stripe = await stripePromise;
-    // Redirect to the Stripe Checkout, then to the Success page on successful payment
+    // Redirect to the Stripe Checkout
     const { error } = await stripe.redirectToCheckout({
-      sessionId,
-      successUrl: window.location.origin + '/success?session_id={CHECKOUT_SESSION_ID}',
-      cancelUrl: window.location.origin + '/cancel',
+      sessionId
     });
 
     if (error) {
@@ -129,8 +127,9 @@ export default {
   } catch (error) {
     console.error("Error during subscription:", error);
   }
-    }
-  },
+}
+  }
+
 };
 </script>
 
