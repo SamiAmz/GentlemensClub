@@ -98,7 +98,7 @@ export default {
   }
 
   // Initialize Stripe with your publishable key
-  const stripePromise = loadStripe("your_stripe_publishable_key");
+  const stripePromise = loadStripe("pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU");
 
   try {
     // Create a Checkout Session with the server
@@ -107,7 +107,7 @@ export default {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ priceId: "your_price_id" }),
+      body: JSON.stringify({ priceId: "price_1Oo7gBIrFzdedmXMi51ZvYJ1" }),
     });
 
     const { sessionId } = await response.json();
