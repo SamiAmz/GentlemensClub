@@ -88,46 +88,58 @@ export default {
       window.scrollTo(0, 0);
     },
     async subscribe() {
-  console.log("subscribe button hit");
+      console.log("Subscribe button clicked.");
 
-  // Check if the user is connected before allowing checkout
-  const user = auth.currentUser;
-  if (!user) {
-    router.push({ name: "login" });
-    return;
-  }
+      // Check if the user is logged in
+      const user = auth.currentUser;
+      if (!user) {
+        console.log("User not logged in, redirecting to login.");
+        router.push({ name: "login" });
+        return;
+      }
 
-  // Initialize Stripe with your publishable key
-  const stripePromise = loadStripe("pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU");
+      // Log the priceId being sent
+      const priceIdToSend = "price_1Oo7gBIrFzdedmXMi51ZvYJ1";
+      console.log("Sending priceId to function:", priceIdToSend);
 
-  try {
-    // Create a Checkout Session with the server
-    const response = await fetch("/.netlify/functions/create-checkout-sessions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ priceId: "price_1Oo7gBIrFzdedmXMi51ZvYJ1" }),
-    });
+      // Initialize Stripe with your publishable key
+      const stripePromise = loadStripe("pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU");
 
-    const { sessionId } = await response.json();
-    if (!sessionId) {
-      throw new Error("Session ID is missing in the response");
+      try {
+        // Create a Checkout Session with the server
+        const fetchOptions = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ priceId: priceIdToSend }),
+        };
+        console.log("Fetch options:", fetchOptions);
+
+        const response = await fetch("/.netlify/functions/create-checkout-sessions", fetchOptions);
+        
+        // Log the response status and data
+        console.log("Response status:", response.status);
+        const responseData = await response.json();
+        console.log("Response data:", responseData);
+
+        if (!responseData.sessionId) {
+          throw new Error("Session ID is missing in the response");
+        }
+
+        const stripe = await stripePromise;
+        // Redirect to the Stripe Checkout
+        const { error } = await stripe.redirectToCheckout({
+          sessionId: responseData.sessionId
+        });
+
+        if (error) {
+          console.error("Stripe checkout error:", error.message);
+        }
+      } catch (error) {
+        console.error("Error during subscription process:", error);
+      }
     }
-
-    const stripe = await stripePromise;
-    // Redirect to the Stripe Checkout
-    const { error } = await stripe.redirectToCheckout({
-      sessionId
-    });
-
-    if (error) {
-      console.error("Stripe checkout error:", error.message);
-    }
-  } catch (error) {
-    console.error("Error during subscription:", error);
-  }
-}
   }
 
 };
