@@ -1,14 +1,16 @@
-// Require the Stripe library with your secret key
+// Require the Stripe library
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async function(event) {
   if (event.httpMethod !== 'POST') {
+    console.log('Request not POST, method not allowed');
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  try {
-    const { priceId } = JSON.parse(event.body);
+  const { priceId } = JSON.parse(event.body);
+  console.log('Received priceId:', priceId); // Log the received priceId
 
+  try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{
@@ -20,11 +22,14 @@ exports.handler = async function(event) {
       cancel_url: process.env.URL, 
     });
 
+    console.log('Session created with ID:', session.id); // Log the created session ID
+
     return {
       statusCode: 200,
       body: JSON.stringify({ sessionId: session.id }),
     };
   } catch (error) {
+    console.error('Error creating checkout session:', error); // Log the error
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
