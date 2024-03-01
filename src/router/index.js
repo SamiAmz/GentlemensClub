@@ -31,7 +31,7 @@ const router = createRouter({
 
     {
       path: "/Success",
-      name: Success,
+      name: "Success",
       component: Success,
       props: true
     },
