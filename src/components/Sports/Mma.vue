@@ -88,102 +88,48 @@ export default {
       window.scrollTo(0, 0);
     },
     async subscribe() {
-      console.log("User authenticated:", auth.currentUser != null);
-console.log("User UID:", auth.currentUser ? auth.currentUser.uid : "N/A");
-      console.log("subscribe button hit")
-      //Check si le user est connecter avant de permettre le checkout
-      const user = auth.currentUser;
-      if (!user) {
-        router.push({ name: "login" });
+  console.log("subscribe button hit");
 
-        return;
-      }
-      
+  // Check if the user is connected before allowing checkout
+  const user = auth.currentUser;
+  if (!user) {
+    router.push({ name: "login" });
+    return;
+  }
 
-      const stripePromise = loadStripe(
-        "pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU"
-      ); // Replace with your Stripe publishable key
+  // Initialize Stripe with your publishable key
+  const stripePromise = loadStripe("your_stripe_publishable_key");
 
-      try {
-        const response = await fetch(
-          "/.netlify/functions/create-checkout-sessions",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ priceId: "price_1Oo7gBIrFzdedmXMi51ZvYJ1" }),
-          }
-        );
+  try {
+    // Create a Checkout Session with the server
+    const response = await fetch("/.netlify/functions/create-checkout-sessions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ priceId: "your_price_id" }),
+    });
 
-        const { sessionId } = await response.json();
+    const { sessionId } = await response.json();
+    if (!sessionId) {
+      throw new Error("Session ID is missing in the response");
+    }
 
-        if (!sessionId) {
-          throw new Error("Session ID is missing in the response");
-        }
+    const stripe = await stripePromise;
+    // Redirect to the Stripe Checkout, then to the Success page on successful payment
+    const { error } = await stripe.redirectToCheckout({
+      sessionId,
+      successUrl: window.location.origin + '/success?session_id={CHECKOUT_SESSION_ID}',
+      cancelUrl: window.location.origin + '/cancel',
+    });
 
-        const stripe = await stripePromise;
-        const { error } = await stripe.redirectToCheckout({ sessionId });
-
-        if (error) {
-          console.error("Stripe checkout error:", error.message);
-          return;
-        }
-
-        // Retrieve payment details from Netlify Function
-        const paymentDetailsResponse = await fetch(
-          "/.netlify/functions/payment-details",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ sessionId }),
-          }
-        );
-
-        if (!paymentDetailsResponse.ok) {
-          throw new Error("Error retrieving payment details.");
-        }
-
-        const paymentDetails = await paymentDetailsResponse.json();
-        console.log("Payment Details:", paymentDetails);
-        console.log("Attempting to add subscription:", {
-          userId: user.uid,
-          sessionId: sessionId,
-          date_expiration: paymentDetails.expirationDate,
-          prix: paymentDetails.amount,
-          status: paymentDetails.status,
-          type: "Boxe",
-        });
-        console.log("Preparing to write document to Firestore with the following data:") 
-        // Update Firestore with the payment details
-        await db.collection("abonnement")
-          .add({
-            userId: user.uid,
-            sessionId: sessionId,
-            date_expiration: paymentDetails.expirationDate,
-            prix: paymentDetails.amount,
-            status: paymentDetails.status,
-            type: "Boxe",
-          })
-          .then((docRef) => {
-            console.log(
-              "Subscription document successfully added with ID:",
-              docRef.id
-            );
-          })
-          .catch((error) => {
-            console.error(
-              "Error adding subscription document to Firestore:",
-              error
-            );
-          });
-      } catch (error) {
-        console.error("Subscription error:", error);
-        // Handle other errors
-      }
-    },
+    if (error) {
+      console.error("Stripe checkout error:", error.message);
+    }
+  } catch (error) {
+    console.error("Error during subscription:", error);
+  }
+    }
   },
 };
 </script>
