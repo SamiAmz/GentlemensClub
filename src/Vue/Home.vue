@@ -23,7 +23,7 @@
             </div>
             <div class="buttons" id="moreBtn">
               <router-link
-                :to="{ name: 'Sports', params: { sportNom: 'mma' } }"
+                :to="{ name: 'Sports', params: { sportNom: 'Mma' } }"
               >
                 <button>S'ABONNER</button>
               </router-link>
@@ -50,7 +50,7 @@
             </div>
             <div class="buttons" id="moreBtn">
               <router-link
-                :to="{ name: 'Sports', params: { sportNom: 'wrestling' } }"
+                :to="{ name: 'Sports', params: { sportNom: 'Wrestling' } }"
               >
                 <button>S'ABONNER</button>
               </router-link>
@@ -77,7 +77,7 @@
             </div>
             <div class="buttons" id="moreBtn">
               <router-link
-                :to="{ name: 'Sports', params: { sportNom: 'box' } }"
+                :to="{ name: 'Sports', params: { sportNom: 'Box' } }"
               >
                 <button>S'ABONNER</button>
               </router-link>
@@ -89,21 +89,15 @@
       <div class="thumbnail">
         <div class="item">
           <img src="../assets/imageCaroussel/img1.jpg" />
-          <div class="content">
-            <div class="description">MMA</div>
-          </div>
+          <div class="content"></div>
         </div>
         <div class="item">
           <img src="../assets/imageCaroussel/img2.jpg" />
-          <div class="content">
-            <div class="description">WRESTLING</div>
-          </div>
+          <div class="content"></div>
         </div>
         <div class="item">
           <img src="../assets/imageCaroussel/img3.jpg" />
-          <div class="content">
-            <div class="description">BOXING</div>
-          </div>
+          <div class="content"></div>
         </div>
       </div>
       <!-- next prev -->
@@ -148,7 +142,7 @@
                 combat.
               </p>
               <router-link
-                :to="{ name: 'Mma' }"
+                :to="{ name: 'Sports', params: { sportNom: 'Mma' } }"
               >
                 <button>S'ABONNER</button>
               </router-link>
@@ -172,7 +166,7 @@
                 école de Wrestling, vous apprendrez l'art du grapling.
               </p>
               <router-link
-                :to="{ name: 'Wrestling' }"
+                :to="{ name: 'Sports', params: { sportNom: 'Wrestling' } }"
               >
                 <button>S'ABONNER</button>
               </router-link>
@@ -196,7 +190,7 @@
                 allez apprendre la Box
               </p>
               <router-link
-                :to="{ name: 'Box' }"
+                :to="{ name: 'Sports', params: { sportNom: 'Box' } }"
               >
                 <button>S'ABONNER</button>
               </router-link>
@@ -206,6 +200,7 @@
       </div>
     </div>
   </div>
+  <Chat />
 </template>
 
 <script>

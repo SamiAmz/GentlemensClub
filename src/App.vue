@@ -3,7 +3,6 @@
   <v-app>
     <v-main>
       <router-view />
-      <Chat />
     </v-main>
     <AppFooter />
   </v-app>

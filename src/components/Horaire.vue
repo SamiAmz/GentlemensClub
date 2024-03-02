@@ -8,29 +8,33 @@
 
       <!-- Dialog nouveau cours -->
       <v-dialog v-model="dialogNewEventVisible" width="80%">
-        <v-form v-model="form" @submit.prevent="onSubmit" v-slot:default="{ isActive }">
+        <v-form
+          v-model="form"
+          @submit.prevent="onSubmit"
+          v-slot:default="{ isActive }"
+        >
           <v-card title="Ajouter un nouveau cours">
             <div class="form-class">
               <div class="row">
-                  <p class="text">Nom du cours: </p>
-                  <v-text-field 
+                <p class="text">Nom du cours:</p>
+                <v-text-field
                   v-model="classData.title"
-                  :rules="[rules.required]" 
+                  :rules="[rules.required]"
                   label="Nom du cours"
                   clearable
-                  ></v-text-field>
+                ></v-text-field>
               </div>
               <div class="row">
-                  <p class="text">Description: </p>
-                  <v-text-field 
+                <p class="text">Description:</p>
+                <v-text-field
                   v-model="classData.description"
-                  :rules="[rules.required]" 
+                  :rules="[rules.required]"
                   label="Description"
                   clearable
-                  ></v-text-field>
+                ></v-text-field>
               </div>
               <div class="row">
-                <p class="text">Type de cours: </p>
+                <p class="text">Type de cours:</p>
                 <v-select
                   v-model="classData.type"
                   :rules="[rules.required]"
@@ -43,56 +47,96 @@
               <v-menu v-model="isMenuOpen" :close-on-content-click="false">
                 <template v-slot:activator="{ props }">
                   <div class="row">
-                  <p class="text">Date du cours: </p>
-                  <v-text-field
-                    :rules="[rules.required]"
-                    label="Date du cours"
-                    :model-value="formattedDate"
-                    readonly
-                    v-bind="props"
-                  ></v-text-field>
-                </div>
+                    <p class="text">Date du cours:</p>
+                    <v-text-field
+                      :rules="[rules.required]"
+                      label="Date du cours"
+                      :model-value="formattedDate"
+                      readonly
+                      v-bind="props"
+                    ></v-text-field>
+                  </div>
                 </template>
-                <v-date-picker v-model="selectedDate" @click="formatDate(selectedDate)">
+                <v-date-picker
+                  v-model="selectedDate"
+                  @click="formatDate(selectedDate)"
+                >
                 </v-date-picker>
               </v-menu>
 
               <!-- Time picker start -->
               <div class="row">
-                <p class="text">Heure de début du cours: </p>
-                <v-select class="time-picker"
-                v-model="classData.startHour"
-                :rules="[rules.required]"
-                label="Heure"
-                :items="['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']"
-              ></v-select>
-              <v-select class="time-picker"
-                v-model="classData.startMinutes"
-                :rules="[rules.required]"
-                label="Minute"
-                :items="['00', '15', '30', '45']"
-              ></v-select>
+                <p class="text">Heure de début du cours:</p>
+                <v-select
+                  class="time-picker"
+                  v-model="classData.startHour"
+                  :rules="[rules.required]"
+                  label="Heure"
+                  :items="[
+                    '08',
+                    '09',
+                    '10',
+                    '11',
+                    '12',
+                    '13',
+                    '14',
+                    '15',
+                    '16',
+                    '17',
+                    '18',
+                    '19',
+                    '20',
+                    '21',
+                    '22',
+                  ]"
+                ></v-select>
+                <v-select
+                  class="time-picker"
+                  v-model="classData.startMinutes"
+                  :rules="[rules.required]"
+                  label="Minute"
+                  :items="['00', '15', '30', '45']"
+                ></v-select>
               </div>
 
               <!-- Time picker end -->
               <div class="row">
-                <p class="text-hour">Heure de fin du cours: </p>
-                <v-select class="time-picker"
-                v-model="classData.endHour"
-                :rules="[rules.required]"
-                label="Heure"
-                :items="['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']"
-              ></v-select>
-              <v-select class="time-picker"
-                v-model="classData.endMinutes"
-                :rules="[rules.required]"
-                label="Minute"
-                :items="['00', '15', '30', '45']"
-              ></v-select>
+                <p class="text-hour">Heure de fin du cours:</p>
+                <v-select
+                  class="time-picker"
+                  v-model="classData.endHour"
+                  :rules="[rules.required]"
+                  label="Heure"
+                  :items="[
+                    '08',
+                    '09',
+                    '10',
+                    '11',
+                    '12',
+                    '13',
+                    '14',
+                    '15',
+                    '16',
+                    '17',
+                    '18',
+                    '19',
+                    '20',
+                    '21',
+                    '22',
+                  ]"
+                ></v-select>
+                <v-select
+                  class="time-picker"
+                  v-model="classData.endMinutes"
+                  :rules="[rules.required]"
+                  label="Minute"
+                  :items="['00', '15', '30', '45']"
+                ></v-select>
               </div>
             </div>
             <v-card-actions>
-              <v-btn class="button-cancel"
+              <v-btn
+                class="button-cancel"
                 text="Annuler"
                 @click="dialogNewEventVisible = false"
               ></v-btn>
@@ -103,7 +147,7 @@
                 :loading="loading"
                 text="Ajouter"
                 @click="addNewClass()"
-              ></v-btn> 
+              ></v-btn>
             </v-card-actions>
           </v-card>
         </v-form>
@@ -120,7 +164,6 @@
             </v-card-text>
 
             <v-card-actions>
-              
               <v-btn text="S'inscrire" @click="registerToClass()"></v-btn>
               <v-btn text="Modifier" @click="updateClass()"></v-btn>
               <v-spacer></v-spacer>
@@ -137,6 +180,7 @@
       </FullCalendar>
     </div>
   </div>
+  <Chat />
 </template>
 
 <script setup>
@@ -155,8 +199,8 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { INITIAL_EVENTS } from "./event-utils";
 import frLocale from "@fullcalendar/core/locales/fr";
 
-import { collection, addDoc } from "firebase/firestore"; 
-import { db } from '@/firebase/init';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "@/firebase/init";
 
 export default defineComponent({
   components: {
@@ -166,7 +210,7 @@ export default defineComponent({
   data() {
     return {
       rules: {
-        required: value => !!value || 'Champ requis', // Required field
+        required: (value) => !!value || "Champ requis", // Required field
       },
 
       // Firebase document class data
@@ -235,9 +279,9 @@ export default defineComponent({
           allDay: selectInfo.allDay
         })
         */
-    
+
     onSubmit() {
-      // Does absolutely nothing  
+      // Does absolutely nothing
     },
 
     async addNewClass() {
@@ -249,12 +293,17 @@ export default defineComponent({
         const docRef = await addDoc(collection(db, "class"), {
           title: this.classData.title,
           description: this.classData.description,
-          startHour: this.classData.startHour + ":" + this.classData.startMinutes + ":00",  
-          endHour: this.classData.endHour + ":" + this.classData.endMinutes + ":00",
+          startHour:
+            this.classData.startHour +
+            ":" +
+            this.classData.startMinutes +
+            ":00",
+          endHour:
+            this.classData.endHour + ":" + this.classData.endMinutes + ":00",
           date: this.formattedDate,
           type: this.classData.type,
         });
-        
+
         console.log("Document written with ID: ", docRef.id);
         setTimeout(() => (this.dialogNewEventVisible = false), 1000);
       } catch (error) {
@@ -278,9 +327,9 @@ export default defineComponent({
     formatDate(selectedDate) {
       const dateObj = new Date(selectedDate);
       const year = dateObj.getFullYear();
-      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-      const day = String(dateObj.getDate()).padStart(2, '0');
-      
+      const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+      const day = String(dateObj.getDate()).padStart(2, "0");
+
       const formattedDate = `${year}-${month}-${day}`;
       this.formattedDate = formattedDate;
       console.log(formattedDate);
@@ -404,5 +453,4 @@ b {
   padding-right: 3.25%;
   align-self: center;
 }
-
 </style>
