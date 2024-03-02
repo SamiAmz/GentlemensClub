@@ -11,7 +11,6 @@
             <div class="title">COMBAT ULTIME</div>
             <div class="topic">MMA</div>
             <div class="des">
-              <!-- lorem 50 -->
               Découvrez le MMA dans notre gym : un mélange explosif de
               techniques de <br />combat alliant force, agilité et stratégie.
               Nos cours, encadrés par des<br />
@@ -204,6 +203,7 @@
 </template>
 
 <script>
+
 import "./styleCarroussel.css";
 import "./app.js";
 import "https://kit.fontawesome.com/95a02bd20d.js";

@@ -2,7 +2,7 @@
   <div>
     <component :is="selectedSportComponent" />
   </div>
-  <Chat />>
+  <Chat />
 </template>
 
 <script>

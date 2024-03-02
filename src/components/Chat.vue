@@ -90,11 +90,11 @@ export default {
     },
 
     formParams: {
-        from_name: '',
-        from_email: '',
-        phone_number: '',
-        message: '',
-      },
+      from_name: "",
+      from_email: "",
+      phone_number: "",
+      message: "",
+    },
   }),
   methods: {
     submitQuestion() {
