@@ -10,20 +10,28 @@
 import { auth, db } from "@/firebase/init";
 import { onMounted, ref } from "vue";
 import { collection, addDoc } from "firebase/firestore"; 
+import { onAuthStateChanged } from "firebase/auth";
+
 
 export default {
   name: "Success",
   setup() {
     const sessionId = ref(null);
 
-    onMounted(async () => {
-  // Extract the session ID from the URL query parameters
-  const query = new URLSearchParams(window.location.search);
-  sessionId.value = query.get("session_id");
-
-  if (sessionId.value) {
-    await updateDatabaseWithSessionInfo(sessionId.value); // Corrected to pass sessionId.value
-  }
+    onMounted(() => {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      // User is signed in, now you can safely use auth.currentUser
+      const query = new URLSearchParams(window.location.search);
+      const sessionID = query.get("session_id");
+      if (sessionID) {
+        await updateDatabaseWithSessionInfo(sessionID);
+      }
+    } else {
+      // User is signed out
+      console.error("No authenticated user found.");
+    }
+  });
 });
 
     async function updateDatabaseWithSessionInfo(sessionId) {
