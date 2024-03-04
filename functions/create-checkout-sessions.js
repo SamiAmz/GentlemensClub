@@ -16,7 +16,7 @@ exports.handler = async function(event) {
       const session = await stripe.checkout.sessions.create({
           payment_method_types: ['card'],
           line_items: [{
-              price:'price_1Oo7gBIrFzdedmXMi51ZvYJ1',
+              price:priceId,
               quantity: 1,
           }],
           mode: 'subscription',
@@ -29,6 +29,8 @@ exports.handler = async function(event) {
           body: JSON.stringify({ sessionId: session.id }),
       };
   } catch (error) {
+    console.error('Stripe error:', error); // Log the full error
+
       return {
           statusCode: 500,
           body: JSON.stringify({ error: error.message }),
