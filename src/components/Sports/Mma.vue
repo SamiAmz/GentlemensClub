@@ -87,59 +87,13 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    async subscribe() {
-      console.log("Subscribe button clicked.");
 
-      // Check if the user is logged in
-      const user = auth.currentUser;
-      if (!user) {
-        console.log("User not logged in, redirecting to login.");
-        router.push({ name: "login" });
-        return;
-      }
-
-      // Log the priceId being sent
-      const priceIdToSend = "price_1Oo7gBIrFzdedmXMi51ZvYJ1";
-      console.log("Sending priceId to function:", priceIdToSend);
-
-      // Initialize Stripe with your publishable key
-      const stripePromise = loadStripe("pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU");
-
-      try {
-        // Create a Checkout Session with the server
-        const fetchOptions = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ priceId: priceIdToSend }),
-        };
-        console.log("Fetch options:", fetchOptions);
-
-        const response = await fetch("/.netlify/functions/create-checkout-sessions", fetchOptions);
-        
-        // Log the response status and data
-        console.log("Response status:", response.status);
-        const responseData = await response.json();
-        console.log("Response data:", responseData);
-
-        if (!responseData.sessionId) {
-          throw new Error("Session ID is missing in the response");
-        }
-
-        const stripe = await stripePromise;
-        // Redirect to the Stripe Checkout
-        const { error } = await stripe.redirectToCheckout({
-          sessionId: responseData.sessionId
-        });
-
-        if (error) {
-          console.error("Stripe checkout error:", error.message);
-        }
-      } catch (error) {
-        console.error("Error during subscription process:", error);
-      }
-    }
+    subscribe() {
+      const priceId = "price_1Oo7ffIrFzdedmXMbqus0Cxr"; // Replace with your actual price ID for this course
+      const courseType = "Boxe"; // Use "boxe" or "wrestling" for other components
+      subscribeToCourse(priceId, courseType);
+      },
+ 
   }
 
 };

@@ -74,6 +74,8 @@
   </template>
   
   <script>
+  import { subscribeToCourse } from '../../Sports/subscribe.js';
+
   export default {
     import: "https://unicons.iconscout.com/release/v3.0.6/css/line.css",
     name: "Mma",
@@ -84,7 +86,11 @@
       scrollToTop() {
         window.scrollTo(0, 0);
       },
-      subscribe() {},
+      subscribe() {
+      const priceId = "price_1Oo7ffIrFzdedmXMbqus0Cxr"; // Replace with your actual price ID for this course
+      const courseType = "Boxe"; // Use "boxe" or "wrestling" for other components
+      subscribeToCourse(priceId, courseType);
+      },
     },
   };
   </script>
