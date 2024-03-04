@@ -26,34 +26,21 @@ export default {
     });
 
     async function updateDatabaseWithSessionInfo() {
-      try {
-        // Retrieve the session details from your backend or Stripe
-        const sessionDetails = await getSessionDetails(sessionId.value);
-
-        const { userId, expirationDate, amount, status, type } = sessionDetails;
-
-        // Ensure the user is logged in
-        const user = auth.currentUser;
-        if (!user) {
-          console.error("User not logged in.");
-          return;
-        }
-
-        // Add the subscription details to Firestore
-        await db.collection("abonnement").add({
-          userId: user.uid,
-          sessionId: sessionId.value,
-          date_expiration: expirationDate,
-          prix: amount,
-          status: status,
-          type: type,
-        });
-
-        console.log("Firestore document added successfully.");
-      } catch (error) {
-        console.error("Error updating the database: ", error);
-      }
-    }
+  try {
+    const docRef = await addDoc(collection(db, "abonnement"), {
+      // your document data here
+      userId: user.uid,
+      sessionId: sessionId.value,
+      date_expiration: expirationDate,
+      prix: amount,
+      status: status,
+      type: type,
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
 
     async function getSessionDetails(sessionId) {
   try {
