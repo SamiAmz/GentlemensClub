@@ -86,8 +86,8 @@ export default {
     },
 
     subscribe() {
-      const priceId = "price_1Oo7ffIrFzdedmXMbqus0Cxr"; // Replace with your actual price ID for this course
-      const courseType = "Boxe"; // Use "boxe" or "wrestling" for other components
+      const priceId = "price_1Oo7gBIrFzdedmXMi51ZvYJ1"; // Replace with your actual price ID for this course
+      const courseType = "MMA"; // Use "boxe" or "wrestling" for other components
       subscribeToCourse(priceId, courseType);
       },
  
