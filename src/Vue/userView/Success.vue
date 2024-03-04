@@ -57,7 +57,7 @@ export default {
   }
 }
 
-    async function getSessionDetails(sessionId) {
+async function getSessionDetails(sessionId) {
   try {
     const response = await fetch('/.netlify/functions/payment-details', {
       method: 'POST',
@@ -66,9 +66,26 @@ export default {
       },
       body: JSON.stringify({ sessionId: sessionId }),
     });
+
     if (!response.ok) {
       throw new Error(`Failed to fetch session details: ${response.statusText}`);
     }
+    
+    const paymentDetails = await response.json();
+    console.log(paymentDetails);
+   
+    return {
+      expirationDate: paymentDetails.expirationDate,
+      amount: paymentDetails.amount,
+      status: paymentDetails.status,
+      type: paymentDetails.type // Assuming the type is returned by the API
+    };
+  } catch (error) {
+    console.error("Error fetching session details:", error);
+    throw error; // Ensuring the calling function knows an error occurred
+  }
+}
+
     
     const paymentDetails = await response.json();
     console.log(paymentDetails)
