@@ -28,8 +28,11 @@ exports.handler = async function(event) {
     return {
       statusCode: 200,
       body: JSON.stringify({
-       sessionId: session.id,
-        // Add any other necessary fields here
+        sessionId: session.id,
+        expirationDate: expirationDate, // Ensure this value is correctly determined above
+        amount: amount,
+        status: status,
+        type: courseType, // Include courseType in the response
       }),
     };
   } catch (error) {
