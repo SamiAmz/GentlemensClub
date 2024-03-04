@@ -10,10 +10,10 @@ export async function subscribeToCourse(priceId, courseType) {
 
   console.log("Initiating subscription for:", courseType);
 
-  const stripe = await loadStripe("your-publishable-stripe-key");
+  const stripe = await loadStripe("pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU");
 
   try {
-    const response = await fetch("/.netlify/functions/create-checkout-session", {
+    const response = await fetch("/.netlify/functions/create-checkout-sessions", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ priceId: priceId, courseType: courseType }), // Pass courseType here
