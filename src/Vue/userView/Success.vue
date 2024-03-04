@@ -9,6 +9,7 @@
 <script>
 import { auth, db } from "@/firebase/init";
 import { onMounted, ref } from "vue";
+import { collection, addDoc } from "firebase/firestore"; 
 
 export default {
   name: "Success",
