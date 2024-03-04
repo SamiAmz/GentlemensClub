@@ -17,14 +17,14 @@ export default {
     const sessionId = ref(null);
 
     onMounted(async () => {
-      // Extract the session ID from the URL query parameters
-      const query = new URLSearchParams(window.location.search);
-      sessionId.value = query.get("session_id");
+  // Extract the session ID from the URL query parameters
+  const query = new URLSearchParams(window.location.search);
+  sessionId.value = query.get("session_id");
 
-      if (sessionId.value) {
-        await updateDatabaseWithSessionInfo();
-      }
-    });
+  if (sessionId.value) {
+    await updateDatabaseWithSessionInfo(sessionId.value); // Corrected to pass sessionId.value
+  }
+});
 
     async function updateDatabaseWithSessionInfo(sessionId) {
   // Make sure there's an authenticated user
