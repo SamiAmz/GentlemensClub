@@ -9,6 +9,7 @@ exports.handler = async function(event) {
       // Extract the base URL from the Referer header
       const refererUrl = new URL(event.headers.referer);
       const baseUrl = `${refererUrl.protocol}//${refererUrl.host}`;
+      console.log("TESTESTESTESTESTESTESTSETESTESTEST")
       console.log('Event body:', event.body);
 
       const { priceId } = JSON.parse(event.body);
