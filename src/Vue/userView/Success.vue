@@ -21,37 +21,31 @@ export default {
     onMounted(() => {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      // User is signed in, now you can safely use auth.currentUser
       const query = new URLSearchParams(window.location.search);
       const sessionID = query.get("session_id");
       if (sessionID) {
         await updateDatabaseWithSessionInfo(sessionID);
       }
     } else {
-      // User is signed out
       console.error("No authenticated user found.");
     }
   });
 });
 
     async function updateDatabaseWithSessionInfo(sessionId) {
-  // Make sure there's an authenticated user
   if (!auth.currentUser) {
     console.error("No authenticated user found.");
     return;
   }
 
-  // Use the UID of the authenticated user
   const userId = auth.currentUser.uid;
 
-  // Retrieve the session details from your backend
   const sessionDetails = await getSessionDetails(sessionId);
 
   try {
     const docRef = await addDoc(collection(db, "abonnement"), {
       userId: userId,
       sessionId: sessionId,
-      // Ensure the rest of these details are correctly obtained from sessionDetails
       date_expiration: sessionDetails.expirationDate,
       prix: sessionDetails.amount,
       status: sessionDetails.status,
@@ -65,7 +59,6 @@ export default {
 
     async function getSessionDetails(sessionId) {
   try {
-    // This fetches from the Netlify function 'payment-details' you provided
     const response = await fetch('/.netlify/functions/payment-details', {
       method: 'POST',
       headers: {
@@ -79,15 +72,13 @@ export default {
     
     const paymentDetails = await response.json();
     console.log(paymentDetails)
-    // Here you should return an object that matches the structure expected in your component
-    // Note: Assuming the structure includes userId, expirationDate, amount, status, and type
-    // Adjust accordingly if your application requires different/more fields
+   
     return {
-      userId: auth.currentUser.uid, // Make sure this matches how you're associating users with sessions
+      userId: auth.currentUser.uid, 
       expirationDate: paymentDetails.expirationDate,
       amount: paymentDetails.amount,
       status: paymentDetails.status,
-      type: "Boxe" // Assuming this is static or derived from somewhere else in your app
+      type: paymentDetails.type // Use the type returned by the API
     };
   } catch (error) {
     console.error("Error fetching session details:", error);

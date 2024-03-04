@@ -1,39 +1,36 @@
-// subscriptionService.js
 import { loadStripe } from '@stripe/stripe-js';
 import { auth } from "@/firebase/init";
 
-// This function initiates the subscription process
 export async function subscribeToCourse(priceId, courseType) {
-  // Check if the user is logged in
   const user = auth.currentUser;
   if (!user) {
     console.log("User not logged in, redirecting to login.");
-    // Redirect to login or show a message prompting to log in
     return;
   }
 
   console.log("Initiating subscription for:", courseType);
 
-  // Initialize Stripe
-  const stripe = await loadStripe("pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU");
+  const stripe = await loadStripe("your-publishable-stripe-key");
 
-  // Fetch the checkout session
-  const response = await fetch("/.netlify/functions/create-checkout-sessions", {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ priceId: priceId }),
-  });
-
-  const session = await response.json();
-  if (response.ok && session.sessionId) {
-    // Redirect to checkout
-    const { error } = await stripe.redirectToCheckout({
-      sessionId: session.sessionId
+  try {
+    const response = await fetch("/.netlify/functions/create-checkout-session", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ priceId: priceId, courseType: courseType }), // Pass courseType here
     });
-    if (error) {
-      console.error("Stripe checkout error:", error.message);
+
+    const session = await response.json();
+    if (response.ok && session.sessionId) {
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: session.sessionId
+      });
+      if (error) {
+        console.error("Stripe checkout error:", error.message);
+      }
+    } else {
+      console.error("Failed to initiate Stripe checkout:", session.error);
     }
-  } else {
-    console.error("Failed to initiate Stripe checkout:", session.error);
+  } catch (error) {
+    console.error("Error during subscription process:", error);
   }
 }

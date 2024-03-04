@@ -7,44 +7,35 @@ exports.handler = async function(event) {
   }
 
   try {
-    // Extract the session ID from the request body
-    const { sessionId } = JSON.parse(event.body);
-    console.log('Received sessionId:', sessionId); // Log the received sessionId for debugging
+    const { sessionId, courseType } = JSON.parse(event.body); // Extract courseType from the request body
 
-    // Retrieve the session details from Stripe, expanding the subscription
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
       expand: ['subscription'],
     });
 
-    // Check if the session has a subscription object and get the current_period_end
     let expirationDate;
     if (session.subscription) {
       expirationDate = session.subscription.current_period_end;
     } else {
-      // Handle cases where there is no subscription object linked to the session
       console.error('No subscription found for this session');
-      expirationDate = null; // or set a default value, or handle as needed
+      expirationDate = null;
     }
 
-    // Extract other necessary details from the session or subscription
-    const amount = session.amount_total; // The total amount of the session
-    const status = session.payment_status; // The payment status of the session
-    // ... add logic to determine the 'type' or other properties if needed
+    const amount = session.amount_total;
+    const status = session.payment_status;
 
-    // Return the necessary session details to the client
     return {
       statusCode: 200,
       body: JSON.stringify({
         sessionId: session.id,
-        expirationDate: expirationDate, // Unix timestamp of the period end
+        expirationDate: expirationDate,
         amount: amount,
         status: status,
-        type: "Boxe", // Assuming this is static or derived from somewhere else in your app
-        // ... include any other fields you need to return
+        type: courseType, // Set the subscription type to the received courseType
       }),
     };
   } catch (error) {
-    console.error('Error retrieving checkout session:', error); // Log the error for debugging
+    console.error('Error retrieving checkout session:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
