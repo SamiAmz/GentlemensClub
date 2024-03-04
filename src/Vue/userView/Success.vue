@@ -26,20 +26,32 @@ export default {
       }
     });
 
-    async function updateDatabaseWithSessionInfo() {
+    async function updateDatabaseWithSessionInfo(sessionId) {
+  // Make sure there's an authenticated user
+  if (!auth.currentUser) {
+    console.error("No authenticated user found.");
+    return;
+  }
+
+  // Use the UID of the authenticated user
+  const userId = auth.currentUser.uid;
+
+  // Retrieve the session details from your backend
+  const sessionDetails = await getSessionDetails(sessionId);
+
   try {
     const docRef = await addDoc(collection(db, "abonnement"), {
-      // your document data here
-      userId: user.uid,
-      sessionId: sessionId.value,
-      date_expiration: expirationDate,
-      prix: amount,
-      status: status,
-      type: type,
+      userId: userId,
+      sessionId: sessionId,
+      // Ensure the rest of these details are correctly obtained from sessionDetails
+      date_expiration: sessionDetails.expirationDate,
+      prix: sessionDetails.amount,
+      status: sessionDetails.status,
+      type: sessionDetails.type,
     });
-    console.log("Document written with ID: ", docRef.id);
+    console.log("Firestore document added successfully. Document ID: ", docRef.id);
   } catch (e) {
-    console.error("Error adding document: ", e);
+    console.error("Error adding document to Firestore: ", e);
   }
 }
 
