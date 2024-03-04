@@ -15,7 +15,7 @@ export async function subscribeToCourse(priceId, courseType) {
   console.log("Initiating subscription for:", courseType);
 
   // Initialize Stripe
-  const stripe = await loadStripe("your-publishable-stripe-key");
+  const stripe = await loadStripe("pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU");
 
   // Fetch the checkout session
   const response = await fetch("/.netlify/functions/create-checkout-sessions", {
