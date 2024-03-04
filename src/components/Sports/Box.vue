@@ -74,7 +74,7 @@
   </template>
   
   <script>
-  import { subscribeToCourse } from '../../Sports/subscribe.js';
+  import { subscribeToCourse } from './subscribe.js';
 
   export default {
     import: "https://unicons.iconscout.com/release/v3.0.6/css/line.css",

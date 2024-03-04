@@ -74,10 +74,7 @@
 </template>
 
 <script>
-import { auth, db } from "@/firebase/init"; // Assuming db is exported from here
-import router from "@/router";
-import { loadStripe } from "@stripe/stripe-js"; // Ensure you have this installed and imported
-
+import { subscribeToCourse } from './subscribe.js';
 export default {
   name: "Mma",
   mounted() {
