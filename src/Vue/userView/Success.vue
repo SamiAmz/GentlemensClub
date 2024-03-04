@@ -19,91 +19,74 @@ export default {
     const sessionId = ref(null);
 
     onMounted(() => {
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const query = new URLSearchParams(window.location.search);
-      const sessionID = query.get("session_id");
-      if (sessionID) {
-        await updateDatabaseWithSessionInfo(sessionID);
-      }
-    } else {
-      console.error("No authenticated user found.");
-    }
-  });
-});
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const query = new URLSearchParams(window.location.search);
+          const sessionID = query.get("session_id");
+          if (sessionID) {
+            await updateDatabaseWithSessionInfo(sessionID);
+          }
+        } else {
+          console.error("No authenticated user found.");
+        }
+      });
+    });
 
     async function updateDatabaseWithSessionInfo(sessionId) {
-  if (!auth.currentUser) {
-    console.error("No authenticated user found.");
-    return;
-  }
+      if (!auth.currentUser) {
+        console.error("No authenticated user found.");
+        return;
+      }
 
-  const userId = auth.currentUser.uid;
+      const userId = auth.currentUser.uid;
 
-  const sessionDetails = await getSessionDetails(sessionId);
-
-  try {
-    const docRef = await addDoc(collection(db, "abonnement"), {
-      userId: userId,
-      sessionId: sessionId,
-      date_expiration: sessionDetails.expirationDate,
-      prix: sessionDetails.amount,
-      status: sessionDetails.status,
-      type: sessionDetails.type,
-    });
-    console.log("Firestore document added successfully. Document ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document to Firestore: ", e);
-  }
-}
-
-async function getSessionDetails(sessionId) {
-  try {
-    const response = await fetch('/.netlify/functions/payment-details', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ sessionId: sessionId }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch session details: ${response.statusText}`);
+      try {
+        const sessionDetails = await getSessionDetails(sessionId);
+        const docRef = await addDoc(collection(db, "abonnement"), {
+          userId: userId,
+          sessionId: sessionId,
+          date_expiration: sessionDetails.expirationDate,
+          prix: sessionDetails.amount,
+          status: sessionDetails.status,
+          type: sessionDetails.type,
+        });
+        console.log("Firestore document added successfully. Document ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document to Firestore: ", e);
+      }
     }
-    
-    const paymentDetails = await response.json();
-    console.log(paymentDetails);
-   
-    return {
-      expirationDate: paymentDetails.expirationDate,
-      amount: paymentDetails.amount,
-      status: paymentDetails.status,
-      type: paymentDetails.type // Assuming the type is returned by the API
-    };
-  } catch (error) {
-    console.error("Error fetching session details:", error);
-    throw error; // Ensuring the calling function knows an error occurred
-  }
-}
 
-    
-    const paymentDetails = await response.json();
-    console.log(paymentDetails)
-   
-    return {
-      userId: auth.currentUser.uid, 
-      expirationDate: paymentDetails.expirationDate,
-      amount: paymentDetails.amount,
-      status: paymentDetails.status,
-      type: paymentDetails.type // Use the type returned by the API
-    };
-  } catch (error) {
-    console.error("Error fetching session details:", error);
-    throw error; // Ensuring the calling function knows an error occurred
-  }
-}
-  }
+    async function getSessionDetails(sessionId) {
+      try {
+        const response = await fetch('/.netlify/functions/payment-details', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ sessionId: sessionId }),
+        });
+        if (!response.ok) {
+          throw new Error(`Failed to fetch session details: ${response.statusText}`);
+        }
+        
+        const paymentDetails = await response.json();
+        console.log(paymentDetails)
+       
+        return {
+          userId: auth.currentUser.uid, 
+          expirationDate: paymentDetails.expirationDate,
+          amount: paymentDetails.amount,
+          status: paymentDetails.status,
+          type: paymentDetails.type // Use the type returned by the API
+        };
+      } catch (error) {
+        console.error("Error fetching session details:", error);
+        throw error; // Ensuring the calling function knows an error occurred
+      }
+    }
 
+    return { sessionId };
+  }
 };
 </script>
 
