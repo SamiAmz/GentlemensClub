@@ -76,8 +76,9 @@ export default {
     if (!response.ok) {
       throw new Error(`Failed to fetch session details: ${response.statusText}`);
     }
+    
     const paymentDetails = await response.json();
-
+    console.log(paymentDetails)
     // Here you should return an object that matches the structure expected in your component
     // Note: Assuming the structure includes userId, expirationDate, amount, status, and type
     // Adjust accordingly if your application requires different/more fields
