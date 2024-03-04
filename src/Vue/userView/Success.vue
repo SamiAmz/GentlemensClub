@@ -86,23 +86,8 @@ async function getSessionDetails(sessionId) {
   }
 }
 
-    
-    const paymentDetails = await response.json();
-    console.log(paymentDetails)
-   
-    return {
-      userId: auth.currentUser.uid, 
-      expirationDate: paymentDetails.expirationDate,
-      amount: paymentDetails.amount,
-      status: paymentDetails.status,
-      type: paymentDetails.type // Use the type returned by the API
-    };
-  } catch (error) {
-    console.error("Error fetching session details:", error);
-    throw error; // Ensuring the calling function knows an error occurred
-  }
+  
 }
-  }
 
 };
 </script>
