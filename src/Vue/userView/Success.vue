@@ -65,6 +65,8 @@ export default {
 }
 
 async function getSessionDetails(sessionId) {
+  console.log("Session Details:", sessionDetails);  // Make sure 'type' is included here and not undefined
+
   try {
     const response = await fetch('/.netlify/functions/payment-details', {
       method: 'POST',
@@ -85,7 +87,7 @@ async function getSessionDetails(sessionId) {
       expirationDate: paymentDetails.expirationDate,
       amount: paymentDetails.amount,
       status: paymentDetails.status,
-      type: paymentDetails.type // Assuming the type is returned by the API
+      type: paymentDetails.courseType // Assuming the type is returned by the API
     };
   } catch (error) {
     console.error("Error fetching session details:", error);
