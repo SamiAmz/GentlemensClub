@@ -16,9 +16,10 @@ export async function subscribeToCourse(priceId, courseType) {
     const response = await fetch("/.netlify/functions/create-checkout-sessions", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ priceId: priceId, courseType: courseType }), // Pass courseType here
+      body: JSON.stringify({ priceId: priceId, courseType: "boxe" }), // Pass courseType here
     });
 
+    
     const session = await response.json();
     if (response.ok && session.sessionId) {
       const { error } = await stripe.redirectToCheckout({
