@@ -32,7 +32,7 @@ exports.handler = async function(event) {
         expirationDate: expirationDate, // Ensure this value is correctly determined above
         amount: amount,
         status: status,
-        type: courseType, // Include courseType in the response
+        courseType: courseType, // Include courseType in the response
       }),
     };
   } catch (error) {
