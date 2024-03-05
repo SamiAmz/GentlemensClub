@@ -17,22 +17,36 @@ export default {
   setup() {
     const sessionId = ref(null);
 
-    onMounted(() => {
-      onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          const query = new URLSearchParams(window.location.search);
-          const sessionID = query.get("session_id");
-          const courseType = query.get("course_type"); // Extract courseType from URL
-          if (sessionID) {
-            await updateDatabaseWithSessionInfo(sessionID, courseType);
-          }
-        } else {
-          console.error("No authenticated user found.");
-        }
-      });
-    });
+    async function getSessionDetails(sessionId, courseType) {
+      try {
+        const response = await fetch('/.netlify/functions/payment-details', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ sessionId: sessionId, courseType: courseType }), // Include courseType in the request body
+        });
 
-    async function updateDatabaseWithSessionInfo(sessionId, courseType) { // Make sure to accept courseType as a parameter
+        if (!response.ok) {
+          throw new Error(`Failed to fetch session details: ${response.statusText}`);
+        }
+
+        const paymentDetails = await response.json();
+        console.log(paymentDetails);
+
+        return {
+          expirationDate: paymentDetails.expirationDate,
+          amount: paymentDetails.amount,
+          status: paymentDetails.status,
+          courseType: paymentDetails.courseType,
+        };
+      } catch (error) {
+        console.error("Error fetching session details:", error);
+        throw error;
+      }
+    }
+
+    async function updateDatabaseWithSessionInfo(sessionId, courseType) {
       if (!auth.currentUser) {
         console.error("No authenticated user found.");
         return;
@@ -40,7 +54,6 @@ export default {
 
       const userId = auth.currentUser.uid;
 
-      // Assume getSessionDetails can now accept and handle courseType
       const sessionDetails = await getSessionDetails(sessionId, courseType);
       console.log({
         userId: userId,
@@ -58,7 +71,7 @@ export default {
           date_expiration: sessionDetails.expirationDate,
           prix: sessionDetails.amount,
           status: sessionDetails.status,
-          courseType: courseType, // Use the extracted courseType
+          courseType: courseType,
         });
         console.log("Firestore document added successfully. Document ID: ", docRef.id);
       } catch (e) {
@@ -66,14 +79,23 @@ export default {
       }
     }
 
-    // Adjust getSessionDetails if necessary to handle courseType
-    async function getSessionDetails(sessionId, courseType) {
-      // Function implementation
-    }
+    onMounted(() => {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const query = new URLSearchParams(window.location.search);
+          const sessionID = query.get("session_id");
+          const courseType = query.get("course_type"); // Extract courseType from URL
+          if (sessionID) {
+            await updateDatabaseWithSessionInfo(sessionID, courseType);
+          }
+        } else {
+          console.error("No authenticated user found.");
+        }
+      });
+    });
   }
 };
 </script>
-
 
 <style scoped>
 .success-page {
