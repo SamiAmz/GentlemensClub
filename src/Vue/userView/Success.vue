@@ -47,7 +47,7 @@ export default {
   date_expiration: sessionDetails.expirationDate,
   prix: sessionDetails.amount,
   status: sessionDetails.status,
-  type: sessionDetails.type,
+  courseType: sessionDetails.courseType,
 });
   try {
     const docRef = await addDoc(collection(db, "abonnement"), {
@@ -56,7 +56,7 @@ export default {
       date_expiration: sessionDetails.expirationDate,
       prix: sessionDetails.amount,
       status: sessionDetails.status,
-      type: sessionDetails.type,
+      courseType: sessionDetails.courseType,
     });
     console.log("Firestore document added successfully. Document ID: ", docRef.id);
   } catch (e) {
