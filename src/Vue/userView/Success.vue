@@ -65,7 +65,6 @@ export default {
 }
 
 async function getSessionDetails(sessionId) {
-  console.log("Session Details:", sessionDetails);  // Make sure 'type' is included here and not undefined
 
   try {
     const response = await fetch('/.netlify/functions/payment-details', {
