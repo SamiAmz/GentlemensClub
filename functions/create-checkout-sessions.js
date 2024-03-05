@@ -26,9 +26,10 @@ exports.handler = async function(event) {
           quantity: 1,
         }],
         mode: 'subscription',
-        success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&course_type=${courseType}`, // Append courseType here
         cancel_url: `${baseUrl}/cancel`,
-      });
+    });
+    
   
       return {
         statusCode: 200,

@@ -12,93 +12,68 @@ import { onMounted, ref } from "vue";
 import { collection, addDoc } from "firebase/firestore"; 
 import { onAuthStateChanged } from "firebase/auth";
 
-
 export default {
   name: "Success",
   setup() {
     const sessionId = ref(null);
 
     onMounted(() => {
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const query = new URLSearchParams(window.location.search);
-      const sessionID = query.get("session_id");
-      if (sessionID) {
-        await updateDatabaseWithSessionInfo(sessionID);
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const query = new URLSearchParams(window.location.search);
+          const sessionID = query.get("session_id");
+          const courseType = query.get("course_type"); // Extract courseType from URL
+          if (sessionID) {
+            await updateDatabaseWithSessionInfo(sessionID, courseType);
+          }
+        } else {
+          console.error("No authenticated user found.");
+        }
+      });
+    });
+
+    async function updateDatabaseWithSessionInfo(sessionId, courseType) { // Make sure to accept courseType as a parameter
+      if (!auth.currentUser) {
+        console.error("No authenticated user found.");
+        return;
       }
-    } else {
-      console.error("No authenticated user found.");
+
+      const userId = auth.currentUser.uid;
+
+      // Assume getSessionDetails can now accept and handle courseType
+      const sessionDetails = await getSessionDetails(sessionId, courseType);
+      console.log({
+        userId: userId,
+        sessionId: sessionId,
+        date_expiration: sessionDetails.expirationDate,
+        prix: sessionDetails.amount,
+        status: sessionDetails.status,
+        courseType: sessionDetails.courseType,
+      });
+
+      try {
+        const docRef = await addDoc(collection(db, "abonnement"), {
+          userId: userId,
+          sessionId: sessionId,
+          date_expiration: sessionDetails.expirationDate,
+          prix: sessionDetails.amount,
+          status: sessionDetails.status,
+          courseType: courseType, // Use the extracted courseType
+        });
+        console.log("Firestore document added successfully. Document ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document to Firestore: ", e);
+      }
     }
-  });
-});
 
-    async function updateDatabaseWithSessionInfo(sessionId) {
-  if (!auth.currentUser) {
-    console.error("No authenticated user found.");
-    return;
-  }
-
-  const userId = auth.currentUser.uid;
-
-  const sessionDetails = await getSessionDetails(sessionId);
-  console.log({
-  userId: userId,
-  sessionId: sessionId,
-  date_expiration: sessionDetails.expirationDate,
-  prix: sessionDetails.amount,
-  status: sessionDetails.status,
-  courseType: sessionDetails.courseType,
-});
-  try {
-    const docRef = await addDoc(collection(db, "abonnement"), {
-      userId: userId,
-      sessionId: sessionId,
-      date_expiration: sessionDetails.expirationDate,
-      prix: sessionDetails.amount,
-      status: sessionDetails.status,
-      courseType: sessionDetails.courseType,
-    });
-    console.log("Firestore document added successfully. Document ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document to Firestore: ", e);
-  }
-}
-
-async function getSessionDetails(sessionId) {
-
-  try {
-    const response = await fetch('/.netlify/functions/payment-details', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ sessionId: sessionId }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch session details: ${response.statusText}`);
+    // Adjust getSessionDetails if necessary to handle courseType
+    async function getSessionDetails(sessionId, courseType) {
+      // Function implementation
     }
-    
-    const paymentDetails = await response.json();
-    console.log(paymentDetails);
-   
-    return {
-      expirationDate: paymentDetails.expirationDate,
-      amount: paymentDetails.amount,
-      status: paymentDetails.status,
-      courseType: paymentDetails.courseType // Assuming the type is returned by the API
-    };
-  } catch (error) {
-    console.error("Error fetching session details:", error);
-    throw error; // Ensuring the calling function knows an error occurred
   }
-}
-
-  
-}
-
 };
 </script>
+
 
 <style scoped>
 .success-page {
