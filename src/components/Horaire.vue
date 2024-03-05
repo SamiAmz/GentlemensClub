@@ -3,17 +3,18 @@
     <div class="demo-app-main">
       <div class="control-panel">
         <h1>Control Panel</h1>
-        <v-btn @click="dialogNewEventVisible = true">Ajouter un cours</v-btn>
+        <v-btn @click="openDialog('create')">Ajouter un cours</v-btn>
+        <!-- <v-btn @click="openDialog('update')">Modifier un cours</v-btn> -->
       </div>
 
       <!-- Dialog nouveau cours -->
-      <v-dialog v-model="dialogNewEventVisible" width="80%">
+      <v-dialog v-model="dialogFormVisible" width="80%">
         <v-form
           v-model="form"
           @submit.prevent="onSubmit"
           v-slot:default="{ isActive }"
         >
-          <v-card title="Ajouter un nouveau cours">
+          <v-card :title="dialogFormTitle">
             <div class="form-class">
               <div class="row">
                 <p class="text">Nom du cours:</p>
@@ -138,16 +139,24 @@
               <v-btn
                 class="button-cancel"
                 text="Annuler"
-                @click="dialogNewEventVisible = false"
+                @click="dialogFormVisible = false"
               ></v-btn>
               <v-spacer></v-spacer>
-              <!-- Ajouter nouveau cours à la base de donnée -->
-              <v-btn
-                :disabled="!form"
-                :loading="loading"
-                text="Ajouter"
-                @click="addNewClass()"
-              ></v-btn>
+               <!-- Conditional rendering of buttons based on action -->
+                <v-btn
+                  v-if="dialogAction === 'create'"
+                  :disabled="!form"
+                  :loading="loading"
+                  text="Ajouter"
+                  @click="addNewClass()"
+                ></v-btn>
+                <v-btn
+                  v-else-if="dialogAction === 'update'"
+                  :disabled="!form"
+                  :loading="loading"
+                  text="Mettre à jour"
+                  @click="updateClass()"
+                ></v-btn>
             </v-card-actions>
           </v-card>
         </v-form>
@@ -156,23 +165,23 @@
       <!-- Dialog afficher information d'un cours -->
       <v-dialog v-model="dialogEventVisible" width="500">
         <template v-slot:default="{ isActive }">
-          <v-card :title="dialogTitle">
+          <v-card :title="dialogEventTitle">
             <v-card-text>
-              Heure: {{ dialogStartHours }}:{{ dialogStartMinutes }} -
-              {{ dialogEndHours }}:{{ dialogEndMinutes }} <br />
-              {{ dialogDescription }}
+              Heure: {{ dialogEventStartHours }}:{{ dialogEventStartMinutes }} -
+              {{ dialogEventEndHours }}:{{ dialogEventEndMinutes }} <br />
+              {{ dialogEventDescription }}
             </v-card-text>
 
             <v-card-actions>
               <v-btn text="S'inscrire" @click="registerToClass()"></v-btn>
-              <v-btn text="Modifier" @click="updateClass()"></v-btn>
+              <v-btn text="Modifier" @click="openDialog('update')"></v-btn>
               <v-spacer></v-spacer>
               <v-btn text="Fermer" @click="dialogEventVisible = false"></v-btn>
             </v-card-actions>
           </v-card>
         </template>
       </v-dialog>
-      <FullCalendar class="demo-app-calendar" :options="calendarOptions">
+      <FullCalendar class="demo-app-calendar" :options="calendarOptions" ref="fullCalendar">
         <template v-slot:eventContent="arg">
           <b>{{ arg.timeText }}</b>
           <i>{{ arg.event.title }}</i>
@@ -199,7 +208,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { INITIAL_EVENTS } from "./event-utils";
 import frLocale from "@fullcalendar/core/locales/fr";
 
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, doc } from "firebase/firestore";
 import { db } from "@/firebase/init";
 
 export default defineComponent({
@@ -227,14 +236,20 @@ export default defineComponent({
       formattedDate: "",
       form: false,
       loading: false,
+      classes: [],
 
       // Dialog
-      dialogNewEventVisible: false,
+      dialogFormVisible: false,
       dialogEventVisible: false,
-      dialogTitle: "",
-      dialogDescription: "",
-      dialogHours: "",
-      dialogMinutes: "",
+      dialogFormTitle: "",
+      dialogEventTitle: "",
+      dialogEventId: "",
+      dialogEventDescription: "",
+      dialogEventHours: "",
+      dialogEventMinutes: "",
+      dialogEventType: "",
+      dialogEventDate: "",
+      dialogAction: "",
 
       // Fullcalendar calendar parameters
       calendarOptions: {
@@ -250,7 +265,7 @@ export default defineComponent({
           end: "prev,next",
         },
         initialView: "timeGridWeek",
-        initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+        initialEvents: [], // alternatively, use the `events` setting to fetch from a feed
         allDaySlot: false,
         //editable: true, // Allows the user to move events
         selectMirror: true,
@@ -270,18 +285,32 @@ export default defineComponent({
     };
   },
   methods: {
-    /*
-        calendarApi.addEvent({
-          id: createEventId(),
-          title,
-          start: selectInfo.startStr,
-          end: selectInfo.endStr,
-          allDay: selectInfo.allDay
-        })
-        */
 
     onSubmit() {
       // Does absolutely nothing
+    },
+
+    openDialog(action) {
+      this.dialogAction = action;
+
+      if (action === "create") {
+        this.dialogFormTitle = "Ajouter un cours";
+      } else if (action === "update") {
+        this.dialogFormTitle = "Modifier un cours";
+        this.classData.title = this.dialogEventTitle;
+        this.classData.description = this.dialogEventDescription;
+        this.classData.type = this.dialogEventType;
+        this.formattedDate = this.dialogEventDate;
+        this.classData.startHour = this.dialogEventStartHours;
+        this.classData.endHour = this.dialogEventEndHours;
+        this.classData.startMinutes = this.dialogEventStartMinutes;
+        this.classData.endMinutes = this.dialogEventEndMinutes;
+
+        console.log(this.dialogEventDate);
+      }
+
+      this.dialogFormVisible = true;
+      //console.log(this.dialogAction);
     },
 
     async addNewClass() {
@@ -305,10 +334,55 @@ export default defineComponent({
         });
 
         console.log("Document written with ID: ", docRef.id);
-        setTimeout(() => (this.dialogNewEventVisible = false), 1000);
+
+        setTimeout(() => (this.dialogFormVisible = false), 1000);
+        setTimeout(() => (this.clearField()), 1500);
       } catch (error) {
         console.error("Error adding document: ", error);
       }
+    },
+
+    async loadAllClasses() {
+
+      try {
+        // Add a new document to the "class" collection with auto-generated ID
+        const querySnapshot = await getDocs(collection(db, "class"));
+        querySnapshot.forEach((doc) => {
+          const data = doc.data(); // Get the document data
+          const classObject = {
+            id: doc.id, // Add the document ID
+            title: data.title,
+            description: data.description,
+            type: data.type,
+            eventDate: data.date,
+            start: data.date + "T" + data.startHour,
+            end: data.date + "T" + data.endHour,
+          };
+          this.classes.push(classObject); // Add the class object to the array
+          
+        });
+        //console.log(this.classes);
+
+        let fullCalendar = this.$refs.fullCalendar.getApi()
+        fullCalendar.removeAllEvents(); // Clear existing events
+        fullCalendar.addEventSource(this.classes); // Add new events
+
+      } catch (error) {
+        console.error("Error loading documents: ", error);
+      }
+      
+    },
+    // Clear the text fields
+    clearField() {
+      this.classData = {
+          title: '',
+          description: '',
+          startHour: '',
+          endHour: '',
+          date: '',
+          type: '',
+        };
+        this.formattedDate= '';      
     },
 
     // Allows a member to register to a class
@@ -318,9 +392,34 @@ export default defineComponent({
     },
 
     // Update class information
-    updateClass() {
-      //TODO
-      console.log("test");
+    async updateClass() {
+      this.loading = true;
+      setTimeout(() => (this.loading = false), 1000); // Simulate loading time on the button
+
+      try {
+        // Add a new document to the "class" collection with auto-generated ID
+        await updateDoc(doc(db, "class", this.dialogEventId), {
+          title: this.classData.title,
+          description: this.classData.description,
+          startHour:
+            this.classData.startHour +
+            ":" +
+            this.classData.startMinutes +
+            ":00",
+          endHour:
+            this.classData.endHour + ":" + this.classData.endMinutes + ":00",
+          date: this.formattedDate,
+          type: this.classData.type,
+        });
+
+        console.log("Document updated with ID: ", this.dialogEventId);
+
+        setTimeout(() => (this.dialogFormVisible = false), 1000);
+        setTimeout(() => (this.clearField()), 1500);
+      } catch (error) {
+        console.error("Error updating document: ", error);
+      }
+
     },
 
     // Formats date to YYYY-MM-DD
@@ -332,32 +431,39 @@ export default defineComponent({
 
       const formattedDate = `${year}-${month}-${day}`;
       this.formattedDate = formattedDate;
-      console.log(formattedDate);
+      //console.log(formattedDate);
     },
 
     // Display event information
     handleEventClick(clickInfo) {
+      this.dialogEventId = clickInfo.event.id;
       this.dialogEventVisible = true;
-      this.dialogTitle = clickInfo.event.title;
-      this.dialogStartHours = clickInfo.event.start.getHours();
-      this.dialogEndHours = clickInfo.event.end.getHours();
-      this.dialogDescription = clickInfo.event.extendedProps.description;
+      this.dialogEventTitle = clickInfo.event.title;
+      this.dialogEventStartHours = clickInfo.event.start.getHours();
+      this.dialogEventEndHours = clickInfo.event.end.getHours();
+      this.dialogEventDescription = clickInfo.event.extendedProps.description;
+      this.dialogEventType = clickInfo.event.extendedProps.type;
+      this.dialogEventDate = clickInfo.event.extendedProps.eventDate;
+      
       // getMinutes() returns 0 if there are no minute, this code will convert to 00
       if (clickInfo.event.start.getMinutes() == "0") {
-        this.dialogStartMinutes = "00";
+        this.dialogEventStartMinutes = "00";
       } else {
-        this.dialogStartMinutes = clickInfo.event.start.getMinutes();
+        this.dialogEventStartMinutes = clickInfo.event.start.getMinutes();
       }
       if (clickInfo.event.end.getMinutes() == "0") {
-        this.dialogEndMinutes = "00";
+        this.dialogEventEndMinutes = "00";
       } else {
-        this.dialogEndMinutes = clickInfo.event.end.getMinutes();
+        this.dialogEventEndMinutes = clickInfo.event.end.getMinutes();
       }
     },
     handleEvents(events) {
       this.currentEvents = events;
     },
   },
+  async mounted() {
+    this.loadAllClasses();
+  }
 });
 </script>
 
