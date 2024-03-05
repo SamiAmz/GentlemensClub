@@ -41,7 +41,14 @@ export default {
   const userId = auth.currentUser.uid;
 
   const sessionDetails = await getSessionDetails(sessionId);
-
+  console.log({
+  userId: userId,
+  sessionId: sessionId,
+  date_expiration: sessionDetails.expirationDate,
+  prix: sessionDetails.amount,
+  status: sessionDetails.status,
+  type: sessionDetails.type,
+});
   try {
     const docRef = await addDoc(collection(db, "abonnement"), {
       userId: userId,

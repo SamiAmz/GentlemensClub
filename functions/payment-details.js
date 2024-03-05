@@ -23,7 +23,7 @@ exports.handler = async function(event) {
 
     const amount = session.amount_total;
     const status = session.payment_status;
-    console.log("Received courseTfype:", courseType);
+    console.log("Received courseType:", courseType);
 
     return {
       statusCode: 200,
