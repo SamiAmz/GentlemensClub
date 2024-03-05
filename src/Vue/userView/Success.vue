@@ -87,7 +87,7 @@ async function getSessionDetails(sessionId) {
       expirationDate: paymentDetails.expirationDate,
       amount: paymentDetails.amount,
       status: paymentDetails.status,
-      type: paymentDetails.courseType // Assuming the type is returned by the API
+      courseType: paymentDetails.courseType // Assuming the type is returned by the API
     };
   } catch (error) {
     console.error("Error fetching session details:", error);
