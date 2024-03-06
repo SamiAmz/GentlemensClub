@@ -56,18 +56,4 @@ export default {
 .wrestling-ul .wrestling-li {
   text-align: left;
 }
-
-.wrestling-button {
-  background-color: #ff5733; /* Orange rouge */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.wrestling-button:hover {
-  background-color: #c94c22; /* Orange rouge foncé */
-}
 </style>

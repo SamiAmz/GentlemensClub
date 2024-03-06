@@ -27,8 +27,6 @@
       protège-tibias et bien plus encore.
     </li>
   </ul>
-  <v-spacer></v-spacer>
-  <button class="mma-button" @click="subscribe">S'abonner</button>
 </template>
 
 <script>
@@ -57,19 +55,5 @@ export default {
 
 .mma-ul .mma-li {
   text-align: left;
-}
-
-.mma-button {
-  background-color: #ff5733; /* Orange rouge */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.mma-button:hover {
-  background-color: #c94c22; /* Orange rouge foncé */
 }
 </style>

@@ -27,8 +27,6 @@
       protège-tibias et bien plus encore.
     </li>
   </ul>
-  <v-spacer></v-spacer>
-  <button class="box-button" @click="subscribe">S'abonner</button>
 </template>
 
 <script>
@@ -57,17 +55,4 @@ export default {
   text-align: left;
 }
 
-.box-button {
-  background-color: #ff5733; /* Orange rouge */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.box-button:hover {
-  background-color: #c94c22; /* Orange rouge foncé */
-}
 </style>
