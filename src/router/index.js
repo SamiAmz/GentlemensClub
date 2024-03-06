@@ -11,6 +11,7 @@ import SportPage from "../components/Sports.vue";
 import Mma from "../components/Sports/Mma";
 import Box from "../components/Sports/Box";
 import Wrestling from "../components/Sports/Wrestling";
+import NotFoundComponent from "../components/Sports/default.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -85,6 +86,12 @@ const router = createRouter({
       path: "/profile",
       name: "profile",
       component: Profile,
+    },
+    ,
+    // Route pour la page non trouvée
+    {
+      path: "/:catchAll(.*)",
+      component: NotFoundComponent,
     },
   ],
 });

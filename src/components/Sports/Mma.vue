@@ -68,26 +68,21 @@ export default {
   padding-bottom: 50px;
 }
 .mma-course-container {
-  background-color: rgb(22, 22, 22);
+  background-color: #333;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0 10vh;
   height: 90vh;
 }
-.mma-course-card-left {
-  border-radius: 15px;
-  height: 100vh;
-}
-
 .mma-course-content-left {
   padding: 20px;
   text-align: center;
-  width: 50%;
+  width: 90%;
 }
 
 .mma-course-content-right {
-  padding: 5% 0 0 10%;
+  padding: 20px 0 0 100px;
   width: 50%;
 }
 

@@ -1,32 +1,32 @@
 <template>
-  <div class="page-container">
-    <div class="default-page-content">
-      <h1 class="default-h1">404 - Page Not Found</h1>
-      <p>Sorry, the page you are looking for does not exist.</p>
+  <div class="container-page">
+    <div class="contenu-page-default">
+      <h1 class="titre-default">404 - Page non trouvée</h1>
+      <p>Désolé, la page que vous recherchez n'existe pas.</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "DefaultPage",
+  name: "PageParDefaut",
 };
 </script>
 
 <style scoped>
-.page-container {
+.container-page {
   background: #333;
   margin-top: 10vh;
   padding-top: 1vh;
   padding-bottom: 50px;
 }
 
-.default-page-content {
+.contenu-page-default {
   padding: 20px;
   text-align: center;
 }
 
-.default-h1 {
+.titre-default {
   color: #ff5733;
 }
 </style>
