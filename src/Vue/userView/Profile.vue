@@ -164,19 +164,16 @@ export default {
     const userDocRef = doc(db, "users", uid);
     const docSnap = await getDoc(userDocRef);
     if (docSnap.exists()) {
-      // Fetch user profile data
       this.profile = docSnap.data();
+      console.log("Id of the user", this.profile.email)
 
-      // Fetch subscription details from Firestore
+      // Fetch courseType from Firestore
       const subscriptionDocRef = doc(db, "abonnement", uid);
       const subscriptionSnap = await getDoc(subscriptionDocRef);
       if (subscriptionSnap.exists()) {
-        const subscriptionData = subscriptionSnap.data();
-        // Update the profile object with subscription details
-        this.profile.subscriptionType = subscriptionData.courseType;
-        this.profile.subscriptionPrice = subscriptionData.prix;
-        this.profile.subscriptionStatus = subscriptionData.status;
-        this.profile.renewalDate = subscriptionData.date_expiration;
+        const courseType = subscriptionSnap.data().courseType;
+        // Update the profile object with courseType
+        this.profile.subscriptionType = courseType;
       }
     } else {
       console.log("No such document!");
@@ -185,6 +182,7 @@ export default {
     console.error("Error getting document:", error);
   }
 },
+,
 
     async updateProfile() {
       if (auth.currentUser) {
