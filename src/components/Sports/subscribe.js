@@ -1,12 +1,13 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { auth } from "@/firebase/init";
+import { useRouter } from 'vue-router';
+import router from '@/router';
 
 export async function subscribeToCourse(priceId, courseType) {
   const user = auth.currentUser;
   if (!user) {
     console.log("User not logged in, redirecting to login.");
-    this.$router.push("/login");
-
+    router.push("/login")
     return;
   }
 

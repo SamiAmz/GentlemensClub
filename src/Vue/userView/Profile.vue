@@ -182,7 +182,7 @@ export default {
     console.error("Error getting document:", error);
   }
 },
-,
+
 
     async updateProfile() {
       if (auth.currentUser) {
