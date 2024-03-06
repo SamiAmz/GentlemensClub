@@ -113,7 +113,15 @@
       <div class="time"></div>
     </div>
 
-
+    <div class="video-background">
+      <video autoplay muted loop id="background-video">
+        <source src="../assets/intro.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-overlay">
+        <h1 class="video-text">AU CENTRE DE LA VIE ÉNERGÉTIQUE</h1>
+      </div>
+    </div>
     <h1 class="titleCards">Nos abonnemnets</h1>
     <div class="container-cards">
       <div class="container">
@@ -135,7 +143,7 @@
               <router-link
                 :to="{ name: 'Sports', params: { sportNom: 'Mma' } }"
               >
-                <button>EN SAVOIR PLUS</button>
+                <button>S'ABONNER</button>
               </router-link>
             </div>
           </div>
@@ -159,7 +167,7 @@
               <router-link
                 :to="{ name: 'Sports', params: { sportNom: 'Wrestling' } }"
               >
-                <button>EN SAVOIR PLUS</button>
+                <button>S'ABONNER</button>
               </router-link>
             </div>
           </div>
@@ -183,19 +191,10 @@
               <router-link
                 :to="{ name: 'Sports', params: { sportNom: 'Box' } }"
               >
-                <button>EN SAVOIR PLUS</button>
+                <button>S'ABONNER</button>
               </router-link>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="video-background">
-        <video autoplay muted loop id="background-video">
-          <source src="../assets/intro.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div class="video-overlay">
-          <h1 class="video-text">AU CENTRE DE LA VIE ÉNERGÉTIQUE</h1>
         </div>
       </div>
     </div>
@@ -211,7 +210,7 @@ import "https://kit.fontawesome.com/95a02bd20d.js";
 import "./style.css";
 export default {
   name: "Home",
-  mounted() { 
+  mounted() {
     this.scrollToTop();
   },
   methods: {
@@ -224,6 +223,7 @@ export default {
 
 document.addEventListener("scroll", function () {
   var video = document.getElementById("background-video");
+  var title = document.querySelector(".video-text");
   var videoPosition = video.getBoundingClientRect().top;
   var videoBottomPosition = video.getBoundingClientRect().bottom;
   var screenPosition = window.innerHeight / 2;
@@ -232,10 +232,10 @@ document.addEventListener("scroll", function () {
     (videoBottomPosition > screenPosition && videoPosition < 0)
   ) {
     video.style.opacity = "1";
-    //title.style.opacity = "1";
+    title.style.opacity = "1";
   } else {
     video.style.opacity = "0";
-    //title.style.opacity = "0";
+    title.style.opacity = "0";
   }
 });
 </script>

@@ -7,11 +7,11 @@ import Login from "../Vue/userView/Login.vue";
 import Signup from "../Vue/userView/Signup.vue";
 import CoachDetails from "../Vue/CoachDetails.vue";
 import Profile from "../Vue/userView/Profile.vue";
-import Sports from "../components/Sports.vue";
-import Mma from "../components/Sports/Mma"
-import Box from "../components/Sports/Box"
-import Wrestling from "../components/Sports/Wrestling"
-import Success from "../Vue/userView/Success"
+import SportPage from "../components/Sports.vue";
+import Mma from "../components/Sports/Mma";
+import Box from "../components/Sports/Box";
+import Wrestling from "../components/Sports/Wrestling";
+import NotFoundComponent from "../components/Sports/default.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,13 +27,6 @@ const router = createRouter({
       name: "Mma",
       component: Mma,
       props: true,
-    },
-
-    {
-      path: "/Success",
-      name: "Success",
-      component: Success,
-      props: true
     },
     {
       path: "/Box",
