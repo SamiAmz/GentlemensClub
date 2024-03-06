@@ -15,7 +15,6 @@ export default {
 
 <style scoped>
 .container-page {
-  background: #333;
   margin-top: 10vh;
   padding-top: 1vh;
   padding-bottom: 50px;
