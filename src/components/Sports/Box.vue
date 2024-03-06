@@ -38,6 +38,7 @@
         <SubsCard :sportNom="sportNom" />
       </div>
     </div>
+<<<<<<< HEAD
   </div>
 </template>
 
@@ -54,6 +55,28 @@ export default {
   methods: {
     scrollToTop() {
       window.scrollTo(0, 0);
+=======
+  </template>
+  
+  <script>
+  import { subscribeToCourse } from './subscribe.js';
+
+  export default {
+    import: "https://unicons.iconscout.com/release/v3.0.6/css/line.css",
+    name: "Mma",
+    mounted() {
+      this.scrollToTop();
+    },
+    methods: {
+      scrollToTop() {
+        window.scrollTo(0, 0);
+      },
+      subscribe() {
+      const priceId = "price_1Oo7ffIrFzdedmXMbqus0Cxr"; // Replace with your actual price ID for this course
+      const courseType = "Boxe"; // Use "boxe" or "wrestling" for other components
+      subscribeToCourse(priceId, courseType);
+      },
+>>>>>>> Stripe
     },
     subscribe() {},
   },
