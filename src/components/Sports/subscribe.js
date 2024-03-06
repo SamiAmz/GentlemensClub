@@ -5,6 +5,8 @@ export async function subscribeToCourse(priceId, courseType) {
   const user = auth.currentUser;
   if (!user) {
     console.log("User not logged in, redirecting to login.");
+    this.$router.push("/login");
+
     return;
   }
 
@@ -16,8 +18,11 @@ export async function subscribeToCourse(priceId, courseType) {
     const response = await fetch("/.netlify/functions/create-checkout-sessions", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      
       body: JSON.stringify({ priceId: priceId, courseType: courseType }), // Pass courseType here
+      
     });
+    
 
     
     const session = await response.json();
