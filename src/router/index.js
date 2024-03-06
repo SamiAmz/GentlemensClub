@@ -11,7 +11,7 @@ import SportPage from "../components/Sports.vue";
 import Mma from "../components/Sports/Mma";
 import Box from "../components/Sports/Box";
 import Wrestling from "../components/Sports/Wrestling";
-import NotFoundComponent from "../components/Sports/default.vue";
+import NotFoundComponent from "../components/default.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
