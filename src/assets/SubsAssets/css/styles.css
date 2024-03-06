@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 .wrapper .table {
-  background: rgb(255, 0, 0);
-  width: 60%;
+  background: #2d2c29;
+  width: 80%;
   padding: 30px 30px;
   position: relative;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -12,8 +12,8 @@
   justify-content: center;
 }
 .table .price-area {
-  height: 120px;
-  width: 120px;
+  height: 130px;
+  width: 130px;
   border-radius: 50%;
   padding: 2px;
 }
@@ -21,10 +21,10 @@
   height: 100%;
   width: 100%;
   border-radius: 50%;
-  border: 3px solid #fff;
+  border: 3px solid #000000;
   line-height: 117px;
   text-align: center;
-  color: #fff;
+  color: #ff5733;
   position: relative;
 }
 .price-area .inner-area .text {
@@ -51,7 +51,7 @@
   left: 50%;
   font-size: 25px;
   font-weight: 500;
-  background: #fff;
+  background: rgb(41, 41, 41);
   padding: 0 15px;
   transform: translate(-50%, -50%);
 }
@@ -73,7 +73,7 @@
   color: #2db94d;
 }
 .features li .icon.cross {
-  color: #cd3241;
+  color: #ff0019;
 }
 .table .btn {
   width: 100%;
@@ -84,7 +84,7 @@
 .table .btn button {
   width: 80%;
   height: 50px;
-  color: #fff;
+  color: #ffffff;
   font-size: 20px;
   font-weight: 500;
   border: none;
@@ -102,111 +102,21 @@
 .basic ::selection,
 .basic .price-area,
 .basic .inner-area {
-  background: #ffbf00;
+  background: #ffffff;
 }
 .basic .btn button {
-  border: 2px solid #ffd861;
-  background: #fff;
-  color: #ffbf00;
+  border: 2px solid #ff5733;
+  background: #ff5733;
+  color: #000000;
 }
 .basic .btn button:hover {
-  background: #ffbf00;
-  color: #fff;
-}
-.premium ::selection,
-.premium .price-area,
-.premium .inner-area,
-.premium .btn button {
-  background: #a26bfa;
-}
-.premium .btn button:hover {
-  background: #833af8;
-}
-.ultimate ::selection,
-.ultimate .price-area,
-.ultimate .inner-area {
-  background: #43ef8b;
-}
-.ultimate .btn button {
-  border: 2px solid #43ef8b;
-  color: #43ef8b;
-  background: #fff;
-}
-.ultimate .btn button:hover {
-  background: #43ef8b;
-  color: #fff;
+  background: #ff5733;
+  color: #000000;
 }
 .basic .package-name {
   background: #ffecb3;
 }
-.premium .package-name {
-  background: #d0b3ff;
-}
-.ultimate .package-name {
-  background: #baf8d4;
-}
+
 .basic .package-name::before {
   content: "Basic";
-}
-.premium .package-name::before {
-  content: "Premium";
-  font-size: 24px;
-}
-.ultimate .package-name::before {
-  content: "Ultimate";
-  font-size: 24px;
-}
-@media (max-width: 1020px) {
-  .wrapper .table {
-    width: calc(50% - 20px);
-    margin-bottom: 40px;
-  }
-}
-@media (max-width: 698px) {
-  .wrapper .table {
-    width: 100%;
-  }
-}
-::selection {
-  color: #fff;
-}
-.table .ribbon {
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  overflow: hidden;
-}
-.table .ribbon::before,
-.table .ribbon::after {
-  position: absolute;
-  content: "";
-  z-index: -1;
-  display: block;
-  border: 7px solid #4606ac;
-  border-top-color: transparent;
-  border-left-color: transparent;
-}
-.table .ribbon::before {
-  top: 0px;
-  right: 15px;
-}
-.table .ribbon::after {
-  bottom: 15px;
-  left: 0px;
-}
-.table .ribbon span {
-  position: absolute;
-  top: 30px;
-  right: 0;
-  transform: rotate(-45deg);
-  width: 200px;
-  background: #a26bfa;
-  padding: 10px 0;
-  color: #fff;
-  text-align: center;
-  font-size: 17px;
-  text-transform: uppercase;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
 }

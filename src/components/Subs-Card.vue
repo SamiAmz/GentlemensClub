@@ -5,7 +5,7 @@
         <div class="price-area">
           <div class="inner-area">
             <span class="text">$</span>
-            <span class="price">29</span>
+            <span class="price">500</span>
           </div>
         </div>
       </div>
@@ -33,8 +33,41 @@
   </div>
 </template>
 <script>
+import { db } from "@/firebase/init";
+import { doc, getDoc } from "firebase/firestore";
 import "../assets/SubsAssets/css/styles.css";
 export default {
   name: "SubsCard",
+  props: {
+    sportNom: {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      plan: null,
+    };
+  },
+  async created() {
+    await this.fetchCoachDetails();
+  },
+  methods: {
+    async fetchCoachDetails() {
+      try {
+        const docRef = doc(db, "plan", this.sportNom);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          this.plan = docSnap.data();
+          this.plan.Prix = `${docSnap.data().Prix}`;
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.error("Error fetching document:", error);
+      }
+    },
+  },
 };
 </script>

@@ -16,6 +16,13 @@ import NotFoundComponent from "./Sports/default.vue";
 export default {
   name: "SportsPage",
   props: ["sportNom"],
+  data() {
+    return {
+      mounted() {
+        this.scrollToTop();
+      },
+    };
+  },
   computed: {
     selectedSportComponent() {
       switch (this.sportNom) {
@@ -30,6 +37,7 @@ export default {
       }
     },
   },
+
   components: { Chat },
 };
 </script>

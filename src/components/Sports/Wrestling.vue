@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="wrestling-course-container">
       <div class="wrestling-course-content-left">
-        <h1 class="wrestling-h1">Subscription du coufffrs de Wrestling</h1>
+        <h1 class="wrestling-h1">Subscription du cours de Wrestling</h1>
         <v-spacer></v-spacer>
 
         <p>
@@ -32,10 +32,6 @@
             protège-tibias et bien plus encore.
           </li>
         </ul>
-        <h2 class="wrestling-h2">Prix du cours :</h2>
-        <p>Le cours de Wrestling est proposé au tarif mensuel de $50.</p>
-        <v-spacer></v-spacer>
-        <button class="wrestling-button" @click="subscribe">S'abonner</button>
       </div>
       <div class="wrestling-course-content-right">
         <SubsCard />
@@ -71,12 +67,12 @@ export default {
   padding-bottom: 50px;
 }
 .wrestling-course-container {
-  background-color: rgb(22, 22, 22);
+  background-color: #333;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0 10vh;
-  height: 110vh;
+  height: 90vh;
 }
 .wrestling-course-card-left {
   border-radius: 15px;
@@ -86,11 +82,11 @@ export default {
 .wrestling-course-content-left {
   padding: 20px;
   text-align: center;
-  width: 50%;
+  width: 90%;
 }
 
 .wrestling-course-content-right {
-  padding: 5% 0 0 10%;
+  padding: 20px 0 0 100px;
   width: 50%;
 }
 

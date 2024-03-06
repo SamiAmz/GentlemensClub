@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="box-course-container">
       <div class="box-course-content-left">
-        <h1 class="box-h1">Subscription du coufffrs de Box</h1>
+        <h1 class="box-h1">Subscription du cours de Box</h1>
         <v-spacer></v-spacer>
 
         <p>
@@ -31,13 +31,11 @@
             protège-tibias et bien plus encore.
           </li>
         </ul>
-        <h2 class="box-h2">Prix du cours :</h2>
-        <p>Le cours de Box est proposé au tarif mensuel de $50.</p>
         <v-spacer></v-spacer>
         <button class="box-button" @click="subscribe">S'abonner</button>
       </div>
       <div class="box-course-content-right">
-        <SubsCard />
+        <SubsCard :sportNom="sportNom" />
       </div>
     </div>
   </div>
@@ -47,8 +45,11 @@
 import SubsCard from "../Subs-Card.vue";
 export default {
   name: "Box",
-  mounted() {
-    this.scrollToTop();
+  props: {
+    sportNom: {
+      type: String,
+      required: true,
+    },
   },
   methods: {
     scrollToTop() {
@@ -75,7 +76,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   margin: 0 10vh;
-  height: 110vh;
+  height: 90vh;
 }
 .box-course-card-left {
   border-radius: 15px;

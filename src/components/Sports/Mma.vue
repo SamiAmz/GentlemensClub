@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="mma-course-container">
       <div class="mma-course-content-left">
-        <h1 class="mma-h1">Subscription du coufffrs de MMA</h1>
+        <h1 class="mma-h1">Subscription du cours de MMA</h1>
         <v-spacer></v-spacer>
 
         <p>
@@ -31,8 +31,6 @@
             protège-tibias et bien plus encore.
           </li>
         </ul>
-        <h2 class="mma-h2">Prix du cours :</h2>
-        <p>Le cours de MMA est proposé au tarif mensuel de $50.</p>
         <v-spacer></v-spacer>
         <button class="mma-button" @click="subscribe">S'abonner</button>
       </div>
@@ -75,7 +73,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   margin: 0 10vh;
-  height: 110vh;
+  height: 90vh;
 }
 .mma-course-card-left {
   border-radius: 15px;
