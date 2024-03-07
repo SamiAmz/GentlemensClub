@@ -39,11 +39,6 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    subscribe() {
-      const priceId = "price_1Oo7gUIrFzdedmXM5qvSEOEu"; 
-      const courseType = "Wrestling"; 
-      subscribeToCourse(priceId, courseType);
-      },
   },
 };
 </script>

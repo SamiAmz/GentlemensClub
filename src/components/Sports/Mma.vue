@@ -39,11 +39,6 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
-    subscribe() {
-      const priceId = "price_1Oo7gBIrFzdedmXMi51ZvYJ1"; // Replace with your actual price ID for this course
-      const courseType = "MMA"; // Use "boxe" or "wrestling" for other components
-      subscribeToCourse(priceId, courseType);
-      },
   },
 };
 </script>

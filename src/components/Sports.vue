@@ -34,7 +34,7 @@
                 <span class="icon cross"><i class="fas fa-times"></i></span>
               </li>
             </ul>
-            <div class="btn"><button>Purchase</button></div>
+            <div class="btn"><button @click="subscribe">Purchase</button></div>
           </div>
         </div>
       </div>
@@ -52,6 +52,7 @@ import BoxComponent from "./Sports/Box.vue";
 import WrestlingComponent from "./Sports/Wrestling.vue";
 import NotFoundComponent from "./default.vue";
 import "../assets/SubsAssets/css/styles.css";
+import { subscribeToCourse } from "./Sports/subscribe.js";
 
 export default {
   name: "SportsPage",
@@ -64,17 +65,28 @@ export default {
   data() {
     return {
       plan: null,
+      priceId: "",
+      courseType: "",
     };
   },
   computed: {
     selectedSportComponent() {
       switch (this.sportNom) {
         case "Mma":
+          this.priceId = "price_1Oo7gBIrFzdedmXMi51ZvYJ1";
+          this.courseType = "MMA";
           return MMAComponent;
+
         case "Box":
+          this.priceId = "price_1Oo7ffIrFzdedmXMbqus0Cxr";
+          this.courseType = "Box";
           return BoxComponent;
+
         case "Wrestling":
+          this.priceId = "price_1Oo7gUIrFzdedmXM5qvSEOEu";
+          this.courseType = "Wrestling";
           return WrestlingComponent;
+
         default:
           return NotFoundComponent;
       }
@@ -87,6 +99,9 @@ export default {
     await this.fetchPlanDetails();
   },
   methods: {
+    subscribe() {
+      subscribeToCourse(this.priceId, this.courseType); // Utiliser this.priceId et this.courseType ici
+    },
     async fetchPlanDetails() {
       try {
         const docRef = doc(db, "plans", this.sportNom);
@@ -106,6 +121,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .course-container {
   margin-top: 10vh;
