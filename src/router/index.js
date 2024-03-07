@@ -24,7 +24,7 @@ const router = createRouter({
       props: true,
     },
     {
-      path: "/Success",
+      path: "/success",
       name: "Success",
       component: Success,
       props: true
