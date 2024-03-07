@@ -1,10 +1,13 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { auth } from "@/firebase/init";
+import { useRouter } from 'vue-router';
+import router from '@/router';
 
 export async function subscribeToCourse(priceId, courseType) {
   const user = auth.currentUser;
   if (!user) {
     console.log("User not logged in, redirecting to login.");
+    router.push("/login")
     return;
   }
 
@@ -16,13 +19,17 @@ export async function subscribeToCourse(priceId, courseType) {
     const response = await fetch("/.netlify/functions/create-checkout-sessions", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      
       body: JSON.stringify({ priceId: priceId, courseType: courseType }), // Pass courseType here
+      
     });
+    
 
+    
     const session = await response.json();
     if (response.ok && session.sessionId) {
       const { error } = await stripe.redirectToCheckout({
-        sessionId: session.sessionId
+        sessionId: session.sessionId    
       });
       if (error) {
         console.error("Stripe checkout error:", error.message);
