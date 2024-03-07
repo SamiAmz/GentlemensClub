@@ -1,6 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { auth } from "@/firebase/init";
-import { useRouter } from 'vue-router';
 import router from '@/router';
 
 export async function subscribeToCourse(priceId, courseType) {

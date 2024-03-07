@@ -27,9 +27,12 @@
       protège-tibias et bien plus encore.
     </li>
   </ul>
+  <button @click="subscribe">S'abonner</button>
+
 </template>
 
 <script>
+import { subscribeToCourse } from './subscribe';
 export default {
   name: "Box",
   methods: {
