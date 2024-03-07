@@ -12,6 +12,7 @@ import Mma from "../components/Sports/Mma";
 import Box from "../components/Sports/Box";
 import Wrestling from "../components/Sports/Wrestling";
 import NotFoundComponent from "../components/default.vue";
+import Success from "../Vue/userView/Success.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
