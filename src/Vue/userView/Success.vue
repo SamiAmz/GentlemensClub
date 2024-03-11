@@ -1,8 +1,10 @@
 <template>
     <div class="success-page">
-      <h1>Thank You for Your Purchase!</h1>
-      <p>Your subscription has been processed successfully.</p>
-      <!-- You can add more user feedback here -->
+      <h1>Merci pour votre achat!</h1>
+      <RouterLink to="/" class="hover-link">
+        <v-text>Retour à l'accueil</v-text>
+      </RouterLink>
+      
     </div>
   </template>
   
@@ -98,6 +100,9 @@
   </script>
   
   <style scoped>
+  .hover-link v-text:hover {
+    color: rgb(255, 91, 8);
+  }
   .success-page {
     display: flex;
     flex-direction: column;
