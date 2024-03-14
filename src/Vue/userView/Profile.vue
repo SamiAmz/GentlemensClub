@@ -217,7 +217,7 @@ export default {
     console.log(subscriptionDoc); // Log to see the fetched subscription data
     // Update your profile object here with subscription details
     // Adjust these lines based on your actual subscription document structure
-    this.subscription.subscriptionType = subscriptionDoc.type; 
+    this.subscription.subscriptionType = subscriptionDoc.courseType; 
     this.subscription.subscriptionPrice = subscriptionDoc.prix;
     this.subscription.subscriptionStatus = subscriptionDoc.status;
     this.subscription.renewalDate = subscriptionDoc.date_expiration;
