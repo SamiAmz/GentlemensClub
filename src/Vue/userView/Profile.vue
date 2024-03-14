@@ -80,7 +80,7 @@ heres my code: <template>
     </div>
     <div class="detail-item">
       <span class="detail-label">Coût Mensuel:</span>
-      <span class="detail">${{ subscription.subscriptionPrice }}</span>
+      <span class="detail">${{ subscription.subscriptionPrice / 100 }}</span>
     </div>
     <div class="detail-item">
       <span class="detail-label">Statut:</span>
