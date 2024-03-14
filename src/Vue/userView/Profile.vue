@@ -198,11 +198,13 @@ export default {
     console.error("No authenticated user found.");
     return;
   }
+
   const userId = auth.currentUser.uid;
+  console.log(`USER ID: ${userId}`)
   // Create a reference to the 'abonnement' collection
   const abonnementCollectionRef = collection(db, "abonnement");
   // Create a query against the collection, where 'userid' field matches the userId
-  const q = query(abonnementCollectionRef, where("userid", "==", userId));
+  const q = query(abonnementCollectionRef, where("userId", "==", userId));
 
   try {
     const querySnapshot = await getDocs(q);
