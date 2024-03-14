@@ -113,15 +113,7 @@
       <div class="time"></div>
     </div>
 
-    <div class="video-background">
-      <video autoplay muted loop id="background-video">
-        <source src="../assets/intro.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div class="video-overlay">
-        <h1 class="video-text">AU CENTRE DE LA VIE ÉNERGÉTIQUE</h1>
-      </div>
-    </div>
+ 
     <h1 class="titleCards">Nos abonnemnets</h1>
     <div class="container-cards">
       <div class="container">
@@ -196,6 +188,16 @@
             </div>
           </div>
         </div>
+        
+      </div>
+    </div>
+    <div class="video-background">
+      <video autoplay muted loop id="background-video">
+        <source src="../assets/intro.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-overlay">
+        <h1 class="video-text">AU CENTRE DE LA VIE ÉNERGÉTIQUE</h1>
       </div>
     </div>
   </div>
