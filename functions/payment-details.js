@@ -14,8 +14,11 @@ exports.handler = async function(event) {
     });
 
     let expirationDate;
+    let readableExpirationDate = null; 
     if (session.subscription) {
-      expirationDate = session.subscription.current_period_end;
+      expirationDate = session.subscription.current_period_end * 1000; // Convert to milliseconds
+      // Format date to YYYY-MM-DD
+      readableExpirationDate = new Date(expirationDate).toISOString().split('T')[0];
     } else {
       console.error('No subscription found for this session');
       expirationDate = null;
@@ -23,14 +26,20 @@ exports.handler = async function(event) {
 
     const amount = session.amount_total;
     const status = session.payment_status;
+    let activeStatus = 'inactive'; // Assume inactive by default
+
+    if(status === "paid" ) {
+      activeStatus = 'active'; // Mark as active if paid
+    }
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         sessionId: session.id,
-        expirationDate: expirationDate,
+        expirationDate: readableExpirationDate, // Use the formatted date
         amount: amount,
         status: status,
+        activeStatus: activeStatus, // Include active status in the response
         type: courseType, // Set the subscription type to the received courseType
       }),
     };
