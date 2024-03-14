@@ -17,7 +17,6 @@ exports.handler = async function(event) {
     let readableExpirationDate = null; 
     if (session.subscription) {
       expirationDate = session.subscription.current_period_end * 1000; // Convert to milliseconds
-      // Format date to YYYY-MM-DD
       readableExpirationDate = new Date(expirationDate).toISOString().split('T')[0];
     } else {
       console.error('No subscription found for this session');
