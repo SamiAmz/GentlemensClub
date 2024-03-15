@@ -1,9 +1,9 @@
 heres my code: <template>
   <div :style="myStyle" id="wrapper">
 
-  <div class="profile-container">
+    <div class="profile-container">
 
-    <div class="profile-nav">
+      <div class="profile-nav">
         <div class="nav-item" :class="{ active: activeTab === 'profile' }" @click="setTabSection('profile')">
           <span class="icon">👤</span>
           <span class="label">Profile</span>
@@ -18,94 +18,94 @@ heres my code: <template>
         </div>
       </div>
 
-  <div v-if="activeTab === 'profile'" class="profile-content">
-    <div class="profile-header">
-        <h1 id="profileTitle">Mes infos</h1>
-      <div class="profile-picture">
+      <div v-if="activeTab === 'profile'" class="profile-content">
+        <div class="profile-header">
+          <h1 id="profileTitle">Mes infos</h1>
+          <div class="profile-picture">
 
-      </div>
-    </div>
+          </div>
+        </div>
 
-    <form class="profile-form" @submit.prevent="updateProfile">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="firstName">Prénom</label>
-          <input type="text" id="firstName" v-model="profile.first_name">
-        </div>
-        <div class="form-group">
-          <label for="lastName">Nom</label>
-          <input type="text" id="lastName" v-model="profile.last_name">
-        </div>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" v-model="profile.email">
-        </div>
-        <div class="form-group">
-          <label for="organization">Nom d'utilisateur</label>
-          <input type="text" id="organization" v-model="profile.username">
-        </div>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-group">
-          <label for="phone">Téléphone</label>
-          <input type="tel" id="phone" v-model="profile.phone">
-        </div>
-        <div class="form-group">
-          <label for="address">Addresse</label>
-          <input type="text" id="address" v-model="profile.address">
-        </div>
-      </div>
-            
-      <div class="form-actions">
-        <button type="button" class="btn btn-logout" @click="logoutUser">Déconnexion</button>
-
-        <button type="submit" class="btn">Sauvegarder</button>
-      </div>
-    </form>
-  </div>
-
-  <div v-if="activeTab === 'abonnement'" class="abonnement-content">
-  <div class="abonnement-header">
-    <h1>Mon Abonnement</h1>
-  </div>
-  
-  <div class="abonnement-details">
-    <div class="detail-item">
-      <span class="detail-label">Type d'abonnement:</span>
-      <span class="detail">{{ subscription.subscriptionType }}</span>
-    </div>
-    <div class="detail-item">
-      <span class="detail-label">Coût Mensuel:</span>
-      <span class="detail">${{ subscription.subscriptionPrice / 100 }}</span>
-    </div>
-    <div class="detail-item">
-      <span class="detail-label">Statut:</span>
-      <span class="detail">{{ subscription.subscriptionStatus === 'paid' ? 'Active' : 'Inactive' }}</span>
-    </div>
-    <div class="detail-item">
-      <span class="detail-label">Date de renouvellement:</span>
-      <span class="detail">{{ subscription.renewalDate }}</span>
-    </div>
-  </div>
-  
-  <div class="abonnement-actions">
-    <button type="button" class="btn btn-renew" @click="renewSubscription">Renouveler</button>
-    <button type="button" class="btn btn-cancel" @click="cancelSubscription">Annuler</button>
-  </div>
-</div>
-
-
-<div v-if="activeTab === 'horaire'" class="calendar-container">
-      <HoraireUtilisateur></HoraireUtilisateur>
-</div>
-
-        </div>
-        
+        <form class="profile-form" @submit.prevent="updateProfile">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Prénom</label>
+              <input type="text" id="firstName" v-model="profile.first_name">
             </div>
+            <div class="form-group">
+              <label for="lastName">Nom</label>
+              <input type="text" id="lastName" v-model="profile.last_name">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" v-model="profile.email">
+            </div>
+            <div class="form-group">
+              <label for="organization">Nom d'utilisateur</label>
+              <input type="text" id="organization" v-model="profile.username">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Téléphone</label>
+              <input type="tel" id="phone" v-model="profile.phone">
+            </div>
+            <div class="form-group">
+              <label for="address">Addresse</label>
+              <input type="text" id="address" v-model="profile.address">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-logout" @click="logoutUser">Déconnexion</button>
+
+            <button type="submit" class="btn">Sauvegarder</button>
+          </div>
+        </form>
+      </div>
+
+      <div v-if="activeTab === 'abonnement'" class="abonnement-content">
+        <div class="abonnement-header">
+          <h1>Mon Abonnement</h1>
+        </div>
+
+        <div class="abonnement-details">
+          <div class="detail-item">
+            <span class="detail-label">Type d'abonnement:</span>
+            <span class="detail">{{ subscription.subscriptionType }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Coût Mensuel:</span>
+            <span class="detail">${{ subscription.subscriptionPrice / 100 }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Statut:</span>
+            <span class="detail">{{ subscription.subscriptionStatus === 'paid' ? 'Active' : 'Inactive' }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Date de renouvellement:</span>
+            <span class="detail">{{ subscription.renewalDate }}</span>
+          </div>
+        </div>
+
+        <div class="abonnement-actions">
+          <button type="button" class="btn btn-renew" @click="renewSubscription">Renouveler</button>
+          <button type="button" class="btn btn-cancel" @click="cancelSubscription">Annuler</button>
+        </div>
+      </div>
+
+
+      <div v-if="activeTab === 'horaire'" class="calendar-container">
+        <HoraireUtilisateur></HoraireUtilisateur>
+      </div>
+
+    </div>
+
+  </div>
 
 </template>
 
@@ -156,42 +156,18 @@ export default {
         },
 
 
-        async fetchSubscription() {
-  // Check if there's a logged-in user
-  if (!auth.currentUser) {
-    console.error("No authenticated user found.");
-    return;
-  }
-
-  // Get the user ID from the currently logged-in user
-  const userId = auth.currentUser.uid;
-
-  // Reference the 'abonnement' collection in Firestore
-  const abonnementCollectionRef = collection(db, "abonnement");
-
-  // Create a query to find the subscription document for the current user
-  const q = query(abonnementCollectionRef, where("userId", "==", userId));
-
+   async fetchProfile(uid) {
   try {
-    // Execute the query
-    const querySnapshot = await getDocs(q);
-    
-    // Check if any documents were found
-    if (querySnapshot.empty) {
-      console.log("No matching subscription document.");
-      return;
+    const userDocRef = doc(db, "users", uid);
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      // Update the profile object with the fetched data
+      this.profile = docSnap.data();
+    } else {
+      console.log("No such document!");
     }
-
-    // Assuming there's only one subscription per user, use the first document
-    const subscriptionDoc = querySnapshot.docs[0].data();
-
-    // Update the 'subscription' data property with the fetched values
-    this.subscription.subscriptionType = subscriptionDoc.courseType; // This matches the field name in Firestore
-    this.subscription.subscriptionPrice = subscriptionDoc.prix; // Assuming this is in cents, divide by 100 to convert to dollars
-    this.subscription.subscriptionStatus = subscriptionDoc.status === 'paid' ? 'Active' : 'Inactive'; // Example conversion of status to human-readable form
-    this.subscription.renewalDate = subscriptionDoc.date_expiration; // You might want to format this date
   } catch (error) {
-    console.error("Error getting subscription documents:", error);
+    console.error("Error getting document:", error);
   }
 },
 
@@ -255,24 +231,23 @@ export default {
 
 
   mounted() {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      this.fetchProfile(user.uid);
-      this.fetchSubscription(); // Fetch subscription when the component mounts
-    } else {
-      // Handle user not logged in or redirect to login page
-      console.log("No user is logged in.");
-      this.$router.push('/login'); // Example redirect
-    }
-  });
-},
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.fetchProfile(user.uid);
+      } else {
+        // Handle user not logged in or redirect to login page
+        console.log("No user is logged in.");
+        this.$router.push('/login'); // Example redirect
+      }
+    });
+
+  },
 
 };
 </script>
 
 
 <style scoped>
-
 .btn {
   margin-right: 15px;
 }
@@ -340,8 +315,8 @@ export default {
 }
 
 
-#profileTitle{
-    color: #333;
+#profileTitle {
+  color: #333;
 }
 
 .profile-form {
@@ -395,8 +370,8 @@ export default {
 }
 
 
-.form-group input:not(:placeholder-shown) + label,
-.form-group input:focus + label {
+.form-group input:not(:placeholder-shown)+label,
+.form-group input:focus+label {
   top: -20px;
   left: 12px;
   font-size: 0.75rem;
@@ -495,11 +470,9 @@ export default {
 }
 
 
-.calendar-container{
+.calendar-container {
   width: 700px;
   margin-left: -30px;
   margin-top: -60px;
 }
-
-
-</style> 
+</style>

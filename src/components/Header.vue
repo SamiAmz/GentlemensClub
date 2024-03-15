@@ -52,7 +52,6 @@
               align-items: center;
             "
           >
-            <p id="profileText">Profil</p>
             <v-icon large color="white">mdi-account</v-icon>
           </router-link>
 
