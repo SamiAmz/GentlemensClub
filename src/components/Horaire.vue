@@ -174,6 +174,7 @@
 
             <v-card-actions>
               <!-- <v-btn v-if="isLoggedIn" text="S'inscrire" @click="registerToClass()"></v-btn> --> <!-- DISABLED -->
+              <v-btn v-if="isLoggedIn && isAdmin" text="Supprimer" @click="openDialogDeleteClass()"></v-btn>
               <v-btn v-if="isLoggedIn && isAdmin" text="Modifier" @click="openDialog('update')"></v-btn>
               <v-spacer></v-spacer>
               <v-btn text="Fermer" @click="dialogEventVisible = false"></v-btn>
@@ -187,6 +188,23 @@
           <i>{{ arg.event.title }}</i>
         </template>
       </FullCalendar>
+      
+      <!-- Dialog confirmation de suppression -->
+      <v-dialog v-model="dialogConfirmDeleteVisible" width="250">
+        <template v-slot:default="{ isActive }">
+          <v-card title="Supprimer un cours">
+            <v-card-text>
+              Etes-vous sûr de vouloir supprimer le cours {{ dialogEventTitle }} ?
+            </v-card-text>
+            <v-card-actions>
+              <v-btn v-if="isLoggedIn && isAdmin" text="Supprimer" @click="deleteClass()"></v-btn>
+              <v-spacer></v-spacer>
+              <v-btn text="Annuler" @click="dialogConfirmDeleteVisible = false"></v-btn>
+            </v-card-actions>
+          </v-card>
+        </template>
+      </v-dialog>
+
     </div>
   </div>
   <Chat />
@@ -210,7 +228,7 @@ import frLocale from "@fullcalendar/core/locales/fr";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/init";
 
-import { collection, addDoc, getDocs, updateDoc, doc, getDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase/init";
 
 export default defineComponent({
@@ -244,6 +262,7 @@ export default defineComponent({
       isAdmin: false,
 
       // Dialog
+      dialogConfirmDeleteVisible: false,
       dialogFormVisible: false,
       dialogEventVisible: false,
       dialogFormTitle: "",
@@ -295,6 +314,7 @@ export default defineComponent({
       // Does absolutely nothing
     },
 
+    // Open dialog with the action create or update
     openDialog(action) {
       this.dialogAction = action;
 
@@ -318,6 +338,26 @@ export default defineComponent({
       //console.log(this.dialogAction);
     },
 
+    // Open dialog to confirm deletion
+    openDialogDeleteClass() {
+      this.dialogConfirmDeleteVisible = true;
+    },
+
+    // Delete class with provided id
+    async deleteClass() {
+      try {
+        const docRef = doc(db, "class", this.dialogEventId);
+        await deleteDoc(docRef);
+        
+        this.dialogEventVisible = false;
+        this.dialogConfirmDeleteVisible = false;
+        
+    } catch (error) {
+        console.error("Error deleting document: ", error);
+    }
+    },
+
+    // Add new class to database
     async addNewClass() {
       this.loading = true;
       setTimeout(() => (this.loading = false), 1000); // Simulate loading time on the button
@@ -347,6 +387,7 @@ export default defineComponent({
       }
     },
 
+    // Load all classes when page is loaded from database
     async loadAllClasses() {
 
       try {
@@ -462,6 +503,7 @@ export default defineComponent({
         this.dialogEventEndMinutes = clickInfo.event.end.getMinutes();
       }
     },
+    
     handleEvents(events) {
       this.currentEvents = events;
     },
@@ -481,7 +523,6 @@ export default defineComponent({
         if (userDocSnap.exists()) {
           const userData = userDocSnap.data();
           this.isAdmin = userData.isAdmin || false;
-          console.log(this.isAdmin);
         }
       } else {
         // User is not logged in
