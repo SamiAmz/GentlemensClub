@@ -156,18 +156,42 @@ export default {
         },
 
 
-   async fetchProfile(uid) {
+        async fetchSubscription() {
+  // Check if there's a logged-in user
+  if (!auth.currentUser) {
+    console.error("No authenticated user found.");
+    return;
+  }
+
+  // Get the user ID from the currently logged-in user
+  const userId = auth.currentUser.uid;
+
+  // Reference the 'abonnement' collection in Firestore
+  const abonnementCollectionRef = collection(db, "abonnement");
+
+  // Create a query to find the subscription document for the current user
+  const q = query(abonnementCollectionRef, where("userId", "==", userId));
+
   try {
-    const userDocRef = doc(db, "users", uid);
-    const docSnap = await getDoc(userDocRef);
-    if (docSnap.exists()) {
-      // Update the profile object with the fetched data
-      this.profile = docSnap.data();
-    } else {
-      console.log("No such document!");
+    // Execute the query
+    const querySnapshot = await getDocs(q);
+    
+    // Check if any documents were found
+    if (querySnapshot.empty) {
+      console.log("No matching subscription document.");
+      return;
     }
+
+    // Assuming there's only one subscription per user, use the first document
+    const subscriptionDoc = querySnapshot.docs[0].data();
+
+    // Update the 'subscription' data property with the fetched values
+    this.subscription.subscriptionType = subscriptionDoc.courseType; // This matches the field name in Firestore
+    this.subscription.subscriptionPrice = subscriptionDoc.prix; // Assuming this is in cents, divide by 100 to convert to dollars
+    this.subscription.subscriptionStatus = subscriptionDoc.status === 'paid' ? 'Active' : 'Inactive'; // Example conversion of status to human-readable form
+    this.subscription.renewalDate = subscriptionDoc.date_expiration; // You might want to format this date
   } catch (error) {
-    console.error("Error getting document:", error);
+    console.error("Error getting subscription documents:", error);
   }
 },
 
@@ -231,17 +255,17 @@ export default {
 
 
   mounted() {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.fetchProfile(user.uid);
-      } else {
-        // Handle user not logged in or redirect to login page
-        console.log("No user is logged in.");
-        this.$router.push('/login'); // Example redirect
-      }
-    });
-
-  },
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      this.fetchProfile(user.uid);
+      this.fetchSubscription(); // Fetch subscription when the component mounts
+    } else {
+      // Handle user not logged in or redirect to login page
+      console.log("No user is logged in.");
+      this.$router.push('/login'); // Example redirect
+    }
+  });
+},
 
 };
 </script>
