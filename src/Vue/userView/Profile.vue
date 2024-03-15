@@ -84,7 +84,7 @@ heres my code: <template>
     </div>
     <div class="detail-item">
       <span class="detail-label">Statut:</span>
-      <span class="detail">{{ subscription.subscriptionStatus }}</span>
+      <span class="detail">{{ subscription.subscriptionStatus === 'paid' ? 'Active' : 'Inactive' }}</span>
     </div>
     <div class="detail-item">
       <span class="detail-label">Date de renouvellement:</span>
