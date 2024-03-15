@@ -9,10 +9,12 @@ export async function subscribeToCourse(priceId, courseType) {
     router.push("/login")
     return;
   }
+  console.log("Payload being sent:", JSON.stringify({ priceId: priceId, courseType: courseType }));
 
   console.log("Initiating subscription for:", courseType);
 
   const stripe = await loadStripe("pk_test_51Oo7T7IrFzdedmXM8bThRpjvZN9FYQ55vJDqyLB8hjQecqUaqh02iury7mpYN4Vjxyv4jvPoQUP6HTaASJY0SVou00AfuC8FGU");
+  console.log("Payload being sent:", JSON.stringify({ priceId: priceId, courseType: courseType }));
 
   try {
     const response = await fetch("/.netlify/functions/create-checkout-sessions", {
