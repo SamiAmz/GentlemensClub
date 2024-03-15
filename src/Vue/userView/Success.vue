@@ -22,10 +22,9 @@
           if (user) {
             const query = new URLSearchParams(window.location.search);
             const sessionId = query.get("session_id");
-            const courseType = query.get("courseType"); // Make sure this matches the parameter name in the URL
+            const courseType = query.get("courseType"); 
   
             if (sessionId) {
-              // Now use sessionId to retrieve session details, courseType is handled here on the client
               const sessionDetails = await getSessionDetails(sessionId);
               await updateDatabaseWithSessionInfo(sessionId, courseType, sessionDetails);
             } else {
@@ -58,7 +57,6 @@
             expirationDate: paymentDetails.expirationDate,
             amount: paymentDetails.amount,
             status: paymentDetails.status,
-            // courseType is not needed here as it's handled in the URL
           };
         } catch (error) {
           console.error("Error fetching session details:", error);
@@ -84,7 +82,7 @@
             date_expiration: sessionDetails.expirationDate,
             prix: sessionDetails.amount,
             status: sessionDetails.status,
-            courseType: courseType, // Here we use the courseType from the URL
+            courseType: courseType, 
           });
           console.log("Firestore document added successfully. Document ID: ", docRef.id);
         } catch (e) {
@@ -107,5 +105,4 @@
     height: 100vh;
   }
   
-  /* Add more styles as needed */
   </style>
