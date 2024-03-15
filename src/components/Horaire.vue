@@ -1,8 +1,8 @@
 <template>
   <div class="demo-app">
     <div class="demo-app-main">
-      <div class="control-panel">
-        <h1>Control Panel</h1>
+      <div v-if="isAdmin" class="control-panel">
+        <h1>Panneau de configuration</h1>
         <v-btn @click="openDialog('create')">Ajouter un cours</v-btn>
         <!-- <v-btn @click="openDialog('update')">Modifier un cours</v-btn> -->
       </div>
@@ -173,8 +173,8 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn text="S'inscrire" @click="registerToClass()"></v-btn>
-              <v-btn text="Modifier" @click="openDialog('update')"></v-btn>
+              <!-- <v-btn v-if="isLoggedIn" text="S'inscrire" @click="registerToClass()"></v-btn> --> <!-- DISABLED -->
+              <v-btn v-if="isLoggedIn && isAdmin" text="Modifier" @click="openDialog('update')"></v-btn>
               <v-spacer></v-spacer>
               <v-btn text="Fermer" @click="dialogEventVisible = false"></v-btn>
             </v-card-actions>
@@ -205,10 +205,12 @@ import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS } from "./event-utils";
 import frLocale from "@fullcalendar/core/locales/fr";
 
-import { collection, addDoc, getDocs, updateDoc, doc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/firebase/init";
+
+import { collection, addDoc, getDocs, updateDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase/init";
 
 export default defineComponent({
@@ -216,6 +218,7 @@ export default defineComponent({
     name: "Horaire",
     FullCalendar,
   },
+  
   data() {
     return {
       rules: {
@@ -237,6 +240,8 @@ export default defineComponent({
       form: false,
       loading: false,
       classes: [],
+      isLoggedIn: false,
+      isAdmin: false,
 
       // Dialog
       dialogFormVisible: false,
@@ -463,6 +468,26 @@ export default defineComponent({
   },
   async mounted() {
     this.loadAllClasses();
+    
+    // Check if user is logged in
+    onAuthStateChanged(auth, async (user) => {
+    this.isLoggedIn = !!user;
+
+  if (user) {
+        // User is logged in, check if user is admin
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          this.isAdmin = userData.isAdmin || false;
+          console.log(this.isAdmin);
+        }
+      } else {
+        // User is not logged in
+        this.isAdmin = false;
+      }
+    });
   }
 });
 </script>
@@ -526,11 +551,8 @@ b {
 }
 
 .control-panel {
-  padding: 3%;
+  padding: 3.25%;
   width: 100%;
-  border-width: 1px;
-  border-style: solid;
-  border-color: white;
 }
 
 .form-class {
