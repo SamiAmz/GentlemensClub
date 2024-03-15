@@ -109,7 +109,7 @@ export default {
 
         if (docSnap.exists()) {
           this.plan = docSnap.data();
-          this.plan.Prix = `${docSnap.data().Prix}`;
+          this.plan.Prix = `120`;
           console.log("Plan:", this.plan);
         } else {
           console.log("No such document!");

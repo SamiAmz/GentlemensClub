@@ -80,7 +80,7 @@ heres my code: <template>
     </div>
     <div class="detail-item">
       <span class="detail-label">Coût Mensuel:</span>
-      <span class="detail">${{ subscription.subscriptionPrice }}</span>
+      <span class="detail">${{ subscription.subscriptionPrice / 100 }}</span>
     </div>
     <div class="detail-item">
       <span class="detail-label">Statut:</span>
@@ -198,11 +198,13 @@ export default {
     console.error("No authenticated user found.");
     return;
   }
+
   const userId = auth.currentUser.uid;
+  console.log(`USER ID: ${userId}`)
   // Create a reference to the 'abonnement' collection
   const abonnementCollectionRef = collection(db, "abonnement");
   // Create a query against the collection, where 'userid' field matches the userId
-  const q = query(abonnementCollectionRef, where("userid", "==", userId));
+  const q = query(abonnementCollectionRef, where("userId", "==", userId));
 
   try {
     const querySnapshot = await getDocs(q);
@@ -215,7 +217,7 @@ export default {
     console.log(subscriptionDoc); // Log to see the fetched subscription data
     // Update your profile object here with subscription details
     // Adjust these lines based on your actual subscription document structure
-    this.subscription.subscriptionType = subscriptionDoc.type; 
+    this.subscription.subscriptionType = subscriptionDoc.courseType; 
     this.subscription.subscriptionPrice = subscriptionDoc.prix;
     this.subscription.subscriptionStatus = subscriptionDoc.status;
     this.subscription.renewalDate = subscriptionDoc.date_expiration;
