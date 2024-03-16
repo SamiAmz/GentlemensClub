@@ -114,7 +114,7 @@
     </div>
 
  
-    <h1 class="titleCards">Nos abonnemnets</h1>
+    <h1 class="titleCards">Nos abonnements</h1>
     <div class="container-cards">
       <div class="container">
         <div class="card">

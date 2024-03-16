@@ -40,7 +40,7 @@ heres my code: <template>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="email">E-mail</label>
+              <label for="email">Courriel</label>
               <input type="email" id="email" v-model="profile.email">
             </div>
             <div class="form-group">
@@ -55,7 +55,7 @@ heres my code: <template>
               <input type="tel" id="phone" v-model="profile.phone">
             </div>
             <div class="form-group">
-              <label for="address">Addresse</label>
+              <label for="address">Adresse</label>
               <input type="text" id="address" v-model="profile.address">
             </div>
           </div>

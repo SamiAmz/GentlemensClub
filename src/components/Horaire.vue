@@ -1,6 +1,6 @@
 <template>
-  <div class="demo-app">
-    <div class="demo-app-main">
+  <div class="app">
+    <div class="app-main">
       <div v-if="isAdmin" class="control-panel">
         <h1>Panneau de configuration</h1>
         <v-btn @click="openDialog('create')">Ajouter un cours</v-btn>
@@ -182,7 +182,8 @@
           </v-card>
         </template>
       </v-dialog>
-      <FullCalendar class="demo-app-calendar" :options="calendarOptions" ref="fullCalendar">
+      
+      <FullCalendar class="app-calendar" :options="calendarOptions" ref="fullCalendar">
         <template v-slot:eventContent="arg">
           <b>{{ arg.timeText }}</b>
           <i>{{ arg.event.title }}</i>
@@ -554,7 +555,7 @@ b {
   margin-right: 3px;
 }
 
-.demo-app {
+.app {
   padding-top: 5%;
   display: flex;
   min-height: 100%;
@@ -562,20 +563,9 @@ b {
   font-size: 14px;
 }
 
-.demo-app-sidebar {
-  width: 300px;
-  line-height: 1.5;
-  background: #eaf9ff;
-  border-right: 1px solid #d3e2e8;
-}
-
-.demo-app-sidebar-section {
-  padding: 2em;
-}
-
-.demo-app-main {
+.app-main {
   flex-grow: 1;
-  padding: 3em;
+  padding: 2.25%;
 }
 
 .fc {
@@ -584,15 +574,15 @@ b {
   margin: 0 auto;
 }
 
-.demo-app-calendar {
+.app-calendar {
   background-color: rgb(29, 29, 31);
-  height: 740px; /* Height of the calendar */
+  height: 740px;
   border-radius: 5px;
   padding: 1%;
 }
 
 .control-panel {
-  padding: 3.25%;
+  padding-left: 3.25%;
   width: 100%;
 }
 
@@ -615,6 +605,7 @@ b {
 
 .text {
   padding-right: 1%;
+  width: 20%;
   align-self: center;
 }
 

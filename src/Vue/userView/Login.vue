@@ -2,7 +2,7 @@
   <div :style="myStyle" id="wrapper">
     <div id="my-app">
       <div id="login-form" class="login-container">
-        <h1 id="loginTitle">Login</h1>
+        <h1 id="loginTitle">Connexion</h1>
         <form @submit.prevent="loginUser">
           <div class="form-group">
             <input
@@ -11,7 +11,7 @@
               v-model="credentials.email"
               @focus="clearPlaceholder($event)"
               @blur="restorePlaceholder($event, 'Email or Username')"
-              placeholder="Email or Username"
+              placeholder="Courriel ou nom d'utilisateur"
               required
             />
           </div>
@@ -22,17 +22,17 @@
               v-model="credentials.password"
               @focus="clearPlaceholder($event)"
               @blur="restorePlaceholder($event, 'Password')"
-              placeholder="Password"
+              placeholder="Mot de passe"
               required
             />
             <button type="button" class="btn-forgot" @click="forgotPassword">
-              Forgot your password?
+              Mot de passe oublié?
             </button>
           </div>
           <div class="form-actions">
-            <button type="submit" class="btn-login">Continue</button>
+            <button type="submit" class="btn-login">Se connecter</button>
             <button @click="newUser" type="button">
-              Don't have an account?
+              Créer un nouveau compte
             </button>
           </div>
         </form>
