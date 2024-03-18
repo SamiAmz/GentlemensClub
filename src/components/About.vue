@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="12" md="8" class="textcolumn">
+    <v-col cols="12" md="8"  class="textcolumn">
       <v-card flat class="text-card">
         <v-card-title class="title">Qui sommes-nous ?</v-card-title>
         <v-card-text class="text">
@@ -19,7 +19,7 @@
         </v-card-text>
       </v-card>
     </v-col>
-    <v-col cols="12" md="4" class="image-wrapper">
+    <v-col cols="12" md="4"  class="image-wrapper">
       <v-img src="@/assets/logo.png" class="logo-img"></v-img>
     </v-col>
   </v-row>
@@ -43,6 +43,8 @@
   font-size: 18px;
   line-height: 30px;
   text-align: left;
+  max-height: 200px;
+  width: fit-content;
   padding: 0 16px; /* Add padding to align with the grid */
 }
 
