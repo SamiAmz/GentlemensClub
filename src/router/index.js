@@ -75,11 +75,6 @@ const router = createRouter({
     },
 
     {
-      path: "/horaire",
-      name: "horaire",
-      component: Horaire,
-    },
-    {
       path: "/login",
       name: "login",
       component: Login,
@@ -94,7 +89,6 @@ const router = createRouter({
       name: "profile",
       component: Profile,
     },
-    ,
     // Route pour la page non trouvée
     {
       path: "/:catchAll(.*)",

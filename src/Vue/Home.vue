@@ -205,39 +205,127 @@
 </template>
 
 <script>
-
+import Chat from "../components/Chat.vue";
 import "./styleCarroussel.css";
-import "./app.js";
-import "https://kit.fontawesome.com/95a02bd20d.js";
 import "./style.css";
+
 export default {
   name: "Home",
+  components: {
+    Chat
+  },
   mounted() {
     this.scrollToTop();
+    this.setupScrollListener();
+    this.setupCarousel();
+  },
+  beforeUnmount() {
+    // Clean up the scroll listener when component is destroyed
+    if (this.scrollHandler) {
+      window.removeEventListener("scroll", this.scrollHandler);
+    }
+    // Clean up carousel timeouts
+    if (this.runTimeOut) {
+      clearTimeout(this.runTimeOut);
+    }
+    if (this.runNextAuto) {
+      clearTimeout(this.runNextAuto);
+    }
   },
   methods: {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
     subscribe() {},
+    setupScrollListener() {
+      this.scrollHandler = () => {
+        const video = document.getElementById("background-video");
+        const title = document.querySelector(".video-text");
+        
+        if (video && title) {
+          const videoPosition = video.getBoundingClientRect().top;
+          const videoBottomPosition = video.getBoundingClientRect().bottom;
+          const screenPosition = window.innerHeight / 2;
+          
+          if (
+            (videoPosition < screenPosition && videoBottomPosition > 0) ||
+            (videoBottomPosition > screenPosition && videoPosition < 0)
+          ) {
+            video.style.opacity = "1";
+            title.style.opacity = "1";
+          } else {
+            video.style.opacity = "0";
+            title.style.opacity = "0";
+          }
+        }
+      };
+      
+      window.addEventListener("scroll", this.scrollHandler);
+    },
+    setupCarousel() {
+      // Get DOM elements
+      const nextDom = document.getElementById("next");
+      const prevDom = document.getElementById("prev");
+      const carouselDom = document.querySelector(".carousel");
+      
+      if (!carouselDom) return;
+      
+      const SliderDom = carouselDom.querySelector(".carousel .list");
+      const thumbnailBorderDom = document.querySelector(".carousel .thumbnail");
+      const timeDom = document.querySelector(".carousel .time");
+
+      // Initial setup
+      const thumbnailItemsDom = thumbnailBorderDom.querySelectorAll(".item");
+      thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+      
+      const timeRunning = 530;
+      const timeAutoNext = 7000;
+      
+      // Function to show slider
+      const showSlider = (type) => {
+        const SliderItemsDom = SliderDom.querySelectorAll(".carousel .list .item");
+        const thumbnailItemsDom = document.querySelectorAll(
+          ".carousel .thumbnail .item"
+        );
+
+        if (type === "next") {
+          SliderDom.appendChild(SliderItemsDom[0]);
+          thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+          carouselDom.classList.add("next");
+        } else {
+          SliderDom.prepend(SliderItemsDom[SliderItemsDom.length - 1]);
+          thumbnailBorderDom.prepend(
+            thumbnailItemsDom[thumbnailItemsDom.length - 1]
+          );
+          carouselDom.classList.add("prev");
+        }
+        
+        clearTimeout(this.runTimeOut);
+        this.runTimeOut = setTimeout(() => {
+          carouselDom.classList.remove("next");
+          carouselDom.classList.remove("prev");
+        }, timeRunning);
+
+        clearTimeout(this.runNextAuto);
+        this.runNextAuto = setTimeout(() => {
+          nextDom.click();
+        }, timeAutoNext);
+      };
+
+      // Click event handlers
+      if (nextDom) {
+        nextDom.onclick = () => showSlider("next");
+      }
+      
+      if (prevDom) {
+        prevDom.onclick = () => showSlider("prev");
+      }
+
+      // Start auto-rotation
+      this.runNextAuto = setTimeout(() => {
+        nextDom.click();
+      }, timeAutoNext);
+    }
   },
 };
-
-document.addEventListener("scroll", function () {
-  var video = document.getElementById("background-video");
-  var title = document.querySelector(".video-text");
-  var videoPosition = video.getBoundingClientRect().top;
-  var videoBottomPosition = video.getBoundingClientRect().bottom;
-  var screenPosition = window.innerHeight / 2;
-  if (
-    (videoPosition < screenPosition && videoBottomPosition > 0) ||
-    (videoBottomPosition > screenPosition && videoPosition < 0)
-  ) {
-    video.style.opacity = "1";
-    title.style.opacity = "1";
-  } else {
-    video.style.opacity = "0";
-    title.style.opacity = "0";
-  }
-});
 </script>
